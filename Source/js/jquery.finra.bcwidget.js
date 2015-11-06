@@ -21,7 +21,6 @@ Version 2.0 - External Widget Update(11/2014)
             tosHTML: '<div id="tosAgree"><label><input type="checkbox" checked="yes"/>I accept the <a id="tosAnchor" href="#">terms and conditions</a>.</label></div>',
             isSelected: false,
             slideSpeed: 300,
-            iFrameEmbed: false,
             timeOutDelay: 2000,
             redirectOutOfDomain: false,
             displayCount: true,
@@ -159,6 +158,13 @@ Version 2.0 - External Widget Update(11/2014)
                     }                    
                 });
             
+                //display dropdown when field gets focus
+                /*$inputTargetField.on(clickEventType, function (e) {
+                    var that = this; 
+                    if(j171(that).val().trim().length >= 2){ 
+                        j171(that).autocomplete_by_category('widget').css("display", "block") ;
+                    }
+                 });*/
 
                $inputTargetField.on('keyup paste', function(e) {
                    var that = this;
@@ -342,27 +348,27 @@ Version 2.0 - External Widget Update(11/2014)
         forwardtoOtherDomain: function(opts){
             if(opts.individual){
 				if(opts.fields.ac_bc_active_fl === "Y" || opts.fields.ac_bc_active_fl === "N"){
-                    var externalURL = this.getForwardUrl('individualBC', opts.fields.ac_source_id);
+					 var externalURL  = this.getForwardUrl('individualBC', opts.fields.ac_source_id);
 				}else if(opts.fields.ac_ia_active_fl === "Y" || opts.fields.ac_ia_active_fl === "N"){
-					var externalURL = this.getForwardUrl('individualIA', opts.fields.ac_source_id);
+					 var externalURL = this.getForwardUrl('individualIA', opts.fields.ac_source_id);
 				}else{
 					 console('out of scope error scenario');
 				}
             }else{			
 				if(opts.fields.ac_bc_active_fl === "Y" || opts.fields.ac_bc_active_fl === "N"){
-					var externalURL = this.getForwardUrl('firmsBC', opts.fields.ac_source_id);
+					  var externalURL  = this.getForwardUrl('firmsBC', opts.fields.ac_source_id);
 				}else if(opts.fields.ac_ia_active_fl === "Y" || opts.fields.ac_ia_active_fl === "N"){
-					var externalURL = this.getForwardUrl('firmsIA', opts.fields.ac_source_id);
+					  var externalURL  = this.getForwardUrl('firmsIA', opts.fields.ac_source_id);
 				}else{
 					  console('out of scope error scenario');
 				}
-            }
-
-            if(opts.iFrameEmbed)
+            }    
+			
+			/*if(opts.iFrameEmbed)
                 window.open(externalURL, '', '');
-            else
-                window.open(externalURL, 'self', '');    
-        },
+            else*/
+                window.location.href = externalURL;       
+		},
         //generic function to call ajax to populate results on hitting "Enter" key
         ajaxRedirect: function (opts, enteredTerm) {            
             console(enteredTerm);
@@ -612,6 +618,19 @@ Version 2.0 - External Widget Update(11/2014)
 
             j171(document).on(clickEventType, function(e) { hideAllPopovers(); isVisible = false;});
             
+
+            //j171(this.element).find(".tooltipContent").tooltip('toggle');
+			/*j171(this.element).find(".tooltipContent").tooltip({placement: function (tooltip, trigger) {
+                window.setTimeout(function () {
+                    j171(tooltip)
+                        .addClass('top')
+                        .css({top: 0, left: 0})
+                        .find('.tooltip-arrow').css({left: '0%'});
+
+                   j171(tooltip).addClass('in');
+                }, 0);
+            }
+            });*/
             $resultsTemplate.find('.bcCallToAction').on(clickEventType, function(){
                 _gaq.push(['FINRA_BC_GA._trackEvent', 'BCWidget-Firm-'+ window.location.hostname, 'Full Report Link', j171('#' + opts.currentEl).val()]);
             });            
@@ -635,7 +654,7 @@ Version 2.0 - External Widget Update(11/2014)
      
     Array.prototype.convert = function () {
         return this.toString().replace(/[|,]/g, ";"); 
-	};
+  };
 
    j171.fn[pluginName] = function (options) {
         if (typeof options === "string") {
@@ -669,6 +688,9 @@ Version 2.0 - External Widget Update(11/2014)
     }
 
     function stripScript(a){
+      //  return a.replace(/<script[^>]*>.*?<\/script>/gi,'')
+        //        .replace(/"/g, "")
+          //      .replace(/'/g, "");
           return a.replace(/<.*?script.*?>.*?<\/.*?script.*?>/igm, '');
     }
 
@@ -735,7 +757,14 @@ window._BC = {};
             j171('.autocomplete-container').html('<div class="serviceDownClass"><div class="bcCallToAction"><a href=\"http://brokercheck.finra.org\" onclick=\"_gaq.push([\'FINRA_BC_GA._trackEvent\', \'BCWidget-Error-Click\', \'BCWidget-Error-Click-\'+window.location.hostname]);\">'+this.textOverButton+'</a></div></div>');
             j171('.autocomplete-container').css({'background': 'none', 'paddingBottom':'10px'});
             j171('#tosAgree').hide();
-            _gaq.push(['FINRA_BC_GA._trackEvent', 'BCWidget-Error-'+window.location.hostname, 'BCWidget-Error']);
+            _gaq.push(['FINRA_BC_GA._trackEvent', 'BCWidget-Error-'+window.location.hostname, 'BCWidget-Error']); 
+
+            /*j171.getJSON(_BC.clientIPRequestURL, function(data){            
+                 _gaq.push(['FINRA_BC_GA._trackEvent', 'BCWidget-Error-'+window.location.hostname, 'BCWidget-Error-'+data.ip]);
+            })
+            .fail(function(){
+                 _gaq.push(['FINRA_BC_GA._trackEvent', 'BCWidget-Error-'+window.location.hostname, 'BCWidget-Error-'+_BC.IPServiceFailure]);   
+            });*/                       
         }
     }
 
@@ -833,7 +862,10 @@ j171(function () {
                 }
             });
         j171(':text').blur();
-        j171(active).focus();        
+        j171(active).focus();
+        /*j171('form').submit(function () {
+            j171(this).find('.hasPlaceholder').each(function() { j171(this).val(''); });
+        });*/
     }  
 });
 
@@ -876,7 +908,7 @@ j171(function () {
                var curEmployer =  (S4_templates.__getValue(hltFields, fields, 'ac_current_employ') !== '')? S4_templates.__getValue(hltFields, fields, 'ac_current_employ') : '';                       
                var altNms = (hltFields.hasOwnProperty('ac_othernames'))? 'Alternate Name: ' + hltFields['ac_othernames'].convert()  : '';
                var prevEmployer = (hltFields.hasOwnProperty('ac_prev_employ'))? 'Match made to previous employer' : '';
-             
+              // var regStatus = (S4_templates.__getValue(hltFields, fields, 'ac_bc_active_fl') !== 'Y') ? 'No current employer on record.' : ''; //<div style="color:#555; font-weight:bold;">'+regStatus+'</div>
                var displayTemplate = '<div class="s4_item-field" style="padding:2px">' + val +'<div style="color:#555;">'+curEmployer+'</div><div class="additive">' + altNms + '</div><div class="additive">'+prevEmployer+'</div></div>';
 
                     return S4_templates._default(displayTemplate, null, luckyObject);
@@ -965,6 +997,15 @@ j171(function () {
                 base += '</td>';
                 base += '</div>';
                 return base;
+
+                // var base = '<div class="s4_suggestion" onmouseover="j171(\'#' + id + '_lucky\').toggleClass(\'s4_lucky s4_lucky_hide\');" onmouseout="j171(\'#' + id + '_lucky\').toggleClass(\'s4_lucky s4_lucky_hide\');">';
+                // base += '<div class="s4_item-field s4_colXXXL">' + value + '</div>';
+                // if (id != null && id != '') {
+                // base += '<div class="s4_item-field s4_colS" style="text-align:right;">' + id + '</div>';
+                // }
+                // base += '<div class="s4_item-field s4_lucky_hide" id="' + id + '_lucky" style="text-align:right;" onclick="window.open(\'' + lucky + '\');event.cancelBubble = true;event.stopPropagation();">I\'m feeling lucky&raquo;</div>';
+                // base += '</div>';
+                // return base;
             } else {
                 return '<div class="s4_suggestion">' + ((id == null) ? ('<div class="s4_item-field" style="width: 95%;">' + value + '</div>' ) : ('<div class="s4_item-field s4_colS" style="text-align: right; float: right;">' + id + '</div>' + '<div class="s4_item-field" style="width: 75%;">' + value + '</div>' )) + '</div>';
             }
@@ -1192,20 +1233,26 @@ j171(function () {
                 } else {
                     searchTerm = request.term.trim();
                 }
-				
+                //if (!searchTerm) seachTerm = "[a TO Z]";
                 that.data('searchTerm', searchTerm);
                 //save
+
                 if (searchTerm.length > 0) {
                     if (!that.data('useCachedResults')) {
                         var results = new TypeAheadResults(that);
-                        var filters = __getFilters(that);						
-                        var dataObj = [];
-					
-						dataObj.push({ name : "sources" ,"value" : that.data('sourceKeys').join(',')});
-						dataObj.push({name : "results", "value" : that.data('pageSize')});
-						dataObj.push({name : "hl" , "value" : that.data('highlight')});
-						dataObj.push({ name : "query", "value" : searchTerm});
-						dataObj = j171.merge(dataObj,filters);                     
+                        var filters = __getFilters(that);
+                        /*var dataObj = j171.extend({
+                                sources : that.data('sourceKeys').join(','),
+                                results : that.data('pageSize'),
+                                hl : that.data('highlight'),
+                                query : searchTerm                              
+                            }, j171.parseJSON(filters));*/
+                            var dataObj = [];
+                            dataObj.push({ name : "sources" ,"value" : that.data('sourceKeys').join(',')});
+                            dataObj.push({name : "results", "value" : that.data('pageSize')});
+                            dataObj.push({name : "hl" , value : that.data('highlight')});
+                            dataObj.push({ name : "query", value : searchTerm});
+                            dataObj = j171.merge(dataObj,filters);                            
 
                             j171.ajax({
                                 url : that.data('serviceURL'),
@@ -1222,13 +1269,10 @@ j171(function () {
                                         });
 
                                         that.data('results', results);
-										localStorage.setItem( 'results',  JSON.stringify(results) );
                                         response(results.getDisplayList());
                                         setTabs(that);
                                     }
-									
-									localStorage.setItem( 'IndividualsTotal', results.resultMap.BC_INDIVIDUALS_WG.total);
-									localStorage.setItem( 'FirmsTotal', results.resultMap.BC_FIRMS_WG.total);
+
                                     var optsTotal = results.resultMap.BC_FIRMS_WG.total + results.resultMap.BC_INDIVIDUALS_WG.total;
                                     if(_BC.enterHit == true)
                                         _BC.publish('/bc/results', [optsTotal]);
@@ -1236,11 +1280,9 @@ j171(function () {
                                         _BC.unsubscribe('/bc/results');
                                 }
                         });
-                    } else {						
-					
-						//that.data('sourceKeys', 'BC_INDIVIDUALS_WG');
-                        // the more link was clicked. so just use the updated result set						
-						response(that.data('results').getDisplayList());
+                    } else {
+                        // the more link was clicked. so just use the updated result set
+                        response(that.data('results').getDisplayList());
                         setTabs(that);
                     }
                 }
@@ -1269,6 +1311,7 @@ j171(function () {
 
                 j171(popup).css({"width": j171("#"+textBoxID).width() + 6});//Add border-radius to width
 
+                //j171(popup).css({"left": "11px"});//low screen resolution fix
                 j171(popup).find('.Firms').nextAll().css("display", "none");
                 
                 j171('.scrollTop').on('click touchend', function(evt){//Firms tab clicked
@@ -1281,6 +1324,7 @@ j171(function () {
                         j171(popup).find('.Firms').nextAll().css("display", "block");
                 });
                 
+
                 j171('.scrollDown').on('click touchend', function(evt){//Individuals tab clicked
                         evt.stopPropagation();                      
                         that.data('firmsSelected', false);
@@ -1290,6 +1334,11 @@ j171(function () {
                         j171(popup).find('.Individuals').nextUntil(".Firms").css({"display": "block"});
                         j171(popup).find('.Firms').nextAll().css("display", "none");
                 });
+
+                // if the popup has a scroll bar - try to disable browser scrollbars
+                /*if (popup.scrollHeight > j171(popup).innerHeight()) {
+                    j171("body").css("overflow", "hidden");
+                }*/
 
                 for (var j = 0; j < sourceKeys.length; j++) {
                     var src = sourceKeys[j];
@@ -1337,6 +1386,7 @@ j171(function () {
                     if (that.data('scrollHeight') > 0) {
                         j171(popup).scrollTop(that.data('scrollHeight'));
                     }
+
                     that.data('scrollHeight', popup.scrollHeight);
                 }
 
@@ -1371,6 +1421,9 @@ j171(function () {
                 // call any close handler
                 that.data('close')();
 
+                //j171("body").css("overflow", "auto");
+                // if browser scrollbars were disabled - enable
+
                 // reset state
                 if (!that.data('subsetMode')) {
                     that.data('sourceKeys', that.data('availableSourceKeys'));
@@ -1390,8 +1443,7 @@ j171(function () {
             }
         }).focus(function(){           
             if(j171(this).val().length && j171(this).val() !== j171(this).attr('placeholder')){
-				j171(this).data('searchTerm', j171(this).val());				
-				j171(this).autocomplete_by_category('widget').css("display", "block");
+                j171(this).autocomplete_by_category('widget').css("display", "block"); 
                 return false;
             }
         });
@@ -1409,11 +1461,17 @@ j171(function () {
                 j171.each(sources[srcKeys[i]].selectedFilters, function(filter, value) {
                     if ((value !== 'All') && (value !== 'Any') && (value !== 'N/A')) {// "All" is just a UI label. It really means there is no filter.
                         var filterVal = {name : 'filter.' + source , value : filter  + ':' +  value };
-                        list.push(filterVal);                        
+                        list.push(filterVal);
+                        
+                        //jsonResult += '"filter.' + source + '":"' + filter  + ':' +  value + '",';
                     }
                 });
             }
         }
+        /*if(jsonResult.length > 1) {
+            jsonResult = jsonResult.substring(0, jsonResult.length -1);
+        }
+        return jsonResult + " }";*/
         return list;
     };
 
@@ -1422,7 +1480,7 @@ j171(function () {
         var flag = false;
         var clickEventType  = 'touchstart click';
 
-         j171("#" + linkid).on(clickEventType, function(e) {
+        j171("#" + linkid).on(clickEventType, function(e) {
             if (!flag) {
                 flag = true;
                 setTimeout(function(){ flag = false; }, 100);
@@ -1439,7 +1497,7 @@ j171(function () {
         var flag = false;
         var clickEventType  = 'touchstart click';
 
-         j171("#" + linkid).on(clickEventType, function(e) {           
+        j171("#" + linkid).on(clickEventType,function(e) {           
             //we only want to focus on one src.
             var typedValue = j171(that).data('keyTerm');       
             
@@ -1454,7 +1512,6 @@ j171(function () {
             }
             return false;
         });
-		
     };
 
     // we are interested in 2 keydown events for now.
@@ -1464,9 +1521,9 @@ j171(function () {
 	
 
     function __addKeyDownHandler(that) {		
-		if (!that.data('disableAdvancedMode')) {
+	if (!that.data('disableAdvancedMode')) {
             if (!that.data('keyDownHandlerAdded')) {									
-				that.autocomplete_by_category('ui').on('keydown', function(event) {
+		that.autocomplete_by_category('ui').on('keydown', function(event) {
                     // if the popup is open
                     if (that.autocomplete_by_category('widget').css("display") !== "none") {
                         var keyCode = j171.ui.keyCode;
@@ -1492,7 +1549,8 @@ j171(function () {
                                 //return true;
                         }
                     }
-        });				
+        });	
+				
 		
                 that.data('keyDownHandlerAdded', true);
             }
@@ -1541,16 +1599,10 @@ j171(function () {
         var dataObj = [];
         dataObj.push({ name : "sources" ,"value" : moreSrc});
         dataObj.push({ name : "results", "value" : S4_service.maxResultsPerCall});
-        dataObj.push({ name : "hl" , "value" : that.data('highlight')});
-        dataObj.push({ name : "query", "value" : that.data('searchTerm')});
-		try{
-			dataObj.push({ name : "start", "value" : that.data('results').resultMap[moreSrc].list.length});		
-		}catch(e){
-			dataObj.push({ name : "start", "value" : JSON.parse(localStorage.getItem('results')).resultMap[moreSrc].list.length});
-		}        
-		
+        dataObj.push({ name : "hl" , value : that.data('highlight')});
+        dataObj.push({ name : "query", value : that.data('searchTerm')});
+        dataObj.push({ name : "start", value : that.data('results').resultMap[moreSrc].list.length});
         dataObj = j171.merge(dataObj,filters);
-		
         j171.ajax({
             url : that.data('serviceURL'),
             dataType : 'jsonp',
@@ -1558,6 +1610,7 @@ j171(function () {
             timeout : 2000,
             traditional : true,
             data : dataObj,
+
             // get and save more results.
             // then programmatically invoke the auto-complete search on the input box
             success : function(data) {
@@ -1565,6 +1618,8 @@ j171(function () {
                     that.data('useCachedResults', true);
                     that.data('results').add(moreSrc, data.results[moreSrc].totalResults, data.results[moreSrc].results);
                     that.autocomplete_by_category('search');
+                    //popup = that.autocomplete_by_category('widget')[0];
+                    //console.log(popup);
                     setTabs(that);                    
                 }
             }
@@ -1652,6 +1707,7 @@ j171(function () {
     function TypeAheadResults(that) {
         this.that = that;
         this.resultMap = {};
+
     };
 
     TypeAheadResults.prototype.add = function(src, totalResults, newResults) {
@@ -1664,6 +1720,9 @@ j171(function () {
         this.resultMap[src].list = this.resultMap[src].list.concat(newResults);        
     };
 
+    TypeAheadResults.prototype.setTabs = function(){
+
+    };
     //
     // for each list item generate the UI snippet
     //
@@ -1683,9 +1742,9 @@ j171(function () {
         for (var i = 0; i < numOfSources; i++) {
             var src = sourceKeys[i];
             if(src === "BC_INDIVIDUALS_WG")
-				var indvlcount = this.resultMap[src] != undefined ? this.resultMap[src].total : parseInt(localStorage.getItem('IndividualsTotal'));				
+             var indvlcount = this.resultMap[src].total;
             else
-				var firmscount = this.resultMap[src] != undefined ? this.resultMap[src].total : parseInt(localStorage.getItem('FirmsTotal')); 		
+             var firmscount = this.resultMap[src].total; 
         }            
 
         function numberWithCommas(x) {
@@ -1701,7 +1760,8 @@ j171(function () {
         }
 
         indvlcount = numberWithCommas(indvlcount);
-        firmscount = numberWithCommas(firmscount);        
+        firmscount = numberWithCommas(firmscount);
+        
 
         if (advancedMode || (numOfSources > 1)) {
                 var header = '<div class="ui-autocomplete-category">';
@@ -1732,23 +1792,29 @@ j171(function () {
                 j171('.ui-autocomplete-input-clear').hide();
                 j171(textField).focus();               
         });
+
      
         for (var i = 0; i < numOfSources; i++) {
-            var src = sourceKeys[i];           
-            var srcResults = this.resultMap[src] != undefined ? this.resultMap[src].list :  JSON.parse(localStorage.getItem('results')).resultMap[src].list;
-            var numOfResults = srcResults.length;        
+            var src = sourceKeys[i];
+           
+            var srcResults = this.resultMap[src].list;
+            var numOfResults = srcResults.length;
+        
             
             // No Results logic
             if (numOfResults == 0) {
                 // category header: only display if there is more than one source or in advanced mode
                 if (numOfSources) {
                     var header = '<li class="ui-autocomplete-category '+S4_service.sources[src].label+'">&nbsp;';
+
+
                     header += '</li>';
 
                     list.push({
                         label : header,
                         type : "header"
                     });
+                    
                 }
 
                 var suggestion = 'No Results ';               
@@ -1821,17 +1887,18 @@ j171(function () {
                 this.that.data('luckyList', luckyList);
 
                 // category footer: show a more link if there are more results available
-				
-				var totalResultMap = this.resultMap[src] != undefined ? this.resultMap[src].total : JSON.parse(localStorage.getItem('results')).resultMap[src].total;
-                if (numOfResults < totalResultMap) {                  
+                if (numOfResults < this.resultMap[src].total) {
+                  
                     var footer = '<li class="ui-autocomplete-category-footer">';
                     var moreId = this.that.data('textBoxID') + src + '_more';
 
-                    if (advancedMode) {                  
+                    if (advancedMode) {
+                  
                         footer += '<div id="' + moreId + '" class="s4_more">View next 20 results</div>';
-                    } else {                  
-                        if ((totalResultMap - numOfResults) < 20) {
-                            footer += '<div id="' + moreId + '_advanced" class="s4_more">View next '+ (totalResultMap - numOfResults) +' results</div>';
+                    } else {
+                  
+                        if ((this.resultMap[src].total - numOfResults) < 20) {
+                            footer += '<div id="' + moreId + '_advanced" class="s4_more">View next '+ (this.resultMap[src].total - numOfResults) +' results</div>';
                         } else {
                             footer += '<div id="' + moreId + '_advanced" class="s4_more">View next 20 results</div>';   
                         }
@@ -1844,7 +1911,12 @@ j171(function () {
                         label : footer,
                         type : "footer"
                     });
-                }            
+
+
+                }
+            
+
+
             }
         }//end of outer 'for' loop
         //_BC.publish('/bc/results', [newArr]); 
@@ -1859,6 +1931,7 @@ j171(function () {
                 });
             }
         }
+
         return list;
     };
 
@@ -1893,11 +1966,14 @@ j171(function () {
                             filter += '<option value="' + value['values'][i][0] + '">' + value['values'][i][1] + '</option>';
                         }
                     }
+
                     filter += '</select></div>';
                 }
+
                 filterPanel += filter;
             });
         }
+
         return filterPanel;
     };
 //})(jQuery);
@@ -1926,7 +2002,9 @@ function escapeHTMLFix (str) {
 
 function loadtracking() {//external no ga
 	window._gaq.push(['FINRA_BC_GA._setAccount', 'UA-8282061-7']);
+//	window._gaq.push(['FINRA_BC_GA._setDomainName', 'finra.org']);
     window._gaq.push(["_setCustomVar", 1, "HostSite", window.location.hostname, 1]);
+//	window._gaq.push(['FINRA_BC_GA._trackPageview']);
 
 	(function() {		
 			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
@@ -1940,102 +2018,13 @@ window._gaq = window._gaq || [];
 j171(window).load (function(){	//both finra and external with ga
 	if (window._gat && typeof _gat != 'undefined') {// when ga.js is loaded already 
 		window._gaq.push(['FINRA_BC_GA._setAccount', 'UA-8282061-7']);
+//		window._gaq.push(['FINRA_BC_GA._setDomainName', 'finra.org']);
         window._gaq.push(["_setCustomVar", 1, "HostSite", window.location.hostname, 1]);
+//       window._gaq.push(['FINRA_BC_GA._trackPageview']);
 	}
 	else{ // when ga.js is not loaded already			
 		loadtracking();		
 	}	
 });
+					
 
-/*
-Copyright (c) 2011 Wojo Design
-Dual licensed under the MIT or GPL licenses.
-*/
-(function() {
-    var window = this;
-    // check to see if we have localStorage or not
-    if (!window.localStorage) {
-
-        // globalStorage
-        // non-standard: Firefox 2+
-        // https://developer.mozilla.org/en/dom/storage#globalStorage
-        if (window.globalStorage) {
-            // try/catch for file protocol in Firefox
-            try {
-                window.localStorage = window.globalStorage;
-            } catch (e) {}
-            return;
-        }
-
-        // userData
-        // non-standard: IE 5+
-        // http://msdn.microsoft.com/en-us/library/ms531424(v=vs.85).aspx
-        var div = document.createElement("div"),
-            attrKey = "localStorage";
-        div.style.display = "none";
-        document.getElementsByTagName("head")[0].appendChild(div);
-        if (div.addBehavior) {
-            div.addBehavior("#default#userdata");
-            //div.style.behavior = "url('#default#userData')";
-
-            var localStorage = window["localStorage"] = {
-                "length": 0,
-                "setItem": function(key, value) {
-                    div.load(attrKey);
-                    key = cleanKey(key);
-
-                    if (!div.getAttribute(key)) {
-                        this.length++;
-                    }
-                    div.setAttribute(key, value);
-
-                    div.save(attrKey);
-                },
-                "getItem": function(key) {
-                    div.load(attrKey);
-                    key = cleanKey(key);
-                    return div.getAttribute(key);
-
-                },
-                "removeItem": function(key) {
-                    div.load(attrKey);
-                    key = cleanKey(key);
-                    div.removeAttribute(key);
-
-                    div.save(attrKey);
-                    this.length--;
-                    if (this.length < 0) {
-                        this.length = 0;
-                    }
-                },
-
-                "clear": function() {
-                    div.load(attrKey);
-                    var i = 0;
-                    while (attr = div.XMLDocument.documentElement.attributes[i++]) {
-                        div.removeAttribute(attr.name);
-                    }
-                    div.save(attrKey);
-                    this.length = 0;
-                },
-
-                "key": function(key) {
-                    div.load(attrKey);
-                    return div.XMLDocument.documentElement.attributes[key];
-                }
-
-            },
-
-            // convert invalid characters to dashes
-            // http://www.w3.org/TR/REC-xml/#NT-Name
-            // simplified to assume the starting character is valid
-            cleanKey = function(key) {
-                return key.replace(/[^-._0-9A-Za-z\xb7\xc0-\xd6\xd8-\xf6\xf8-\u037d\u37f-\u1fff\u200c-\u200d\u203f\u2040\u2070-\u218f]/g, "-");
-            };
-
-
-            div.load(attrKey);
-            localStorage["length"] = div.XMLDocument.documentElement.attributes.length;
-        }
-    }
-})();
