@@ -1,0 +1,68 @@
+<project name="cm-build" default="cm-build-all" basedir=".">
+
+    <!-- Load build.properties from CM folder -->
+    <property file="build.properties"/>
+
+    <!-- Importing environment variables -->
+    <property environment="env"/>
+
+    <!-- Importing common cm file standard targets. Location is defined as Hudson environment Variable -->
+    <import file="${env.APP_UTIL_DIR}/${env.COMMON_TASKS_SCRIPT}"/>
+
+    <!-- Set properties to overrides development defaults -->
+	<property name="dist.dir" location="${cm.workspace.dir}/dist" />
+	
+    <target name="cm-build-all" description="Full CM build.">
+
+		<property name="cm.checkout.list" value="" />
+        <antcall target="cm-init"/>
+        <antcall target="cm-checkout"/>
+        <antcall target="cm-calculate-sloc"/>
+        
+        <stopwatch name="TimeToBuild" action="start"/>
+		
+        <stopwatch name="TimeToBuild" action="total"/>
+        <antcall target="cm-publish-all"/>
+		
+    </target>
+
+    <!-- Create distribution packages-->
+    <target name="cm-dist" description="Create deployment packages" >
+		<echo>Add code to create distribution files</echo>
+		
+		<!-- Copy DRUPAL Source Code -->
+		<tar destfile="${dist.dir}/brokercheckwidget/brokercheckwidget.tar.gz" compression="gzip">
+			<tarfileset dir="${cm.checkout.dir}/Source/" filemode="755"/>
+		</tar>
+	
+		<copy todir="${dist.dir}/bootstrap">
+			<fileset dir="${cm.checkout.dir}/bootstrap"/>
+		</copy>	
+
+		<copy todir="${dist.dir}/bootstrap">
+			<fileset dir="${cm.checkout.dir}/infrastructure/release/bootstrap" >
+				<exclude name = "incremental.sh" />
+				<exclude name = "bootstrap.sh" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${dist.dir}/app-stack">
+			<fileset dir="${cm.checkout.dir}/infrastructure/release/app-stack" >
+				<exclude name = "create.py" />
+				<exclude name = "delete.py" />
+			</fileset>
+		</copy>	
+		
+		<copy todir="${dist.dir}">
+			<fileset dir="${cm.checkout.dir}/CM" includes="install.sh"/>
+		</copy>
+
+		<copy todir="${cm.release.dir}/deployrecord">
+			<fileset dir="${cm.release.dir}" >
+				<include name="buildinfo" />
+			</fileset>  
+		</copy>
+	
+	</target>
+	
+</project>
