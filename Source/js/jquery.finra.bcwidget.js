@@ -22,7 +22,6 @@ Version 2.0 - External Widget Update(11/2014)
             isSelected: false,
             slideSpeed: 300,
             timeOutDelay: 2000,
-			iFrameEmbed: false,
             redirectOutOfDomain: false,
             displayCount: true,
             dropdownOrientation: 'none',
@@ -349,27 +348,22 @@ Version 2.0 - External Widget Update(11/2014)
         forwardtoOtherDomain: function(opts){
             if(opts.individual){
 				if(opts.fields.ac_bc_active_fl === "Y" || opts.fields.ac_bc_active_fl === "N"){
-					 var externalURL  = this.getForwardUrl('individualBC', opts.fields.ac_source_id);
+					 window.location.href = this.getForwardUrl('individualBC', opts.fields.ac_source_id);
 				}else if(opts.fields.ac_ia_active_fl === "Y" || opts.fields.ac_ia_active_fl === "N"){
-					 var externalURL = this.getForwardUrl('individualIA', opts.fields.ac_source_id);
+					 window.location.href = this.getForwardUrl('individualIA', opts.fields.ac_source_id);
 				}else{
 					 console('out of scope error scenario');
 				}
             }else{			
 				if(opts.fields.ac_bc_active_fl === "Y" || opts.fields.ac_bc_active_fl === "N"){
-					  var externalURL  = this.getForwardUrl('firmsBC', opts.fields.ac_source_id);
+					  window.location.href = this.getForwardUrl('firmsBC', opts.fields.ac_source_id);
 				}else if(opts.fields.ac_ia_active_fl === "Y" || opts.fields.ac_ia_active_fl === "N"){
-					  var externalURL  = this.getForwardUrl('firmsIA', opts.fields.ac_source_id);
+					  window.location.href = this.getForwardUrl('firmsIA', opts.fields.ac_source_id);
 				}else{
 					  console('out of scope error scenario');
 				}
             }    
-			
-			if(opts.iFrameEmbed)
-                window.open(externalURL, '', '');
-            else
-                window.location.href = externalURL;       
-		},
+        },
         //generic function to call ajax to populate results on hitting "Enter" key
         ajaxRedirect: function (opts, enteredTerm) {            
             console(enteredTerm);
