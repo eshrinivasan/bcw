@@ -1,0 +1,438 @@
+/**
+  Output has Media queries but no .lt-ie9 and .no-mq fallbacks
+  https://github.com/Team-Sass/breakpoint/wiki/No-Query-Fallbacks
+**/
+/*
+ * Typography
+ * --------------------------------------------------
+ * Font, line-height, and color for body text, headings, and more.
+ * Mobile first
+ */
+/*
+ * Buttons
+ * --------------------------------------------------
+ * Mobile first
+ */
+/*
+ * Forms
+ * --------------------------------------------------
+ * Mobile first
+ */
+/*
+ * Global
+ * --------------------------------------------------
+ * Base tags with site wide classes
+ */
+a {
+  /* See typography */
+}
+
+body {
+  /* See typography */
+}
+
+button {
+  /* See buttons */
+}
+
+h1, h2, h3, h4, h4, h6 {
+  /* See typography */
+}
+
+input[type=submit] {
+  /* See buttons */
+}
+
+table {
+  /* See tables */
+}
+
+td {
+  /* See tables */
+}
+
+th {
+  /* See tables */
+}
+
+ul {
+  /* See lists */
+}
+
+/*
+ * Lists
+ * --------------------------------------------------
+ * Mobile first
+ */
+/*
+ * Typography
+ * --------------------------------------------------
+ * Mobile first
+ */
+@font-face {
+  font-family: 'robotoregular';
+  src: url("../../fonts/Roboto-Regular-webfont.eot");
+  src: url("../../fonts/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto-Regular-webfont.woff") format("woff"), url("../../fonts/Roboto-Regular-webfont.ttf") format("truetype"), url("../../fonts/Roboto-Regular-webfont.svg#robotoregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'robotobold';
+  src: url("../../fonts/Roboto-Bold-webfont.eot");
+  src: url("../../fonts/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/Roboto-Bold-webfont.woff") format("woff"), url("../../fonts/Roboto-Bold-webfont.ttf") format("truetype"), url("../../fonts/ Roboto-Bold-webfont.svg#robotobold") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*  Use this file to define widget specific styles. */
+.widget-container {
+  border: solid 1px #51a2da;
+  background-color: #51a2da;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+.widget-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0em .7em 0 .3em;
+}
+.widget-container ul li {
+  padding: .6em 0 .6em .6em;
+  border-bottom: solid 1px #80c5fb;
+  position: relative;
+}
+
+.header {
+  background-color: white;
+  padding: 5px;
+}
+
+footer {
+  text-align: center;
+  background-color: #51a2da;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 2px 5px 6px;
+  height: 22px;
+  color: white;
+}
+footer a {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 0.6875em;
+  color: white;
+  text-decoration: none;
+}
+footer .separator {
+  position: relative;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 0.6875em;
+  font-weight: 300;
+}
+
+.main-view {
+  position: absolute;
+  top: 75px;
+  bottom: 22px;
+  right: 5px;
+  left: 5px;
+}
+.main-view .main {
+  width: 100%;
+}
+
+.data-container {
+  position: absolute;
+  top: 35px;
+  bottom: 0;
+  width: 100%;
+}
+
+.message {
+  font-size: 1.125em;
+  background-color: #51a2da;
+  color: white;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  text-align: center;
+  padding: .5em;
+  margin: 1em auto;
+  width: 80%;
+}
+.message .firmname {
+  color: #00008b;
+}
+
+.logo, .search-icon {
+  background: url("../../images/bc-sprites.png") no-repeat top left;
+}
+
+.search-icon {
+  width: 16px;
+  height: 16px;
+  background-position: -5px -78px;
+}
+
+.logo {
+  background-position: -5px -5px;
+  width: 236px;
+  height: 63px;
+  text-align: center;
+  margin: 0 auto;
+}
+.logo:hover {
+  cursor: pointer;
+}
+
+.field-search {
+  white-space: nowrap;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.field-search .clear {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  color: #ccc;
+  font-weight: bold;
+  font-size: .75em;
+  top: 5px;
+  font-family: arial;
+}
+
+.search-icon {
+  background-position: 0 -73px;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  position: relative;
+  left: -45px;
+  top: 7px;
+  border: none;
+}
+.search-icon:hover {
+  cursor: pointer;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.clearfix {
+  display: inline-block;
+}
+
+/* start commented backslash hack \*/
+* html .clearfix {
+  height: 1%;
+}
+
+.clearfix {
+  display: block;
+}
+
+.bc-item {
+  background-color: #51a2da;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  margin: 0 1em 0 .5em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: .75em;
+  font-weight: 300;
+  color: #fff;
+}
+.bc-item:hover {
+  cursor: pointer;
+}
+.bc-item .result {
+  color: #fff;
+  text-decoration: none;
+  padding: .3em 0 .3em .5em;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: .9em;
+  display: inline-block;
+  width: 100%;
+  border-bottom: solid 1px #fff;
+}
+.bc-item.expanded .result {
+  border-bottom: none;
+  background-color: white;
+  color: darkblue;
+  font-weight: bold;
+}
+.bc-item.expanded .details {
+  color: darkblue;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: .7em;
+  border-bottom: solid 1px #fff;
+  width: 100%;
+  padding: .3em 0 .3em .5em;
+  background-color: white;
+  border: solid 1px white;
+}
+
+.scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 150px;
+  max-height: 150px;
+  position: relative;
+  margin-right: .2em;
+  margin-top: .5em;
+}
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail {
+  display: none !important;
+}
+
+.form-group {
+  text-align: right;
+  margin-top: 1em;
+}
+.form-group button {
+  background-color: white;
+  color: white;
+}
+
+.detail-container {
+  width: 95%;
+  margin: 0 .5em;
+  color: #fff;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  overflow: hidden;
+  padding: .5em 0 0 0;
+  font-size: .8em;
+  height: 145px;
+}
+.detail-container .detail-item {
+  margin: .5em 0;
+  font-size: .95em;
+}
+.detail-container .detail-item a {
+  color: white;
+  font-weight: bold;
+}
+.detail-container .detail-item a:hover {
+  color: #265b85;
+  font-weight: bold;
+}
+.detail-container .heading {
+  font-weight: bold;
+}
+.detail-container .more-link {
+  float: none;
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  /* top: 1em; */
+  width: 50%;
+  height: 20px;
+  border-radius: 2px;
+  margin: 0 auto;
+  text-align: center;
+  background: #ff553a;
+  padding: .3em .3em;
+}
+.detail-container .more-link a {
+  display: inline;
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+}
+.detail-container .return {
+  border-bottom: solid 1px #80c5fb;
+  margin-bottom: .5em;
+}
+.detail-container .return a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: 500;
+}
+.detail-container .return a:hover {
+  color: #265b85;
+}
+
+input[type="text"] {
+  background-color: white;
+  border: none;
+  height: 30px;
+  position: relative;
+  padding: 0 1em;
+  color: #777777;
+  width: 90%;
+  margin: 0 auto 0 .1em;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  font-size: .82em;
+  vertical-align: top;
+  margin-top: .4em;
+}
+
+.no-results-found {
+  width: 80%;
+  margin: 3em auto;
+  text-align: center;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.more-arrow {
+  position: absolute;
+  right: 0;
+  font-weight: bold;
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  width: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(192, 192, 192, 0.4);
+}
+
+.notation {
+  font-weight: 300;
+  font-size: .8em;
+  font-style: italic;
+}
+
+li .heading:hover {
+  color: #265b85;
+  font-weight: 500;
+}
+
+.locations {
+  font-size: .7em;
+}

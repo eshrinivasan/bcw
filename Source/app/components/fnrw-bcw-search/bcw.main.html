@@ -1,0 +1,9 @@
+<div class="main">
+    <div class="field-search">
+      <input type="text" ng-model="model.query" ng-change="search(model.query)" placeholder="Search" />
+      <a href="#" class="search-icon" ng-click="search(model.query)"></a>
+    </div>
+    <div class="data-container">
+        <div ui-view class="animated" ng-class="getViewState()"></div>
+     </div>
+</div>

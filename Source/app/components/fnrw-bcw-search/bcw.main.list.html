@@ -1,0 +1,14 @@
+<div class="scrollable"><ul>
+   <li tabindex="0" class="bc-item clearfix result" ng-class="{'expanded': isActive(item) && expanded }" ng-repeat="item in results" ng-click="select(item)" ng-keypress="select(item)" infinite-scroll="loadMoreData(20)" infinite-scroll-distance="1" infinite-scroll-parent="true">
+         <div class="heading">
+             <span class="fullname" ng-bind="getFullName(item)"></span><span class="more-arrow"> > </span>
+             <div class="locations" ng-bind="getLocations(item)"></div>
+             <!--<span class="crd-number"> <span> (#</span><span ng-bind="item.fields.ac_source_id"></span><span>)</span></span>-->
+
+         </div>
+   </li>
+</ul>
+    <div class="no-results-found">There were no results for <b>"{{model.query}}"</b>. Please try again.</div>
+</div>
+
+

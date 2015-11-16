@@ -1,0 +1,9 @@
+logs/*
+tmp
+.DS_Store
+.idea
+build/*
+build1/*
+app/assets/js/*
+.sass-cache
+app/assets/css/min/*
