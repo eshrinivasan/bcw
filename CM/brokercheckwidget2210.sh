@@ -5,7 +5,8 @@
 #which rvm
 
 unset http_proxy
-npm install
+npm config list
+npm install --production
 npm install -g grunt-cli
 
 #echo "Gem list before setting rvm"
