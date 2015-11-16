@@ -34,7 +34,7 @@
 		
 		<!-- Copy DRUPAL Source Code -->
 		<tar destfile="${dist.dir}/brokercheckwidget2210/brokercheckwidget2210.tar.gz" compression="gzip">
-			<tarfileset dir="${cm.checkout.dir}/Source/" filemode="755"/>
+			<tarfileset dir="${cm.checkout.dir}/Source/build/" filemode="755"/>
 		</tar>
 	
 		<copy todir="${dist.dir}/bootstrap">
