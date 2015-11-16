@@ -33,7 +33,7 @@
 		<echo>Add code to create distribution files</echo>
 		
 		<!-- Copy DRUPAL Source Code -->
-		<tar destfile="${dist.dir}/brokercheckwidget/brokercheckwidget2210.tar.gz" compression="gzip">
+		<tar destfile="${dist.dir}/brokercheckwidget2210/brokercheckwidget2210.tar.gz" compression="gzip">
 			<tarfileset dir="${cm.checkout.dir}/Source/" filemode="755"/>
 		</tar>
 	
