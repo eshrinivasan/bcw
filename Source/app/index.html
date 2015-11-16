@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+		<title>Broker Check</title>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href="assets/css/min/animate.min.css" type="text/css" rel="stylesheet">
+       <!-- <link href="bower_components/angular-bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+        <link href="assets/css/min/widget-styles.min.css" type="text/css" rel="stylesheet">
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="assets/js/min/jquery.min.js"></script>
+        <script src="assets/js/min/angular-plugins.min.js"></script>
+        <script src="assets/js/min/app.min.js"></script>
+
+        <script src="components/fnrw-solr-provider/fnrw-solr-provider.js"></script>
+        <script src="components/fnrw-bcw-search/fnrw-bcw-search.js"></script>
+        <script src="components/fnrw-bcw-message/fnrw-bcw-message.js"></script>
+        <script src="components/fnrw-data-services/fnrw-data-services.js"></script>
+
+
+        <script src="app.js"></script>
+
+	</head>
+
+	<body ng-app="BCWidgetApp">
+      <div class="widget-container">
+          <div ng-include="'shared/header/header.html'"></div>
+          <div ui-view class="main-view"></div>
+          <footer ng-include="'shared/footer/footer.html'"></footer>
+      </div>
+	</body>
+</html>

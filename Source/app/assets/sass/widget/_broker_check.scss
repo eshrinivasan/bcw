@@ -1,0 +1,376 @@
+/*  Use this file to define widget specific styles. */
+
+
+.widget-container {
+  border: solid 1px $default-bg-color;
+  background-color: $default-bg-color;
+  width:300px;
+  height:300px;
+  position:relative;
+  overflow:hidden;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0em .7em 0 .3em;
+
+    li {
+      padding: .6em 0 .6em .6em;
+      border-bottom: solid 1px $separator-line-color;
+      position:relative;
+
+
+    }
+  }
+}
+.header {
+  background-color: $white;
+  padding:5px;
+
+}
+footer {
+  text-align: center;
+  background-color: $footer-bg-color;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 2px 5px 6px;
+  height:22px;
+  color:$white;
+
+
+  a {
+    font-family: $sans-serif-stack;
+    font-weight: 300;
+    font-size: em(11);
+    color: $footer-text-color;
+    text-decoration:none;
+  }
+  .separator {
+    position:relative;
+
+    font-family: $sans-serif-stack;
+    font-size:em(11);
+    font-weight:300;
+  }
+}
+.main-view {
+  position:absolute;
+  top: 75px;
+  bottom:22px;
+  right:5px;
+  left:5px;
+
+  .main {
+    width:100%;
+  }
+
+}
+.data-container {
+
+  position: absolute;
+  top: 35px;
+  bottom: 0;
+  width: 100%;
+
+}
+.message {
+  font-size: em(18);
+  background-color: $default-bg-color;
+  color: $default-text-color;
+  font-family: $sans-serif-stack;
+  font-weight:300;
+  text-align:center;
+  padding: .5em;
+  margin: 1em auto;
+  width: 80%;
+
+  .firmname {
+    color: #00008b;
+  }
+
+}
+.logo, .search-icon{
+  background: url('../../images/bc-sprites.png') no-repeat top left;
+}
+
+//.sprite { background: url('../../images/bc-sprites.png') no-repeat top left;  }
+
+.search-icon {
+  width: 16px;
+  height: 16px;
+  background-position: -5px -78px;
+}
+
+
+.logo {
+  background-position: -5px -5px;
+  width: 236px;
+  height: 63px;
+  text-align:center;
+  margin:0 auto;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.field-search {
+  white-space: nowrap;
+  width: 100%;
+  margin: 0 auto;
+  position:relative;
+
+  .clear {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    color: #ccc;
+    font-weight: bold;
+    font-size: .75em;
+    top: 5px;
+    font-family: arial;
+
+  }
+}
+.search-icon {
+  background-position: 0 -73px;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  position: relative;
+  left: -45px;
+  top: 7px;
+  border: none;
+  &:hover {
+    cursor:pointer;
+  }
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+
+
+.bc-item {
+  background-color:$default-bg-color;
+  font-family: $sans-serif-stack;
+  margin:0 1em 0 .5em;
+  list-style:none;
+  margin:0;
+  padding:0;
+  font-size: .75em;
+  font-weight:300;
+  color: #fff;
+
+
+  &:hover {
+    cursor:pointer;
+  }
+
+  .result {
+    color: #fff;
+    text-decoration: none;
+    padding: .3em 0 .3em .5em;
+
+    font-family: $sans-serif-stack;
+    font-weight: 300;
+    font-size:.9em;
+    display: inline-block;
+    width: 100%;
+    border-bottom: solid 1px #fff;
+  }
+  &.expanded {
+    .result {
+
+      border-bottom:none;
+      background-color:$white;
+      color:darkblue;
+      font-weight:bold;
+    }
+    .details {
+      color: darkblue;
+      font-family:$sans-serif-stack;
+      font-weight:300;
+      font-size: .7em;
+      border-bottom: solid 1px #fff;
+      width: 100%;
+
+      padding: .3em 0 .3em .5em;
+      background-color:$white;
+      border:solid 1px $default-text-color;
+
+    }
+
+  }
+}
+
+
+
+.scrollable {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 150px;
+  max-height: 150px;
+  position: relative;
+  margin-right: .2em;
+  margin-top:.5em;
+
+}
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail {
+  display: none !important;
+}
+
+.form-group {
+  text-align:right;
+  margin-top: 1em;
+  button {
+    background-color: $header-bg-color;
+    color: $white;
+  }
+}
+
+.detail-container {
+  width:95%;
+  margin:0 .5em;
+  color: #fff;
+  font-family: $sans-serif-stack;
+  font-weight: 300;
+  overflow:hidden;
+  padding: .5em 0 0 0;
+  font-size: .8em;
+  height: 145px;
+
+  .detail-item {
+    margin:.5em 0;
+    font-size:.95em;
+    a {
+      color: $white;
+      font-weight:bold;
+
+      &:hover {
+        color: $hover-color;
+        font-weight:bold;
+      }
+    }
+  }
+  .heading {
+    font-weight:bold;
+  }
+  .more-link {
+
+    float: none;
+    position: absolute;
+    bottom:0;
+    left:25%;
+    /* top: 1em; */
+    width: 50%;
+    height: 20px;
+    border-radius: 2px;
+    margin: 0 auto;
+    text-align: center;
+    background: #ff553a;
+    padding: .3em .3em;
+
+
+    a {
+      display:inline;
+      height:100%;
+      width:100%;
+      color:$white;
+      text-decoration:none;
+
+
+    }
+  }
+  .return {
+    border-bottom: solid 1px $separator-line-color;
+    margin-bottom:.5em;
+    a {
+      color: #fff;
+      text-decoration: none;
+      font-size:1em;
+      font-weight:500;
+    }
+    a:hover {
+      color:$hover-color;
+    }
+  }
+}
+
+input[type="text"] {
+    background-color: $white;
+    border:none;
+    height:30px;
+    position:relative;
+    padding: 0 1em;
+    color: $search-text-color;
+    width: 90%;
+    margin: 0 auto 0 .1em;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    font-size: .82em;
+    vertical-align:top;
+    margin-top: .4em;
+
+}
+
+.no-results-found {
+    width: 80%;
+    margin: 3em auto;
+    text-align: center;
+    font-family: $sans-serif-stack;
+    color: $white;
+}
+.more-arrow {
+  position: absolute;
+  right: 0;
+  font-weight: bold;
+}
+
+  /* Let's get this party started */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    width:12px;
+    background: rgba(255,255,255,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(192,192,192,0.4);
+  }
+
+
+  .notation {
+    font-weight:300;
+    font-size:.8em;
+    font-style:italic;
+  }
+li {
+  .heading:hover {
+    color: $hover-color;
+    font-weight:500;
+  }
+}
+.locations {
+  font-size: .7em;
+
+}

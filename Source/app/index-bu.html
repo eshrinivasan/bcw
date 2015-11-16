@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>Professional Designations</title>
+        <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+        <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <link href="assets/css/min/widget-styles.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/min/compiled-styles.min.css" rel="stylesheet" type="text/css" />
+
+
+        <!--[if lt IE 9]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <script src="assets/js/min/jquery.min.js"></script>
+        <script src="assets/js/min/angular-plugins.min.js"></script>
+        <script src="assets/js/min/app.min.js"></script>
+        <script src="bower_components/fetch-jsonp/build/fetch-jsonp.js"></script>
+
+	</head>
+
+	<body ng-app="bcWidget" ng-controller="bcWidgetController">
+
+      <div class="widget-container">
+		<div class="header" id="top-section">
+            <div class="logo"><a href="http://brokercheck.finra.org/"></a></div>
+        </div>
+        <div class="main">
+            <treasure-overlay-spinner active='spinner.active'>
+			<!-- Create a binding between the searchString model and the text field -->
+        <div class="field-search">
+			 <input type="text" ng-model="query" ng-change="doFilter()" placeholder="Search" />
+             <button class="search-icon" ng-click="showSpinner();"></button>
+		</div>
+
+        <div class="message" ng-show="showMessage">Get important facts about a {{firmname}} investment professional's background.</div>
+
+        <perfect-scrollbar class="scrollable" wheel-propagation="true" always-visible="true" wheel-speed="1" min-scrollbar-length="5" max-scrollbar-length="10" useKeyboard="true" suppressScrollX="true">
+
+            <div class="bc-item clearfix" ng-repeat="i in filteredItems = (items | filter:search )" ng-click="select(i)" ng-class="{'expanded': isActive(i) }">
+              <div class="result">
+                  <span class="bc-name">{{i.firstname}} {{i.middle}} {{i.lastname}} </span> <span class="bc-crd"> (#{{i.crdnumber}})</span>
+              </div>
+              <div class="details clearfix animate-show" ng-show="isActive(i)" ng-animate="animate">
+                  <div class="titles"><span class="name">{{i.firstname}} {{i.middle}} {{i.lastname}} </span> is a registered <a href="#">{{i.titles}}</a></div>
+                  <div class="disclosures">There are <b>no</b><a href="#"> disclosures</a> for this individual.</div>
+                  <div class="more-link"><a href="http://brokercheck.finra.org/Individual/Summary/{{i.crdnumber}}" target="_blank">Get Full Report</a></div>
+              </div>
+		  </div>
+          <div ng-show="filteredItems.length==0" class="no-results-found">There were no results found for search term "{{query}}". <br /><br /> Please try again.</div>
+
+        </perfect-scrollbar></treasure-overlay-spinner>
+        </div>
+        <div class="footer"><a href="http://www.finra.org/Privacy" title="privacy statement">Privacy</a> <span class="separator"> | </span><a href="http://www.finra.org/Legal" title="legal statement">Legal</a></div>
+      </div>
+	</body>
+</html>

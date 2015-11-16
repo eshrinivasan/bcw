@@ -1,0 +1,28 @@
+
+<div class="detail-container">
+    <div class="return"><span></span><a ui-sref="list" ng-keypress="goBack('list')" tabindex="0">< Back to List</a></div>
+    <div class="heading">
+     <span class="fullname heading" ng-bind="getFullName(item)"></span>
+     <span class="crd-number"> <span> (#</span><span ng-bind="item.fields.ac_source_id"></span><span>)</span></span>
+   </div>
+   <div class="locations">
+       <span ng-repeat="loc in item.fields.ac_locations track by $index"><span  ng-bind="loc"></span><span ng-hide="$last">; </span></span>
+   </div>
+    <div class="details">
+        <div class="bc-type detail-item">
+            <span class="fullname" ng-bind="getFullName(item)"></span><span> is </span>
+
+            <span ng-show="isBroker(item)"> a <a href="#" title="{{brokerToolTip}}">registered broker</a>.</span>
+            <span ng-show="isInvestmentAdvisor(item)"> an <a href="#" title="{{iaToolTip}}">investment advisor.</a></span>
+            <span ng-show="isBoth(item)"> both a <a href="#" title="{{brokerToolTip}}">registered broker</a> and an <a href="#" title="{{iaToolTip}}">investment advisor</a>.</span>
+            <span ng-show="isNeither(item)"> neither a <a href="#" title="{{brokerToolTip}}">registered broker</a> nor an <a href="#" title="{{iaToolTip}}">investment advisor</a>.</span>
+
+    <span class="detail-item">There are <span ng-hide="hasDisclosures(item)"><b>no</b></span> <a href="#" title="{{disclosureToolTip}}">disclosures</a> for this individual.</span>
+        </div>
+    <div class="more-link">
+       <img src="assets/images/newWindow.png" height="14px">
+        <a ng-if="isBroker(item) || isBoth(item)" tabindex="0" ng-href="http://brokercheck.finra.org/Individual/Summary/{{item.fields.ac_source_id}}" target="_blank"> Get Full Report</a>
+        <a ng-if="isInvestmentAdvisor(item)" tabindex="0" ng-href="http://www.adviserinfo.sec.gov/IAPD/Support/IAPD_Summary_Link.aspx?Source=Widget&IndividualID={{item.fields.ac_source_id}}" target="_blank"> Get Full Report</a>
+    </div>
+</div>
+</div>
