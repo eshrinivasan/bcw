@@ -1,6 +1,6 @@
 {
-  "name": "broker-check-list-widget",
-  "description": "A list widget project for FINRA Broker Check.",
+  "name": "broker-check-2210-widget",
+  "description": "A list widget project for FINRA Broker Check 2210.",
   "version": "0.0.1",
   "homepage": "http://www.finra.org",
   "dependencies": {
@@ -15,6 +15,7 @@
     "angulartics": "~0.20.1",
     "angulartics-google-analytics": "~0.1.1",
     "html5-boilerplate": "~5.2.0",
+    "ng-scroller": "angular-scroller#*",
     "ui-bootstrap": "~0.14.3"
   }
 }
