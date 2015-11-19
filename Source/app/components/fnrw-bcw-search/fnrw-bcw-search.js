@@ -1,12 +1,11 @@
 (function() {
     'use strict'
-    angular.module('BCWidgetApp.list', ['FinraSolrProvider', 'ui.router', 'ngAnimate', 'FinraDataServices', 'ui.bootstrap'])
+    angular.module('BCWidgetApp.list', ['ui.router', 'ngAnimate', 'FinraDataServices', 'ui.bootstrap'])
         .value('IAUrl', 'http://www.adviserinfo.sec.gov/IAPD/Support/IAPD_Summary_Link.aspx?Source=Widget&IndividualID=')
         .value('BCIndUrl', 'http://brokercheck.finra.org/Individual/Summary/')
-        .controller('SolrSearchCtrl', ['$scope', '$state', 'Solr', 'dataShareService', 'itemShareService', 'bcNameService', 'bcString',
-            function ($scope, $state, Solr, dataShareService, itemShareService, bcNameService, bcString) {
+        .controller('SolrSearchCtrl', ['$scope', '$state', 'itemShareService', 'bcNameService','locationService',
+            function ($scope, $state, itemShareService, bcNameService, locationService) {
 
-                $scope.expanded = false;
                 $scope.itemDetail;
 
                 $scope.select = function (item) {
@@ -14,37 +13,18 @@
                     $state.go('detail');
                 };
 
-
-                $scope.isActive = function (item) {
-                    return ($scope.selected === item && $scope.expanded);
-                };
-
                 $scope.getFullName = function (item) {
                     bcNameService.setFullName(item);
                     return bcNameService.getFullName();
                 };
-                $scope.getLocations = function (item) {
-                    var locations = '';
-                    if (item.fields.ac_locations) {
-
-                        var length = item.fields.ac_locations.length;
-                        console.log(length);
-                        var cityState = item.fields.ac_locations[0].split(',');
-                        if (length > 1) {
-                            var leftover = length - 1;
-                            locations = bcString.capitalize(cityState[0], true) + ',' + cityState[1] + ' +' + leftover + ' more.';
-                        }
-                        else if (length = 1) {
-                            locations = bcString.capitalize(cityState[0], true) + ',' + cityState[1];
-                        }
-                    }
-                    return locations;
+                $scope.locations = function(item) {
+                    return locationService.getLocations(item);
                 }
 
 
             }])
-        .controller('ItemDetailCtrl', ['$scope', 'itemShareService', '$state', 'bcNameService', 'IAUrl', 'BCIndUrl',
-            function ($scope, itemShareService, $state, bcNameService, IAUrl, BCIndUrl) {
+        .controller('ItemDetailCtrl', ['$scope', 'itemShareService', '$state', 'bcNameService', 'IAUrl', 'BCIndUrl','locationService',
+            function ($scope, itemShareService, $state, bcNameService, IAUrl, BCIndUrl, locationService) {
                 $scope.item = itemShareService.getItem();
 
                 $scope.BCUrl = BCIndUrl;
@@ -99,6 +79,9 @@
                         throw "This individual is neither an investment advisor nor a broker."
                     }
                     return url;
+                }
+                $scope.locations = function(item) {
+                    return locationService.getLocations(item);
                 }
 
             }])
