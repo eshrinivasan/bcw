@@ -4,9 +4,17 @@
     angular.module('FinraDataServices', ['ui.router'])
         .service('dataService', ['$http', '$q', '$log', '$state', function ($http, $q, $log, $state) {
 
-            this.fetchAll = function (url) {
+            this.search = function (endpoint, options, keepParamOrder) {
                 var deferred = $q.defer();
-                $http.jsonp(url, {cache: true}).success(
+                var url = endpoint;
+                var defaults = {};
+                angular.extend(defaults, options);
+                var config = {
+                    params: defaults,
+                    keepParamsOrder: keepParamOrder
+                }
+
+                $http.jsonp(url, config).success(
                     function (data, status, headers, config) {
                         deferred.resolve(data);
                     })
@@ -52,27 +60,30 @@
                 absUrl = $location.absUrl(),
             // extract and parse url
                 elements = absUrl.split("?");
+            console.log(elements);
 
-            parts["queryString"] = elements[1];
-            if (elements[1]) {
-                parts["hashString"] = (parts["queryString"].split("#"))[1];
-                parts["requestParams"] = ((parts["queryString"].split("#"))[0]).split("&");
+            if (!angular.isUndefined(elements) && elements.length > 1) {
+                parts["queryString"] = elements[1];
+                if (elements[1]) {
+                    parts["hashString"] = (parts["queryString"].split("#"))[1];
+                    parts["requestParams"] = ((parts["queryString"].split("#"))[0]).split("&");
 
-                parts["requestParams"].forEach(function (queryStringVariable) {
-                    var __variable = queryStringVariable.split("=");
-                    parts.queryvars[__variable[0]] = __variable[1];
-                });
+                    parts["requestParams"].forEach(function (queryStringVariable) {
+                        var __variable = queryStringVariable.split("=");
+                        parts.queryvars[__variable[0]] = __variable[1];
+                    });
+                }
+                else {
+                    $state.go('error');
+                }
+                // url
+                parts["url"] = elements[0];
             }
-            else {
-                $state.go('error');
-            }
-            // url
-            parts["url"] = elements[0];
-
 
             // public interface
             // returns variable from query string
             this.getQueryStringVar = function (variable) {
+                console.log(parts);
                 if (parts.queryvars[variable] !== "undefined") {
                     return parts.queryvars[variable];
                 }
@@ -85,8 +96,9 @@
 
             this.getCRDQueryString = function (crds) {
                 var crdString = '';
-                if (crds) {
-                    //crdString += '+AND+(';
+                console.log(crds);
+                if (!angular.isUndefined(crds)) {
+                    crdString += '+AND+(';
                     angular.forEach(crds, function (value, key) {
                         if (key != 0) {
                             crdString += '+OR+';
@@ -96,12 +108,50 @@
                     return crdString + ')';
                 }
                 else {
-                    $state.go('error');
                     console.error("iFrame parameter must supply at least one CRD number. Returning for all CRDs.");
                 }
                 return crdString;
             }
 
 
+        }])
+        .service('itemShareService', function () {
+            var Item = {};
+            var queryStr = '';
+
+            return {
+                getQueryStr: function () {
+                    return queryStr;
+                },
+                setQueryStr: function () {
+                    return queryStr;
+                },
+                getItem: function () {
+                    return Item;
+                },
+                setItem: function (item) {
+                    Item = item;
+                }
+            };
+        })
+        .service("locationService", ['$state', 'bcString', function ($state, bcString) {
+
+            this.getLocations = function (item) {
+                console.log(item);
+                var locations = '';
+                if (item.fields.ac_locations) {
+
+                    var length = item.fields.ac_locations.length;
+                    var cityState = item.fields.ac_locations[0].split(',');
+                    if (length > 1) {
+                        var leftover = length - 1;
+                        locations = bcString.capitalize(cityState[0], true) + ',' + cityState[1] + ' +' + leftover + ' more.';
+                    }
+                    else if (length = 1) {
+                        locations = bcString.capitalize(cityState[0], true) + ',' + cityState[1];
+                    }
+                }
+                return locations;
+            }
         }])
 })()

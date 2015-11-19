@@ -1,0 +1,19 @@
+{
+  "name": "ng-scroller",
+  "dependencies": {
+    "angular": "*",
+    "bootstrap": "*",
+    "closure-library": "git://github.com/google/closure-library.git"
+  },
+  "homepage": "https://github.com/jankuca/ng-scroller",
+  "_release": "df1d336ade",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "df1d336adede44e3e76afdf1a86b8c74ffadce40"
+  },
+  "_source": "https://github.com/jankuca/ng-scroller.git",
+  "_target": "*",
+  "_originalSource": "angular-scroller",
+  "_direct": true
+}

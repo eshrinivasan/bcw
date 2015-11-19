@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    angular.module('BCWidgetApp', ['FinraDataServices', 'FinraSolrProvider', 'BCWidgetApp.list',
+    angular.module('BCWidgetApp', ['FinraDataServices', 'BCWidgetApp.list',
         'BCWidgetApp.message', 'ui.router', 'ngAnimate'])
 
-        .config(['$urlRouterProvider', '$stateProvider', '$httpProvider', 'SolrProvider', function ($urlRouterProvider, $stateProvider, $httpProvider, SolrProvider) {
-            SolrProvider.setEndpoint('http://doppler.qa.finra.org/doppler-lookup/api/v1/lookup');
+        .constant('restConfig', { endpoint: 'http://doppler.qa.finra.org/doppler-lookup/api/v1/lookup'})
+        .config(['$urlRouterProvider', '$stateProvider', '$httpProvider',  function ($urlRouterProvider, $stateProvider, $httpProvider) {
 
             $urlRouterProvider.otherwise('/');
 
@@ -81,10 +81,11 @@
 
         }])
 
-        .controller('BCWidgetCtrl', ['$scope', '$state', 'dataService', 'Solr', 'dataShareService', 'urlService', 'queryStringService', function ($scope, $state, dataService, Solr, dataShareService, urlService, queryStringService) {
+        .controller('BCWidgetCtrl', ['$scope', '$state', 'dataService', 'urlService', 'queryStringService', 'restConfig', function ($scope, $state, dataService, urlService, queryStringService, restConfig) {
 
             //Set up initial view.
             $state.go('message');
+            $scope.results = [];
 
             $scope.getViewState = function () {
                 if ($state.current.name == 'list') {
@@ -96,13 +97,11 @@
 
             }
 
-            var crd_numbers = urlService.getQueryStringVar('crds').split(',');
+            if (urlService.getQueryStringVar('crds')) {
+                var crd_numbers = urlService.getQueryStringVar('crds').split(',');
+            }
             var startAt = 0;
 
-            $scope.loadMoreData = function (increment) {
-                $scope.startAt += increment;
-                this.search($scope.model.query);
-            }
 
             var concatWords = function (data) {
                 if (data) {
@@ -111,47 +110,44 @@
                 return false;
             }
 
-            var getFirstWord = function (data) {
+             $scope.search = function (data) {
 
-                if (data) {
-                    var first = data.split(' ');
-                    return first[0];
-                }
-                return false;
-            }
-            $scope.search = function (data) {
-
-                if (data.length == 0) {
-                    $state.go("message");
-                }
-                else {
-                    $state.go('list');
-                    var concatenated = concatWords(data);
-                    var firstWord = getFirstWord(data);
-                    var params = {
-                        'json.wrf': 'JSON_CALLBACK',
-                        start: 0,
-                        results: 20,
-                        sources: 'BC_INDIVIDUALS_WG',
-                        hl: false,
-                        query: concatenated,
-                        filter: '(ac_ia_active_fl:Y+OR+ac_bc_active_fl:Y)' + '+AND+(' + queryStringService.getCRDQueryString(crd_numbers),
-                        wt: 'json'
-
-                    };
-
-                    Solr.search(params, true)
-                        .then(function (data) {
-                            $scope.results = data.data.results.BC_INDIVIDUALS_WG.results;
-
-                        }), function (error) {
-
-                        console.error(error)
-                    };
+                 var lastIndex = 0;
 
 
-                }
-            }
+                 if (data.length === 0) {
+                     $state.go("message");
+                 }
+                 else {
+                     $state.go('list');
+                     var params = {
+                         'json.wrf': 'JSON_CALLBACK',
+                         start: startAt,
+                         results: 20,
+                         sources: 'BC_INDIVIDUALS_2210',
+                         hl: false,
+                         query: concatWords(data),
+                         filter: '(ac_ia_active_fl:Y+OR+ac_bc_active_fl:Y)' + queryStringService.getCRDQueryString(crd_numbers),
+                         wt: 'json'
+
+                     };
+
+                     dataService.search(restConfig.endpoint, params, true)
+                         .then(function (data) {
+                             console.log(data);
+                             $scope.results = data.results.BC_INDIVIDUALS_2210.results;
+
+
+                         }), function (error) {
+
+                         console.error(error)
+                     };
+
+
+                 }
+             }
+
+
         }]);
 
 })()
