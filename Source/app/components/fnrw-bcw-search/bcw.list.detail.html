@@ -6,7 +6,7 @@
      <span class="crd-number"> <span> (#</span><span ng-bind="item.fields.ac_source_id"></span><span>)</span></span>
    </div>
    <div class="locations">
-       <span ng-repeat="loc in item.fields.ac_locations track by $index"><span  ng-bind="loc"></span><span ng-hide="$last">; </span></span>
+       <span ng-bind="locations(item)"></span>
    </div>
     <div class="details">
         <div class="bc-type detail-item">

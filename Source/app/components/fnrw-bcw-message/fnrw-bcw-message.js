@@ -12,11 +12,14 @@
             ]);
         })
         .controller('MessageCtrl', ['$scope', 'urlService', '$state', function ($scope, urlService, $state) {
+            var fname = urlService.getQueryStringVar('firmname');
 
-
-            $scope.firmname = decodeURI(urlService.getQueryStringVar('firmname'));
-            console.log($scope.firmname);
-
+            if (fname) {
+                $scope.firmname = decodeURI(urlService.getQueryStringVar('firmname'));
+             }
+            else {
+                $scope.firmname = ' ';
+            }
         }])
         .controller('ErrorMessageCtrl', function () {
 
