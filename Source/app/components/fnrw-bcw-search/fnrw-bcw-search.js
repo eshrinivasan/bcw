@@ -7,6 +7,7 @@
             function ($scope, $state, itemShareService, bcNameService, locationService) {
 
                 $scope.itemDetail;
+                $scope.empty = $scope.noresults;
 
                 $scope.select = function (item) {
                     itemShareService.setItem(item);

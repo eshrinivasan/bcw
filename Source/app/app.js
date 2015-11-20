@@ -85,7 +85,7 @@
 
             //Set up initial view.
             $state.go('message');
-            $scope.results = [];
+            $scope.noresults = false;
 
             $scope.getViewState = function () {
                 if ($state.current.name == 'list') {
@@ -113,7 +113,7 @@
              $scope.search = function (data) {
 
                  var lastIndex = 0;
-
+                 $scope.results = [];
 
                  if (data.length === 0) {
                      $state.go("message");
@@ -134,13 +134,14 @@
 
                      dataService.search(restConfig.endpoint, params, true)
                          .then(function (data) {
-                             console.log(data);
+                             if (data.length === 0 || angular.isUndefined(data)) {
+                                 $scope.noresults = true;
+                             }
                              $scope.results = data.results.BC_INDIVIDUALS_2210.results;
 
-
                          }), function (error) {
-
-                         console.error(error)
+                              $scope.noresult = true;
+                              console.error(error)
                      };
 
 
