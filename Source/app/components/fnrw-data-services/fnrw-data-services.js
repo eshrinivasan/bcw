@@ -60,7 +60,7 @@
                 absUrl = $location.absUrl(),
             // extract and parse url
                 elements = absUrl.split("?");
-            console.log(elements);
+
 
             if (!angular.isUndefined(elements) && elements.length > 1) {
                 parts["queryString"] = elements[1];
@@ -83,7 +83,7 @@
             // public interface
             // returns variable from query string
             this.getQueryStringVar = function (variable) {
-                console.log(parts);
+
                 if (parts.queryvars[variable] !== "undefined") {
                     return parts.queryvars[variable];
                 }
@@ -96,7 +96,6 @@
 
             this.getCRDQueryString = function (crds) {
                 var crdString = '';
-                console.log(crds);
                 if (!angular.isUndefined(crds)) {
                     crdString += '+AND+(';
                     angular.forEach(crds, function (value, key) {
@@ -137,7 +136,6 @@
         .service("locationService", ['$state', 'bcString', function ($state, bcString) {
 
             this.getLocations = function (item) {
-                console.log(item);
                 var locations = '';
                 if (item.fields.ac_locations) {
 

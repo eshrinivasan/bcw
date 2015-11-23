@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('BCWidgetApp', ['FinraDataServices', 'BCWidgetApp.list',
-        'BCWidgetApp.message', 'ui.router', 'ngAnimate'])
+        'BCWidgetApp.message', 'ui.router', 'ngAnimate', 'infinite-scroll'])
 
         .constant('restConfig', { endpoint: 'http://doppler.qa.finra.org/doppler-lookup/api/v1/lookup'})
         .config(['$urlRouterProvider', '$stateProvider', '$httpProvider',  function ($urlRouterProvider, $stateProvider, $httpProvider) {
@@ -85,7 +85,7 @@
 
             //Set up initial view.
             $state.go('message');
-            $scope.noresults = false;
+
 
             $scope.getViewState = function () {
                 if ($state.current.name == 'list') {
@@ -100,8 +100,6 @@
             if (urlService.getQueryStringVar('crds')) {
                 var crd_numbers = urlService.getQueryStringVar('crds').split(',');
             }
-            var startAt = 0;
-
 
             var concatWords = function (data) {
                 if (data) {
@@ -110,23 +108,30 @@
                 return false;
             }
 
-             $scope.search = function (data) {
+             $scope.search = function (append) {
 
-                 var lastIndex = 0;
-                 $scope.results = [];
+                 var lastindex = 0;
 
-                 if (data.length === 0) {
+                 if (angular.isUndefined($scope.model.query) || $scope.model.query.length === 0) {
                      $state.go("message");
                  }
                  else {
                      $state.go('list');
+
+                     if (append && !angular.isUndefined($scope.results)) {
+                         lastindex = $scope.results.length;
+                     }
+                     else {
+                         lastindex = 0;
+                     }
+
                      var params = {
                          'json.wrf': 'JSON_CALLBACK',
-                         start: startAt,
+                         start: lastindex,
                          results: 20,
                          sources: 'BC_INDIVIDUALS_2210',
                          hl: false,
-                         query: concatWords(data),
+                         query: concatWords($scope.model.query),
                          filter: '(ac_ia_active_fl:Y+OR+ac_bc_active_fl:Y)' + queryStringService.getCRDQueryString(crd_numbers),
                          wt: 'json'
 
@@ -137,10 +142,15 @@
                              if (data.length === 0 || angular.isUndefined(data)) {
                                  $scope.noresults = true;
                              }
-                             $scope.results = data.results.BC_INDIVIDUALS_2210.results;
+                             else {
+                                 var items = $scope.results;
+                                 $scope.results = items.concat(data.results.BC_INDIVIDUALS_2210.results);
+                                 console.log($scope.results.length);
+                                 // $scope.noresults = false;
+                             }
 
                          }), function (error) {
-                              $scope.noresult = true;
+                              //$scope.noresult = true;
                               console.error(error)
                      };
 
