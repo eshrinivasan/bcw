@@ -246,10 +246,9 @@ footer {
 
 .scrollable {
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: scroll;
   height: 150px;
   max-height: 150px;
-  position: relative;
   margin-right: .2em;
   margin-top: .5em; }
 

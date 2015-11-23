@@ -16,13 +16,14 @@
         <![endif]-->
         <script src="assets/js/min/jquery.min.js"></script>
         <script src="assets/js/min/angular-plugins.min.js"></script>
+        <script src="bower_components/angular-infinite-scroll/ng-infinite-scroll.js"></script>
         <script src="assets/js/min/app.min.js"></script>
 
 
 	</head>
 
-	<body ng-app="BCWidgetApp">
-      <div class="widget-container">
+	<body>
+      <div class="widget-container" ng-app="BCWidgetApp">
           <div ng-include="'shared/header/header.html'"></div>
           <div ui-view class="main-view"></div>
           <footer ng-include="'shared/footer/footer.html'"></footer>

@@ -1,13 +1,13 @@
 (function() {
     'use strict'
-    angular.module('BCWidgetApp.list', ['ui.router', 'ngAnimate', 'FinraDataServices', 'ui.bootstrap'])
+    angular.module('BCWidgetApp.list', ['ui.router', 'ngAnimate', 'FinraDataServices', 'ui.bootstrap','infinite-scroll'])
         .value('IAUrl', 'http://www.adviserinfo.sec.gov/IAPD/Support/IAPD_Summary_Link.aspx?Source=Widget&IndividualID=')
         .value('BCIndUrl', 'http://brokercheck.finra.org/Individual/Summary/')
         .controller('SolrSearchCtrl', ['$scope', '$state', 'itemShareService', 'bcNameService','locationService',
             function ($scope, $state, itemShareService, bcNameService, locationService) {
 
-                $scope.itemDetail;
-                $scope.empty = $scope.noresults;
+               // $scope.itemDetail;
+               // $scope.empty = $scope.noresults;
 
                 $scope.select = function (item) {
                     itemShareService.setItem(item);
@@ -44,24 +44,24 @@
                     return 'http://brokercheck.finra.org/Individual/Summary/' + item.fields.ac_source_id;
                 }
                 $scope.isBroker = function (item) {
-                    console.log(item);
+
                     return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl !== "Y");
                 };
                 $scope.isInvestmentAdvisor = function (item) {
-                    console.log(item);
+
                     return (item.fields.ac_ia_active_fl === "Y" && item.fields.ac_bc_active_fl !== "Y");
                 };
                 $scope.isBoth = function (item) {
-                    console.log(item);
+
                     return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl === "Y");
 
                 };
                 $scope.isNeither = function (item) {
-                    console.log(item);
+
                     return (item.fields.ac_bc_active_fl !== "Y" && item.fields.ac_ia_active_fl !== "Y");
                 };
                 $scope.hasDisclosures = function (item) {
-                    console.log(item);
+
                     return (item.fields.ac_bc_dsclr_fl === "Y" || item.fields.ac_ia_dsclr_fl === "Y");
                 }
                 $scope.getFullName = function (item) {
