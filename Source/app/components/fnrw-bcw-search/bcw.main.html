@@ -1,7 +1,7 @@
 <div class="main">
-    <div class="field-search">
+    <div class="field-search" ng-hide="hideSearch">
       <input type="text" ng-model="model.query" ng-change="search(false)" placeholder="Search" ng-keypress="search(false)" />
-      <a href="#" class="search-icon" ng-click="search(model.query, false)"></a>
+      <a href="#" class="search-icon" ng-click="search(false)"></a>
     </div>
     <div class="data-container">
         <div ui-view class="animated" autoscroll="false" ng-class="getViewState()"></div>

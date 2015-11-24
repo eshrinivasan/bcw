@@ -102,8 +102,8 @@ footer {
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 2px 5px 6px;
-  height: 22px;
+  padding: 2px 5px 3px;
+  height: 20px;
   color: white; }
   footer a {
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
@@ -119,7 +119,7 @@ footer {
 
 .main-view {
   position: relative;
-  height: 66%; }
+  height: 68%; }
   .main-view .main {
     width: 98%;
     margin: 0 auto;
@@ -128,7 +128,7 @@ footer {
 .data-container {
   position: relative;
   width: 100%;
-  height: 150px; }
+  height: 160px; }
 
 .message {
   font-size: 1.125em;
@@ -139,7 +139,7 @@ footer {
   height: 150px;
   text-align: center;
   padding: .5em;
-  margin: 1em auto;
+  margin: 1.5em auto;
   width: 80%; }
   .message .firmname {
     color: #00008b; }
@@ -213,7 +213,7 @@ footer {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: .75em;
+  font-size: .875em;
   font-weight: 300;
   color: #fff; }
   .bc-item:hover {
@@ -247,8 +247,8 @@ footer {
 .scrollable {
   overflow-x: hidden;
   overflow-y: scroll;
-  height: 150px;
-  max-height: 150px;
+  height: 160px;
+  max-height: 160px;
   margin-right: .2em;
   margin-top: .5em; }
 
@@ -270,19 +270,20 @@ footer {
   font-weight: 300;
   overflow: hidden;
   padding: .5em 0 0 0;
-  font-size: .8em;
-  height: 145px; }
+  font-size: .9em;
+  height: 155px; }
   .detail-container .detail-item {
     margin: .5em 0;
-    font-size: .95em; }
+    font-size: .93em; }
     .detail-container .detail-item a {
       color: white;
-      font-weight: bold; }
+      font-weight: 600;
+      text-decoration: none; }
       .detail-container .detail-item a:hover {
         color: #265b85;
-        font-weight: bold; }
+        font-weight: 600; }
   .detail-container .heading {
-    font-weight: bold; }
+    font-weight: 500; }
   .detail-container .more-link {
     float: none;
     position: absolute;
@@ -321,12 +322,11 @@ input[type="text"] {
   padding: 0 1em;
   color: #777777;
   width: 90%;
-  margin: 0 auto 0 .1em;
+  margin: .5em auto 0 .2em;
   border-radius: 2px;
   -webkit-border-radius: 2px;
   font-size: .82em;
-  vertical-align: top;
-  margin-top: .4em; }
+  vertical-align: top; }
 
 .no-results-found {
   width: 80%;
@@ -369,4 +369,4 @@ li .heading:hover {
   font-weight: 500; }
 
 .locations {
-  font-size: .75em; }
+  font-size: .875em; }

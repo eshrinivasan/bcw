@@ -4,7 +4,7 @@
     angular.module('BCWidgetApp', ['FinraDataServices', 'BCWidgetApp.list',
         'BCWidgetApp.message', 'ui.router', 'ngAnimate', 'infinite-scroll'])
 
-        .constant('restConfig', { endpoint: 'http://doppler.qa.finra.org/doppler-lookup/api/v1/lookup'})
+        .constant('restConfig', { endpoint: 'http://doppler.qa.finra.org/doppler-lookup/api/v1/lookup1'})
         .config(['$urlRouterProvider', '$stateProvider', '$httpProvider',  function ($urlRouterProvider, $stateProvider, $httpProvider) {
 
             $urlRouterProvider.otherwise('/');
@@ -16,6 +16,7 @@
                 controller: 'BCWidgetCtrl',
                 resolve: {}
             };
+
             var list = {
                 name: 'list',
                 url: '/list',
@@ -42,7 +43,6 @@
             }
             var error = {
                 name: 'error',
-                parent: 'main',
                 url: '/error',
                 templateUrl: 'components/fnrw-bcw-message/bcw.main.message.error.html',
                 controller: 'ErrorMessageCtrl'
@@ -81,11 +81,22 @@
 
         }])
 
-        .controller('BCWidgetCtrl', ['$scope', '$state', 'dataService', 'urlService', 'queryStringService', 'restConfig', function ($scope, $state, dataService, urlService, queryStringService, restConfig) {
+        .controller('BCWidgetCtrl', ['$scope',
+            '$state',
+            'dataService',
+            'urlService',
+            'queryStringService',
+            'restConfig', function ($scope, $state, dataService, urlService, queryStringService, restConfig) {
 
+                $scope.$on('service-failure', function(event, args) {
+                    console.log('hidesearch=' + args.hideSearch);
+                    $scope.hideSearch = args.hideSearch;
+                });
             //Set up initial view.
             $state.go('message');
 
+            var append = false;
+            $scope.results = [];
 
             $scope.getViewState = function () {
                 if ($state.current.name == 'list') {
@@ -102,7 +113,7 @@
             }
 
             var concatWords = function (data) {
-                if (data) {
+                if (!angular.isUndefined(data)) {
                     return data.replace(/\s+/g, '+');
                 }
                 return false;
@@ -110,9 +121,10 @@
 
              $scope.search = function (append) {
 
+                 console.log('append ' + append);
                  var lastindex = 0;
 
-                 if (angular.isUndefined($scope.model.query) || $scope.model.query.length === 0) {
+                 if (angular.isUndefined($scope.model) || $scope.model.query.length === 0) {
                      $state.go("message");
                  }
                  else {

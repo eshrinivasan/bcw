@@ -21,7 +21,7 @@
                 $scope.firmname = ' ';
             }
         }])
-        .controller('ErrorMessageCtrl', function () {
-
-        });
+        .controller('ErrorMessageCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+            $rootScope.$emit('service-failure', { hideSearch : true });
+        }]);
 })()
