@@ -1,4 +1,4 @@
-<div class="scrollable"><ul infinite-scroll="search(model.query, true)" infinite-scroll-parent="true" infinite-scroll-distance="1">
+<div class="scrollable"><ul infinite-scroll="search(true)" infinite-scroll-parent="true" infinite-scroll-distance="1">
    <li tabindex="0" class="bc-item clearfix result" ng-class="{'expanded': isActive(item) && expanded }" ng-repeat="item in results" ng-click="select(item)" ng-keypress="select(item)" infinite-scroll="loadMoreData(20)" infinite-scroll-distance="1" infinite-scroll-parent="true">
          <div class="heading">
              <span class="fullname" ng-bind="getFullName(item)"></span><span class="more-arrow"> > </span>

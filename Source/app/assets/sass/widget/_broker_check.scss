@@ -34,8 +34,8 @@ footer {
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 2px 5px 6px;
-  height:22px;
+  padding: 2px 5px 3px;
+  height:20px;
   color:$white;
 
 
@@ -56,7 +56,7 @@ footer {
 }
 .main-view {
   position:relative;
-  height: 66%;
+  height: 68%;
 
   .main {
     width:98%;
@@ -69,7 +69,7 @@ footer {
 
   position: relative;
   width: 100%;
-  height:150px;
+  height:160px;
 
 }
 .message {
@@ -81,7 +81,7 @@ footer {
   height:150px;
   text-align:center;
   padding: .5em;
-  margin: 1em auto;
+  margin: 1.5em auto;
   width: 80%;
 
   .firmname {
@@ -165,7 +165,7 @@ footer {
   list-style:none;
   margin:0;
   padding:0;
-  font-size: .75em;
+  font-size: .875em;
   font-weight:300;
   color: #fff;
 
@@ -216,8 +216,8 @@ footer {
 .scrollable {
   overflow-x: hidden;
   overflow-y: scroll;
-  height: 150px;
-  max-height: 150px;
+  height: 160px;
+  max-height: 160px;
   margin-right: .2em;
   margin-top:.5em;
 
@@ -244,24 +244,25 @@ footer {
   font-weight: 300;
   overflow:hidden;
   padding: .5em 0 0 0;
-  font-size: .8em;
-  height: 145px;
+  font-size: .9em;
+  height: 155px;
 
   .detail-item {
     margin:.5em 0;
-    font-size:.95em;
+    font-size:.93em;
     a {
       color: $white;
-      font-weight:bold;
+      font-weight: 600;
+      text-decoration: none;
 
       &:hover {
         color: $hover-color;
-        font-weight:bold;
+        font-weight:600;
       }
     }
   }
   .heading {
-    font-weight:bold;
+    font-weight:500;
   }
   .more-link {
 
@@ -312,12 +313,12 @@ input[type="text"] {
     padding: 0 1em;
     color: $search-text-color;
     width: 90%;
-    margin: 0 auto 0 .1em;
+    margin: .5em auto 0 .2em;
     border-radius: 2px;
     -webkit-border-radius: 2px;
     font-size: .82em;
     vertical-align:top;
-    margin-top: .4em;
+
 
 }
 
@@ -369,6 +370,6 @@ li {
   }
 }
 .locations {
-  font-size: .75em;
+  font-size: .875em;
 
 }

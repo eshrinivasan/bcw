@@ -2,7 +2,7 @@
     'use strict'
 
     angular.module('FinraDataServices', ['ui.router'])
-        .service('dataService', ['$http', '$q', '$log', '$state', function ($http, $q, $log, $state) {
+        .service('dataService', ['$http', '$q', '$log', '$state', '$rootScope', function ($http, $q, $log, $state, $rootScope) {
 
             this.search = function (endpoint, options, keepParamOrder) {
                 var deferred = $q.defer();
@@ -136,8 +136,9 @@
         .service("locationService", ['$state', 'bcString', function ($state, bcString) {
 
             this.getLocations = function (item) {
-                var locations = '';
-                if (item.fields.ac_locations) {
+                var locations = ' ';
+
+                if (!angular.isUndefined(item.fields.ac_locations) && (item.fields.ac_locations[0]) !== '') {
 
                     var length = item.fields.ac_locations.length;
                     var cityState = item.fields.ac_locations[0].split(',');
