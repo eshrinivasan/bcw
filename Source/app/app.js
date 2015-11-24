@@ -4,7 +4,7 @@
     angular.module('BCWidgetApp', ['FinraDataServices', 'BCWidgetApp.list',
         'BCWidgetApp.message', 'ui.router', 'ngAnimate', 'infinite-scroll'])
 
-        .constant('restConfig', { endpoint: 'http://awslbedplrwp01-445465457.us-west-2.elb.amazonaws.com/doppler-lookup/api/v1/lookup'})
+        .constant('restConfig', { endpoint: 'http://doppler.finra.org/doppler-lookup/api/v1/lookup'})
         .config(['$urlRouterProvider', '$stateProvider', '$httpProvider',  function ($urlRouterProvider, $stateProvider, $httpProvider) {
 
             $urlRouterProvider.otherwise('/');
