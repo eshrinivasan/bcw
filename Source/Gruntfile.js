@@ -106,7 +106,8 @@ module.exports = function (grunt) {
                             'app/bower_components/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
-                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js'
+                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
+                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js'
                         ],
 
                         dest: 'app/assets/js/min/angular-plugins.min.js'
@@ -131,7 +132,8 @@ module.exports = function (grunt) {
                             'app/bower_components/angular-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
-                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js'
+                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
+                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js'
                         ],
                         dest: 'app/assets/js/min/angular-plugins.min.js'
                     },
