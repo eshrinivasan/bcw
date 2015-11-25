@@ -11,7 +11,16 @@
        <!-- <link href="bower_components/angular-bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">-->
         <link href="assets/css/min/widget-styles.min.css" type="text/css" rel="stylesheet">
         <link href="assets/css/min/animate.min.css" type="text/css" rel="stylesheet">
+
+        <!--[if IE 9]>
         <script src="assets/js/external/xdomain.min.js"></script>
+        <script>
+            xdomain.slaves({
+                "http://www.finra.org": "/ie9/proxy.html"
+            });
+        </script>
+        <![endif]-->
+
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
