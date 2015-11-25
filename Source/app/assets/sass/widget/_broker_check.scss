@@ -85,12 +85,15 @@ footer {
   width: 80%;
 
   .firmname {
-    color: #00008b;
+    //color: #00008b;
+    color: $white;
+    font-weight: 600;
   }
 
 }
-.logo, .search-icon{
+.search-icon, .external-link, .return-arrow, .more {
   background: url('../../images/bc-sprites.png') no-repeat top left;
+  display:inline-block;
 }
 
 //.sprite { background: url('../../images/bc-sprites.png') no-repeat top left;  }
@@ -99,19 +102,39 @@ footer {
   width: 16px;
   height: 16px;
   background-position: -5px -78px;
+  top: -2px;
 }
 
 
 .logo {
-  background-position: -5px -5px;
   width: 236px;
   height: 63px;
   text-align:center;
   margin:0 auto;
+  display:block;
+}
 
-  &:hover {
-    cursor: pointer;
-  }
+.more {
+  width: 12px;
+  height: 12px;
+  background-position: -5px -150px;
+  position: absolute;
+  right: 0;
+  top: 35%;
+}
+
+.external-link {
+  width: 20px;
+  height: 20px;
+  background-position: -5px -114px;
+  position: relative;
+  top: -5px;
+}
+
+.return-arrow {
+  width: 12px;
+  height: 12px;
+  background-position: -27px -150px;
 }
 .field-search {
   white-space: nowrap;
@@ -138,7 +161,6 @@ footer {
   display: inline-block;
   position: relative;
   left: -45px;
-  top: 7px;
   border: none;
   &:hover {
     cursor:pointer;
@@ -278,14 +300,17 @@ footer {
     text-align: center;
     background: #ff553a;
     padding: .3em .3em;
+    cursor: pointer;
 
 
-    a {
+    .link {
       display:inline;
       height:100%;
       width:100%;
       color:$white;
       text-decoration:none;
+      position: relative;
+      top: -5px;
 
 
     }
