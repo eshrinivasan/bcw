@@ -1,3 +1,3 @@
 (function() {
-    angular.module('listwidget.list', ['infinite-scroll']);
+    angular.module('listwidget.list', ['infinite-scroll', 'ngAnimate']);
 })()

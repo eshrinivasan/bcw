@@ -12,6 +12,7 @@
         vm.brokerToolTip = tooltips.broker;
         vm.iaToolTip = tooltips.investmentAdvisor;
         vm.disclosureToolTip = tooltips.disclosure;
+        vm.animeClass = 'slideInRight';
 
         vm.goBack = goBack;
         vm.isBroker = isBroker;

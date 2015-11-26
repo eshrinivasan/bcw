@@ -11,7 +11,10 @@
         vm.search = search;
         var items = [];
         vm.results = [];
-        vm.getViewState = getViewState;
+        vm.animeClass = 'slideInRight';
+
+
+
 
 
 
@@ -26,7 +29,6 @@
         };
 
 
-
         $scope.$watch("vm.query", function(newValue, oldValue){
 
             if (newValue != oldValue) {
@@ -37,16 +39,11 @@
         });
 
 
-        function getViewState() {
-                if ($state.current.name == 'list') {
-                    return 'slideInLeft';
-                }
-                else {
-                    return 'slideInRight';
-                }
-         }
-
-
+        function isList() {
+            var state = dataservice.getCurrentState();
+            console.log('state' + state);
+            return state === 'list';
+        }
         function search(append, startWith) {
 
             if (angular.isUndefined(vm.query) || vm.query.length === 0) {
@@ -64,19 +61,16 @@
                 params.query = dataservice.concatWords(vm.query);
                 params.filter =  '(ac_ia_active_fl:Y+OR+ac_bc_active_fl:Y)' + urlfactory.createQueryStringEle(crdnumbers);
 
-
                 dataservice.searchBy(params, true)
                     .then(function (data) {
                         vm.noresults = false;
-
-                        items = data.results.BC_INDIVIDUALS_2210.results;
                         var total = data.results.BC_INDIVIDUALS_2210.totalResults;
 
                         if (total === 0) {
                             vm.noresults = true;
                         }
                         else {
-
+                            items = data.results.BC_INDIVIDUALS_2210.results;
                             if (startWith > 0) {
                                 for (i = 0; i < items.length; i++) {
                                     vm.results.push(items[i]);

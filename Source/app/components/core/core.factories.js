@@ -42,7 +42,6 @@
         function getQueryStringVar(variable) {
 
             if (parts.queryvars[variable] !== "undefined") {
-                console.log('am i here');
                 return parts.queryvars[variable];
             }
             return false;
@@ -51,7 +50,7 @@
         function createQueryStringEle(crds) {
 
                 var crdString = '';
-                if (!angular.isUndefined(crds)) {
+                if (!angular.isUndefined(crds) && crds[0] !== '') {
                     crdString += '+AND+(';
                     angular.forEach(crds, function (value, key) {
                         if (key != 0) {

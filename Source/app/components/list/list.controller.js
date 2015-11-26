@@ -11,12 +11,9 @@
         vm.loadMore = loadMore;
         vm.select = select;
         vm.results = [];
-
-
-        vm.results = itemshareservice.getList();
-
-
         vm.goToSite = goToSite;
+        vm.results = itemshareservice.getList();
+        vm.animeClass = 'slideInLeft';
 
         function goToSite(url) {
             $window.open(url);

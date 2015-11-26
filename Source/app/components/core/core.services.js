@@ -52,7 +52,8 @@
             capitalize: capitalize,
             getLocations: getLocations,
             getFullName: getFullName,
-            concatWords: concatWords
+            concatWords: concatWords,
+            getCurrentState : getCurrentState
         };
 
         return service;
@@ -115,5 +116,10 @@
             }
             return '';
         }
+
+        function getCurrentState() {
+            return $state.current.name();
+        }
+
     }
 })()
