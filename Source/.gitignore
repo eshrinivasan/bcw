@@ -4,7 +4,7 @@ tmp
 .idea
 build/*
 build1/*
-app/assets/js/*
+app/assets/js/min/*
 .sass-cache
 app/assets/css/min/*
 .idea
