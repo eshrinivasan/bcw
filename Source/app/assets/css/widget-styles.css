@@ -75,11 +75,19 @@ ul {
   font-style: normal; }
 
 /*  Use this file to define widget specific styles. */
+body {
+  margin: 0;
+  padding: 0; }
+
 .widget-container {
   border: solid 1px #51a2da;
   background-color: #51a2da;
-  width: 330px;
-  height: 300px;
+  min-width: 250px;
+  max-width: 480px;
+  min-height: 300px;
+  max-height: 480px;
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden; }
   .widget-container ul {
@@ -102,8 +110,8 @@ footer {
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 2px 5px 6px;
-  height: 22px;
+  padding: 0px 5px 3px;
+  height: 20px;
   color: white; }
   footer a {
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
@@ -119,16 +127,16 @@ footer {
 
 .main-view {
   position: relative;
-  height: 66%; }
+  height: 68%; }
   .main-view .main {
-    width: 98%;
+    width: 100%;
     margin: 0 auto;
     height: 100%; }
 
 .data-container {
   position: relative;
   width: 100%;
-  height: 150px; }
+  height: 160px; }
 
 .message {
   font-size: 1.125em;
@@ -136,36 +144,58 @@ footer {
   color: white;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 300;
-  height: 150px;
+  font-size: 1.125em;
+  height: 100%;
+  width: 80%;
   text-align: center;
-  padding: .5em;
-  margin: 1em auto;
-  width: 80%; }
+  margin: 2em auto 0 auto; }
   .message .firmname {
-    color: #00008b; }
+    color: white;
+    font-weight: 600; }
 
-.logo, .search-icon {
-  background: url("../../images/bc-sprites.png") no-repeat top left; }
+.search-icon, .external-link, .return-arrow, .more {
+  background: url("../../images/bc-sprites.png") no-repeat top left;
+  display: inline-block; }
 
 .search-icon {
   width: 16px;
   height: 16px;
-  background-position: -5px -78px; }
+  background-position: -5px -78px;
+  top: -2px; }
 
 .logo {
-  background-position: -5px -5px;
   width: 236px;
   height: 63px;
   text-align: center;
-  margin: 0 auto; }
-  .logo:hover {
-    cursor: pointer; }
+  margin: 0 auto;
+  display: block; }
+
+.more {
+  width: 12px;
+  height: 12px;
+  background-position: -5px -150px;
+  position: absolute;
+  right: 0;
+  top: 35%; }
+
+.external-link {
+  width: 20px;
+  height: 20px;
+  background-position: -5px -114px;
+  position: relative;
+  top: -5px; }
+
+.return-arrow {
+  width: 12px;
+  height: 12px;
+  background-position: -27px -150px; }
 
 .field-search {
   white-space: nowrap;
   width: 100%;
   margin: 0 auto;
-  position: relative; }
+  position: relative;
+  padding: .3em 0 .5em; }
   .field-search .clear {
     display: inline-block;
     position: absolute;
@@ -181,9 +211,10 @@ footer {
   width: 35px;
   height: 35px;
   display: inline-block;
-  position: relative;
-  left: -45px;
-  top: 7px;
+  position: absolute;
+  /* left: -45px; */
+  right: 5%;
+  top: .2em;
   border: none; }
   .search-icon:hover {
     cursor: pointer; }
@@ -213,7 +244,7 @@ footer {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: .75em;
+  font-size: .875em;
   font-weight: 300;
   color: #fff; }
   .bc-item:hover {
@@ -246,11 +277,10 @@ footer {
 
 .scrollable {
   overflow-x: hidden;
-  overflow-y: auto;
-  height: 150px;
-  max-height: 150px;
-  position: relative;
-  margin-right: .2em;
+  overflow-y: scroll;
+  height: 160px;
+  max-height: 160px;
+  margin-right: .5em;
   margin-top: .5em; }
 
 .ps-container.ps-active-x > .ps-scrollbar-x-rail {
@@ -264,26 +294,27 @@ footer {
     color: white; }
 
 .detail-container {
-  width: 95%;
-  margin: 0 .5em;
+  width: 94%;
+  margin: 0 .2em 0 1em;
   color: #fff;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 300;
   overflow: hidden;
   padding: .5em 0 0 0;
-  font-size: .8em;
-  height: 145px; }
+  font-size: .9em;
+  height: 100%; }
   .detail-container .detail-item {
     margin: .5em 0;
-    font-size: .95em; }
+    font-size: .93em; }
     .detail-container .detail-item a {
       color: white;
-      font-weight: bold; }
+      font-weight: 600;
+      text-decoration: none; }
       .detail-container .detail-item a:hover {
         color: #265b85;
-        font-weight: bold; }
+        font-weight: 600; }
   .detail-container .heading {
-    font-weight: bold; }
+    font-weight: 500; }
   .detail-container .more-link {
     float: none;
     position: absolute;
@@ -296,13 +327,16 @@ footer {
     margin: 0 auto;
     text-align: center;
     background: #ff553a;
-    padding: .3em .3em; }
-    .detail-container .more-link a {
+    padding: .3em .3em;
+    cursor: pointer; }
+    .detail-container .more-link .link {
       display: inline;
       height: 100%;
       width: 100%;
       color: white;
-      text-decoration: none; }
+      text-decoration: none;
+      position: relative;
+      top: -5px; }
   .detail-container .return {
     border-bottom: solid 1px #80c5fb;
     margin-bottom: .5em; }
@@ -314,20 +348,24 @@ footer {
     .detail-container .return a:hover {
       color: #265b85; }
 
+div.animated {
+  height: 100%; }
+
 input[type="text"] {
-  background-color: white;
+  background-color: #fff;
+  display: block;
   border: none;
   height: 30px;
   position: relative;
-  padding: 0 1em;
-  color: #777777;
-  width: 90%;
-  margin: 0 auto 0 .1em;
+  width: 92%;
+  margin: 0 auto;
+  padding: 0 0 0 4%;
+  top: .5em;
+  color: #777;
   border-radius: 2px;
   -webkit-border-radius: 2px;
   font-size: .82em;
-  vertical-align: top;
-  margin-top: .4em; }
+  vertical-align: top; }
 
 .no-results-found {
   width: 80%;
@@ -370,4 +408,4 @@ li .heading:hover {
   font-weight: 500; }
 
 .locations {
-  font-size: .75em; }
+  font-size: .875em; }

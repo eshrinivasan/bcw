@@ -1,0 +1,9 @@
+<div class="main">
+    <div class="field-search clearfix" ng-hide="hideSearch">
+        <input type="text" ng-model="vm.query"  placeholder="Search by Name or CRD#"  />
+        <a href="#" class="search-icon" ng-click="vm.search(false, 0)"></a>
+    </div>
+    <div class="data-container">
+        <div ui-view class="animated {{vm.animeClass}}"></div>
+    </div>
+</div>

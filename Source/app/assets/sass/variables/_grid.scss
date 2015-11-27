@@ -2,7 +2,8 @@
 
 $small-ad           : 125px;
 $minimum            : 250px;
-$phone              : 320px;			    //  iPhone 3 portrait, Default
+$phone              : 320px;  //  iPhone 3 portrait, Default
+$max                : 400px;
 $tab-portrait       : 767px;	            //  iPad portrait
 $tab-landscape      : 850px;	            //  iPad landscape
 $mdesk				: 959px;
@@ -12,7 +13,8 @@ $lg-desk            : 1200px;               //  Large desktop
 
 $breakpoint-to-ems  : true;
 
-$grids              : 1;								// Mobile
+$grids              : 1;
+$grids              : add-grid(12 at $phone); // Mobile
 $grids              : add-grid(6 at $tab-portrait); 	// Tablet (Portrait)
 $grids              : add-grid(6 at $tab-landscape); 	// Tablet (Landscape)
 $grids              : add-grid(12 at $desk); 			// Large Desktop
