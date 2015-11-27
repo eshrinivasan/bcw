@@ -59,10 +59,10 @@
         function openFullReport(item) {
             var url = '';
             if (isBoth(item) || isBroker(item)) {
-                url = externalUrls.bcIndUrl + '/' + item.fields.ac_source_id;
+                url = externalUrls.bcIndUrl + item.fields.ac_source_id;
             }
             else if (isInvestmentAdvisor(item)) {
-                url = externalUrls.iaIndUrl + '/' + item.fields.ac_source_id;
+                url = externalUrls.iaIndUrl + item.fields.ac_source_id;
             }
             else {
                 url = 'http://brokercheck.finra.org'
