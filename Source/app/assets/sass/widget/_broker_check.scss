@@ -1,11 +1,18 @@
 /*  Use this file to define widget specific styles. */
-
+body {
+  margin:0;
+  padding:0;
+}
 
 .widget-container {
   border: solid 1px $default-bg-color;
   background-color: $default-bg-color;
-  width: 330px;
-  height:300px;
+  min-width: 250px;
+  max-width: 480px;
+  min-height: 300px;
+  max-height: 480px;
+  width: 100%;
+  height:100%;
   position:relative;
   overflow:hidden;
   ul {
@@ -34,7 +41,7 @@ footer {
   bottom: 0;
   right: 0;
   left: 0;
-  padding: 2px 5px 3px;
+  padding: 0px 5px 3px;
   height:20px;
   color:$white;
 
@@ -59,14 +66,13 @@ footer {
   height: 68%;
 
   .main {
-    width:98%;
+    width:100%;
     margin:0 auto;
     height:100%;
   }
 
 }
 .data-container {
-
   position: relative;
   width: 100%;
   height:160px;
@@ -78,19 +84,23 @@ footer {
   color: $default-text-color;
   font-family: $sans-serif-stack;
   font-weight:300;
-  height:150px;
-  text-align:center;
-  padding: .5em;
-  margin: 1.5em auto;
+  font-size: 1.125em;
+  height: 100%;
   width: 80%;
+  text-align:center;
+  margin: 2em auto 0 auto;
+
 
   .firmname {
-    color: #00008b;
+    //color: #00008b;
+    color: $white;
+    font-weight: 600;
   }
 
 }
-.logo, .search-icon{
+.search-icon, .external-link, .return-arrow, .more {
   background: url('../../images/bc-sprites.png') no-repeat top left;
+  display:inline-block;
 }
 
 //.sprite { background: url('../../images/bc-sprites.png') no-repeat top left;  }
@@ -99,25 +109,46 @@ footer {
   width: 16px;
   height: 16px;
   background-position: -5px -78px;
+  top: -2px;
 }
 
 
 .logo {
-  background-position: -5px -5px;
   width: 236px;
   height: 63px;
   text-align:center;
   margin:0 auto;
+  display:block;
+}
 
-  &:hover {
-    cursor: pointer;
-  }
+.more {
+  width: 12px;
+  height: 12px;
+  background-position: -5px -150px;
+  position: absolute;
+  right: 0;
+  top: 35%;
+}
+
+.external-link {
+  width: 20px;
+  height: 20px;
+  background-position: -5px -114px;
+  position: relative;
+  top: -5px;
+}
+
+.return-arrow {
+  width: 12px;
+  height: 12px;
+  background-position: -27px -150px;
 }
 .field-search {
   white-space: nowrap;
   width: 100%;
   margin: 0 auto;
   position:relative;
+  padding: .3em 0 .5em;
 
   .clear {
     display: inline-block;
@@ -136,9 +167,10 @@ footer {
   width: 35px;
   height: 35px;
   display: inline-block;
-  position: relative;
-  left: -45px;
-  top: 7px;
+  position: absolute;
+  /* left: -45px; */
+  right: 5%;
+  top:.2em;
   border: none;
   &:hover {
     cursor:pointer;
@@ -218,7 +250,7 @@ footer {
   overflow-y: scroll;
   height: 160px;
   max-height: 160px;
-  margin-right: .2em;
+  margin-right: .5em;
   margin-top:.5em;
 
 }
@@ -237,15 +269,15 @@ footer {
 }
 
 .detail-container {
-  width:95%;
-  margin:0 .5em;
+  width: 94%;
+  margin: 0 .2em 0 1em;
   color: #fff;
   font-family: $sans-serif-stack;
   font-weight: 300;
   overflow:hidden;
   padding: .5em 0 0 0;
   font-size: .9em;
-  height: 155px;
+  height: 100%;
 
   .detail-item {
     margin:.5em 0;
@@ -278,14 +310,17 @@ footer {
     text-align: center;
     background: #ff553a;
     padding: .3em .3em;
+    cursor: pointer;
 
 
-    a {
+    .link {
       display:inline;
       height:100%;
       width:100%;
       color:$white;
       text-decoration:none;
+      position: relative;
+      top: -5px;
 
 
     }
@@ -305,19 +340,24 @@ footer {
   }
 }
 
+div.animated {
+  height:100%;
+}
 input[type="text"] {
-    background-color: $white;
-    border:none;
-    height:30px;
-    position:relative;
-    padding: 0 1em;
-    color: $search-text-color;
-    width: 90%;
-    margin: .5em auto 0 .2em;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    font-size: .82em;
-    vertical-align:top;
+  background-color: #fff;
+  display:block;
+  border: none;
+  height: 30px;
+  position: relative;
+  width: 92%;
+  margin: 0 auto;
+  padding: 0 0 0 4%;
+  top: .5em;
+  color: #777;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  font-size: .82em;
+  vertical-align: top;
 
 
 }

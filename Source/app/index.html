@@ -7,22 +7,38 @@
 		<title>Broker Check</title>
         <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
         <link href='//fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link href="assets/css/min/animate.min.css" type="text/css" rel="stylesheet">
+
        <!-- <link href="bower_components/angular-bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">-->
         <link href="assets/css/min/widget-styles.min.css" type="text/css" rel="stylesheet">
+        <link href="assets/css/min/animate.min.css" type="text/css" rel="stylesheet">
+
+        <!--[if IE 9]>
+        <script src="assets/js/external/xdomain.min.js"></script>
+        <script>
+            xdomain.slaves({
+                "http://cdn.finra.org": "/ie9/proxy.html",
+                "http://cdn.dev.finra.org": "/ie9/proxy.html",
+                "http://cdn.qa.finra.org": "/ie9/proxy.html",
+                "http://localhost": "/ie9/proxy.html"
+            });
+        </script>
+        <![endif]-->
 
         <!--[if lt IE 9]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <script src="assets/js/min/jquery.min.js"></script>
         <script src="assets/js/min/angular-plugins.min.js"></script>
-        <script src="assets/js/min/app.min.js"></script>
+        <script src="assets/js/min/app.module.min.js"></script>
+        <script src="assets/js/min/bc2210.core.min.js"></script>
+        <script src="assets/js/min/bc2210.messages.min.js"></script>
+        <script src="assets/js/min/bc2210.list.min.js"></script>
 
 
-	</head>
+        </head>
 
 	<body>
-      <div class="widget-container" ng-app="BCWidgetApp">
+      <div class="widget-container" ng-app="bc2210">
           <div ng-include="'shared/header/header.html'"></div>
           <div ui-view class="main-view"></div>
           <footer ng-include="'shared/footer/footer.html'"></footer>

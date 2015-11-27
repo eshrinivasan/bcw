@@ -1,0 +1,12 @@
+<div class="scrollable">
+    <ul infinite-scroll="vm.loadMore()"  infinite-scroll-parent="true" infinite-scroll-distance="1">
+    <li tabindex="0" class="bc-item clearfix result" ng-class="{'expanded': isActive(item) }"
+       ng-repeat="item in $parent.vm.results" ng-click="vm.select(item)">
+        <div class="heading">
+            <span class="fullname" ng-bind="vm.getFullName(item)"></span><span class="more"></span>
+            <div class="locations" ng-bind="vm.getLocations(item)"></div>
+        </div>
+    </li>
+</ul>
+    <div class="no-results-found" ng-show="$parent.vm.noresults">There were no results for <b>"{{$parent.vm.query}}"</b>. Please try again.</div>
+</div>
