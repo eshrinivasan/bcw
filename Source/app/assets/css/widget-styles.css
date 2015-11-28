@@ -168,7 +168,8 @@ footer {
   height: 63px;
   text-align: center;
   margin: 0 auto;
-  display: block; }
+  display: block;
+  text-decoration: none; }
 
 .more {
   width: 12px;
