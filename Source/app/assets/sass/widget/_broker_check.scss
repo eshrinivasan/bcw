@@ -120,6 +120,15 @@ footer {
   margin:0 auto;
   display:block;
   text-decoration: none;
+  &:hover,
+  &:visited,
+  &:active {
+    text-decoration: none;
+    border:none;
+  }
+  img {
+    border:none;
+  }
 }
 
 .more {

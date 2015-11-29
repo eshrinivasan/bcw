@@ -168,7 +168,13 @@ footer {
   height: 63px;
   text-align: center;
   margin: 0 auto;
-  display: block; }
+  display: block;
+  text-decoration: none; }
+  .logo:hover, .logo:visited, .logo:active {
+    text-decoration: none;
+    border: none; }
+  .logo img {
+    border: none; }
 
 .more {
   width: 12px;

@@ -101,20 +101,22 @@
                 }
             }
 
+            else {
+                return item.fields.ac_locations;
+            }
             return _locations;
         }
 
         function getFullName(item) {
            _fullName = capitalize(item.fields.ac_firstname + ' ' + item.fields.ac_middlename + ' ' + item.fields.ac_lastname, true);
             return _fullName;
-
         }
 
         function concatWords(data) {
             if (!angular.isUndefined(data)) {
                 return data.replace(/\s+/g, '+');
             }
-            return '';
+            return data;
         }
 
         function getCurrentState() {
