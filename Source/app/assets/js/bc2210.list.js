@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.list', ['infinite-scroll', 'ngAnimate']);
+    angular.module('listwidget.list', ['infinite-scroll', 'ngAnimate', 'ui.router']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
@@ -104,31 +104,96 @@
     }
 })();(function() {
     angular.module('listwidget.list')
+        .controller("ScrollController", ScrollController)
+        .directive("preserveScroll", function preserveScroll($window, $timeout){
+            return {
+                restrict: 'AE',
+                controller: 'ScrollController',
+                link: function(scope, element, attr, sctrl) {
+
+                    scope.scrollPos = {};
+
+                    $(element).on("scroll", function() {
+                       // console.log(this.scrollTop);
+                        scope.scrollPos.offset = this.scrollTop;
+                        console.log(scope.scrollPos.offset);
+
+                        sctrl.setPosition(scope.scrollPos.offset);
+                        scope.$apply();
+
+                    });
+
+                }
+            }
+
+        });
+
+    ScrollController.$inject = ['$rootScope', '$window', '$element'];
+    function ScrollController($rootScope, $window, $element) {
+        var scroll = this;
+        scroll.setPosition = setPosition;
+        scroll.getPosition = getPosition;
+        //scroll.offset = 0;
+
+        console.log($element);
+        $element.scrollTop = scroll.getPosition();
+        function getPosition() {
+            return $rootScope.offset;
+        }
+
+        function setPosition(offset) {
+            $rootScope.offset = offset;
+        }
+
+    }
+
+
+})();(function() {
+    angular.module('listwidget.list')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$rootScope','$scope', '$state', '$sanitize', 'urlfactory', 'dataservice','itemshareservice', '$window', '$anchorScroll', '$location'];
+    ListController.$inject = ['$state',
+        'dataservice',
+        'itemshareservice',
+        '$window',
+        '$rootScope'];
 
-    function ListController($rootScope, $scope, $state, $sanitize,  urlfactory, dataservice, itemshareservice, $window, $anchorScroll, $location) {
+    function ListController($state,
+                            dataservice,
+                            itemshareservice,
+                            $window,
+                            $rootScope) {
         var vm = this;
 
         vm.getFullName = getFullName;
         vm.getLocations = getLocations;
         vm.select = select;
         vm.goToSite = goToSite;
-        var scrollTo = scrollTo;
+        vm.scrollTo = scrollTo;
         vm.animeClass = 'slideInLeft';
+        vm.element = '';
 
+        function scrollTo(element) {
+            jQuery( 'html, body').animate({
+                scrollTop: jQuery(element).offset()
+            }, 2000);
+        }
 
+        $rootScope.$on('$stateChangeSuccess', function (event) {
+           // console.log($rootScope.offset);
+           // $window.pageYOffset =  $rootScope.offset;
+            vm.scrollTo(vm.element);
+
+        });
         function goToSite(url) {
             $window.open(url);
         }
-        function select(item, event) {
+        function select(item, event, index) {
             itemshareservice.setItem(item);
-
-            vm.selectedId = event.currentTarget.id;
-
+            vm.element = event.currentTarget.id;
             $state.go('detail');
         };
+
         function getFullName(item) {
             return dataservice.getFullName(item);
         }
@@ -136,16 +201,14 @@
         function getLocations(item) {
             return dataservice.getLocations(item);
         }
-
-
     }
 })();(function() {
     angular.module('listwidget.list')
         .controller('ListDetailController', ListDetailController);
 
-    ListDetailController.$inject = ['$scope', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
+    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
 
-    function ListDetailController($scope, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
+    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
         var vm = this;
         vm.item = itemshareservice.getItem();
         vm.bcIndUrl = externalUrls.bcIndUrl;
@@ -165,9 +228,10 @@
         vm.getLocations = getLocations;
         vm.openFullReport = openFullReport;
 
-        function goBack(state) {
-            $state.go(state);
-        };
+          function goBack(state) {
+              $state.go(state);
+              //$window.history.back;
+          };
 
         function isBroker(item) {
 

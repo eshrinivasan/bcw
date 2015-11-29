@@ -2,29 +2,48 @@
     angular.module('listwidget.list')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$rootScope','$scope', '$state', '$sanitize', 'urlfactory', 'dataservice','itemshareservice', '$window', '$anchorScroll', '$location'];
+    ListController.$inject = ['$state',
+        'dataservice',
+        'itemshareservice',
+        '$window',
+        '$rootScope'];
 
-    function ListController($rootScope, $scope, $state, $sanitize,  urlfactory, dataservice, itemshareservice, $window, $anchorScroll, $location) {
+    function ListController($state,
+                            dataservice,
+                            itemshareservice,
+                            $window,
+                            $rootScope) {
         var vm = this;
 
         vm.getFullName = getFullName;
         vm.getLocations = getLocations;
         vm.select = select;
         vm.goToSite = goToSite;
-        var scrollTo = scrollTo;
+        vm.scrollTo = scrollTo;
         vm.animeClass = 'slideInLeft';
+        vm.element = '';
 
+        function scrollTo(element) {
+            jQuery( 'html, body').animate({
+                scrollTop: jQuery(element).offset()
+            }, 2000);
+        }
 
+        $rootScope.$on('$stateChangeSuccess', function (event) {
+           // console.log($rootScope.offset);
+           // $window.pageYOffset =  $rootScope.offset;
+            vm.scrollTo(vm.element);
+
+        });
         function goToSite(url) {
             $window.open(url);
         }
-        function select(item, event) {
+        function select(item, event, index) {
             itemshareservice.setItem(item);
-
-            vm.selectedId = event.currentTarget.id;
-
+            vm.element = event.currentTarget.id;
             $state.go('detail');
         };
+
         function getFullName(item) {
             return dataservice.getFullName(item);
         }
@@ -32,7 +51,5 @@
         function getLocations(item) {
             return dataservice.getLocations(item);
         }
-
-
     }
 })()

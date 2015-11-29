@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.core',['ui.router', 'ngSanitize']);
+    angular.module('listwidget.core',['ui.router', 'ngSanitize', 'ct.ui.router.extras']);
 })();(function() {
     angular.module('listwidget.core')
         .constant('restConfig', { endpoint: 'http://doppler.finra.org/doppler-lookup/api/v1/lookup' })
@@ -18,10 +18,10 @@
         .config(configure)
         .run(runApp);
 
-    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider'];
+    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', '$uiViewScrollProvider'];
     runApp.$inject = ['$state'];
 
-    function configure($urlRouterProvider, $stateProvider, $httpProvider) {
+    function configure($urlRouterProvider, $stateProvider, $httpProvider, $uiViewScrollProvider) {
 
         $urlRouterProvider.otherwise('/');
 
@@ -99,8 +99,9 @@
                     return config;
                 }
             };
-        });
-    };
+        })
+
+    }
 
     function runApp($state) {
         $state.go('info');

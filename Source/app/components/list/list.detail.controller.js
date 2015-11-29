@@ -2,9 +2,9 @@
     angular.module('listwidget.list')
         .controller('ListDetailController', ListDetailController);
 
-    ListDetailController.$inject = ['$scope', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
+    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
 
-    function ListDetailController($scope, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
+    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
         var vm = this;
         vm.item = itemshareservice.getItem();
         vm.bcIndUrl = externalUrls.bcIndUrl;
@@ -24,9 +24,10 @@
         vm.getLocations = getLocations;
         vm.openFullReport = openFullReport;
 
-        function goBack(state) {
-            $state.go(state);
-        };
+          function goBack(state) {
+              $state.go(state);
+              //$window.history.back;
+          };
 
         function isBroker(item) {
 
