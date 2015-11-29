@@ -255,7 +255,7 @@ module.exports = function (grunt) {
                         flatten: true,
                         cwd: 'app/',
                         dest: 'app/assets/js/min',
-                        src: ['addpdwidget.js', '!addpdwidget.min.js'],
+                        src: ['addbcwidget.js', '!addbcwidget.min.js'],
                         rename: function(dest, src) {
                             var folder = src.substring(0, src.lastIndexOf('/'));
                             var filename = src.substring(src.lastIndexOf('/'), src.length);
@@ -288,7 +288,7 @@ module.exports = function (grunt) {
                         flatten: true,
                         cwd: 'app/',
                         dest: 'app/assets/js/min',
-                        src: ['addpdwidget.js', '!addpdwidget.min.js'],
+                        src: ['addbcwidget.js', '!addbcwidget.min.js'],
                         rename: function(dest, src) {
                             var folder = src.substring(0, src.lastIndexOf('/'));
                             var filename = src.substring(src.lastIndexOf('/'), src.length);
