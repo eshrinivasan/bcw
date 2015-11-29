@@ -170,6 +170,11 @@ footer {
   margin: 0 auto;
   display: block;
   text-decoration: none; }
+  .logo:hover, .logo:visited, .logo:active {
+    text-decoration: none;
+    border: none; }
+  .logo img {
+    border: none; }
 
 .more {
   width: 12px;
