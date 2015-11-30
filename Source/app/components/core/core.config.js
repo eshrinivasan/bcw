@@ -5,10 +5,10 @@
         .config(configure)
         .run(runApp);
 
-    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider'];
+    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', '$uiViewScrollProvider'];
     runApp.$inject = ['$state'];
 
-    function configure($urlRouterProvider, $stateProvider, $httpProvider) {
+    function configure($urlRouterProvider, $stateProvider, $httpProvider, $uiViewScrollProvider) {
 
         $urlRouterProvider.otherwise('/');
 
@@ -86,8 +86,9 @@
                     return config;
                 }
             };
-        });
-    };
+        })
+
+    }
 
     function runApp($state) {
         $state.go('info');

@@ -2,9 +2,9 @@
     angular.module('listwidget.list')
         .controller('ListDetailController', ListDetailController);
 
-    ListDetailController.$inject = ['$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
+    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
 
-    function ListDetailController($state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
+    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
         var vm = this;
         vm.item = itemshareservice.getItem();
         vm.bcIndUrl = externalUrls.bcIndUrl;
@@ -24,9 +24,10 @@
         vm.getLocations = getLocations;
         vm.openFullReport = openFullReport;
 
-        function goBack(state) {
-            $state.go(state);
-        };
+          function goBack(state) {
+              $state.go(state);
+              //$window.history.back;
+          };
 
         function isBroker(item) {
 
@@ -59,10 +60,10 @@
         function openFullReport(item) {
             var url = '';
             if (isBoth(item) || isBroker(item)) {
-                url = externalUrls.bcIndUrl + '/' + item.fields.ac_source_id;
+                url = externalUrls.bcIndUrl + item.fields.ac_source_id;
             }
             else if (isInvestmentAdvisor(item)) {
-                url = externalUrls.iaIndUrl + '/' + item.fields.ac_source_id;
+                url = externalUrls.iaIndUrl + item.fields.ac_source_id;
             }
             else {
                 url = 'http://brokercheck.finra.org'

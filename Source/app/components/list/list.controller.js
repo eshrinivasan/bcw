@@ -2,60 +2,54 @@
     angular.module('listwidget.list')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$rootScope','$scope', '$state', '$sanitize', 'urlfactory', 'dataservice','itemshareservice', '$window', '$anchorScroll', '$location'];
+    ListController.$inject = ['$state',
+        'dataservice',
+        'itemshareservice',
+        '$window',
+        '$rootScope'];
 
-    function ListController($rootScope, $scope, $state, $sanitize,  urlfactory, dataservice, itemshareservice, $window, $anchorScroll, $location) {
+    function ListController($state,
+                            dataservice,
+                            itemshareservice,
+                            $window,
+                            $rootScope) {
         var vm = this;
+
         vm.getFullName = getFullName;
         vm.getLocations = getLocations;
-        vm.loadMore = loadMore;
         vm.select = select;
-        vm.results = [];
         vm.goToSite = goToSite;
-        var scrollTo = scrollTo;
-        vm.results = itemshareservice.getList();
+        vm.scrollTo = scrollTo;
         vm.animeClass = 'slideInLeft';
+        vm.element = '';
 
-
-
-        $rootScope.$on('$viewContentLoaded',
-            function(event){
-
-            console.log(event);
-            })
-
-        function scrollTo(div) {
-
+        function scrollTo(element) {
+            jQuery( 'html, body').animate({
+                scrollTop: jQuery(element).offset()
+            }, 2000);
         }
 
+        $rootScope.$on('$stateChangeSuccess', function (event) {
+           // console.log($rootScope.offset);
+           // $window.pageYOffset =  $rootScope.offset;
+            vm.scrollTo(vm.element);
+
+        });
         function goToSite(url) {
             $window.open(url);
         }
-        function select(item, event) {
+        function select(item, event, index) {
             itemshareservice.setItem(item);
-
-            vm.selectedId = event.currentTarget.id;
-            console.log(vm.selectedId);
-
+            vm.element = event.currentTarget.id;
             $state.go('detail');
         };
+
         function getFullName(item) {
             return dataservice.getFullName(item);
         }
 
         function getLocations(item) {
             return dataservice.getLocations(item);
-        }
-
-        function loadMore() {
-
-            if (!angular.isUndefined(vm.results)) {
-                var startPosition = vm.results.length;
-            }
-            else {
-                var startPosition = 0;
-            }
-            $scope.$parent.vm.search(true, startPosition);
         }
     }
 })()

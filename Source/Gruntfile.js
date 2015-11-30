@@ -97,6 +97,7 @@ module.exports = function (grunt) {
                     {
                         src: ['app/bower_components/angular/angular.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+                            'app/bower_components/ui-router-extras/release/ct-ui-router-extras.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
@@ -124,6 +125,7 @@ module.exports = function (grunt) {
                     {
                         src: ['app/components/list/list.module.js',
                             'app/components/list/search.controller.js',
+                            'app/components/list/autoscroll.directive.js',
                             'app/components/list/list.controller.js',
                             'app/components/list/list.detail.controller.js'],
                         dest: 'app/assets/js/bc2210.list.js'
@@ -143,6 +145,7 @@ module.exports = function (grunt) {
                     {
                         src: ['app/bower_components/angular/angular.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+                            'app/bower_components/ui-router-extras/release/ct-ui-router-extras.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
