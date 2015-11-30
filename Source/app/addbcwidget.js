@@ -19,7 +19,7 @@ var thisBCScript = document.CurrentScript || document.getElementById("bcwidgetId
 var bcQueryString = thisBCScript.src.replace(/^[^\?]+\??/,'');
 
 function setIframeSrc() {
-    i.src = "//cdn.finra.org/brokercheck2210-widget/index.html?"+bcQueryString;
+    i.src = "//cdn.qa.finra.org/brokercheck2210-widget/index.html?"+bcQueryString;
 }
 
 setTimeout(setIframeSrc, 2);
