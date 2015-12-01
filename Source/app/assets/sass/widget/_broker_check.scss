@@ -477,7 +477,7 @@ li {
   height:160px;
 
 }
-
+/*
 .iScrollVerticalScrollbar {
   z-index: 9999;
   position:absolute;
@@ -498,8 +498,8 @@ li {
 
 
 }
+*/
 
-
-::-ms-clear {
+input::-ms-clear {
   display: none;
 }
