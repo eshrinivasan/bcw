@@ -30,7 +30,7 @@ mod.directive('infiniteScroll', [
                 if (attrs.infiniteScrollContainer != null) {
                     scope.$watch(attrs.infiniteScrollContainer, function(value) {
                         value = angular.element(value);
-                        console.log(value);
+
                         if (value != null) {
                             return container = value;
                         } else {
@@ -41,7 +41,7 @@ mod.directive('infiniteScroll', [
                 if (attrs.infiniteScrollParent != null) {
                     container = elem.parent();
                     scope.$watch(attrs.infiniteScrollParent, function() {
-                        return container = elem.parent();
+                        return elem.parent();
                     });
                 }
                 handler = function() {
@@ -51,17 +51,19 @@ mod.directive('infiniteScroll', [
                         elementBottom = elem.offset().top + elem.height();
                     } else {
 
+
                         containerBottom = container.height();
                         elementBottom = elem.offset().top - container.offset().top + elem.height();
+                       
                     }
                     remaining = parseInt(elementBottom) - parseInt(containerBottom);
                     shouldScroll = remaining <= container.height() * scrollDistance;
                     if (shouldScroll && scrollEnabled) {
                         if ($rootScope.$$phase) {
-                            console.log('eval');
+
                             return scope.$eval(attrs.infiniteScroll);
                         } else {
-                            console.log('apply');
+
                             return scope.$apply(attrs.infiniteScroll);
                         }
                     } else if (shouldScroll) {

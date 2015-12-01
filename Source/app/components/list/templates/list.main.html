@@ -3,8 +3,8 @@
       'iscroll-off': !vm.iScrollState.useIScroll
       }">
 <div class="iscroll-wrapper" iscroll iscroll-instance="instance">
-    <div class="iscroll-scroller">
-    <ul infinite-scroll="$parent.vm.loadMore()" infinite-scroll-container="iscroll-scroller" infinite-list-distance="2">
+
+    <ul infinite-scroll="$parent.vm.loadMore()" infinite-scroll-parent="true" infinite-list-distance="2" scroll-enabled="true">
     <li tabindex="0" class="bc-item clearfix result" id="bc-item-{{$index}}" ng-class="{'expanded': isActive(item) }"
        ng-repeat="item in $parent.vm.results track by $index" ng-click="vm.select(item, $event, $index)">
         <div class="heading">
@@ -14,5 +14,5 @@
     </li>
 </ul>
     <div class="no-results-found" ng-show="$parent.vm.noresults">There were no results for <b>"{{$parent.vm.query}}"</b>. Please try again.</div>
-</div>
+
  </div>   </div>
