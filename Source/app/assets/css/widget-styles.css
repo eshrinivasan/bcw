@@ -446,7 +446,10 @@ li .heading:hover {
   height: 160px;
   width: 93%;
   margin: 0 auto;
-  overflow: auto; }
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch; }
 
 .iscroll-scroller {
   position: relative;

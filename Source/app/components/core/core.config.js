@@ -70,7 +70,17 @@
                 momentum: false,
                 snap: true,
                 zoom:true,
-                bindToWrapper: true
+                bindToWrapper: true,
+                onBeforeScrollStart: function (e) {
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                },
+                onScrollStart: null,
+                onBeforeScrollMove: null,
+                onScrollMove: null,
+                onBeforeScrollEnd: null,
+                onScrollEnd: null
             }
         }
 
