@@ -54,7 +54,7 @@ mod.directive('infiniteScroll', [
 
                         containerBottom = container.height();
                         elementBottom = elem.offset().top - container.offset().top + elem.height();
-                       
+
                     }
                     remaining = parseInt(elementBottom) - parseInt(containerBottom);
                     shouldScroll = remaining <= container.height() * scrollDistance;
