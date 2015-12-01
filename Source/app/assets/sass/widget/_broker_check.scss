@@ -294,19 +294,28 @@ footer {
 }
 
 .detail-container {
-  width: 94%;
-  margin: 0 .5em 0 .5em;
+
+
+  width: 93%;
+  margin: 0 .5em;
   color: #fff;
-  font-family: $sans-serif-stack;
-  font-weight: 300;
-  overflow:hidden;
-  padding: .5em 0 0 0;
+  overflow: hidden;
+  padding: .5em 0 0 0em;
   font-size: .9em;
   height: 100%;
+  font-family: $arial;
+  font-weight: 500;
+
+  @include breakpoint($phone) {
+    font-weight:300;
+    font-family: $sans-serif-stack;
+    padding: .5em 0 0 .5em;
+  }
+
 
   .detail-item {
     margin:.5em 0;
-    font-size:.93em;
+
     a {
       color: $white;
       font-weight: 600;
@@ -320,6 +329,9 @@ footer {
   }
   .heading {
     font-weight:500;
+  }
+  .centered {
+    text-align:center;
   }
   .more-link {
 
@@ -336,7 +348,7 @@ footer {
     margin: 0 auto;
     text-align: center;
     background: #ff553a;
-    padding: .3em .3em;
+    padding: 0.3em 2em .3em .9em;
     cursor: pointer;
 
 
