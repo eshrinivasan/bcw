@@ -11,6 +11,7 @@ $em-base: 16; // Default
 $sans-serif-stack					:   'Open Sans', Arial, Helvetica, sans-serif;
 $serif-stack                        :   Georgia, "Times New Roman", Times, serif;
 $header-font-stack                  :   robotoregular, Arial, sans-serif;
+$arial                              :   Arial, sans-serif;
 
 @function em($pixels, $context: $em-base ) {
   @return $pixels/$context * 1em;

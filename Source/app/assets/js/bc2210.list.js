@@ -4,15 +4,16 @@
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice'];
+    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice', 'iScrollService'];
 
-    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice) {
+    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice, iScrollService) {
         var vm = this;
         vm.query = '';
         vm.noresults = false;
         vm.search = search;
         vm.animeClass = 'slideInRight';
         vm.loadMore = loadMore;
+
 
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
@@ -92,6 +93,7 @@
             }
         }
         function loadMore() {
+            console.log('does this get called?');
             if (!angular.isUndefined(vm.results)) {
                 var startPosition = vm.results.length;
             }
@@ -104,63 +106,19 @@
     }
 })();(function() {
     angular.module('listwidget.list')
-        .controller("ScrollController", ScrollController)
-        .directive("preserveScroll", function preserveScroll($window, $timeout){
-            return {
-                restrict: 'AE',
-                controller: 'ScrollController',
-                link: function(scope, element, attr, sctrl) {
-
-                    scope.scrollPos = {};
-
-                    $(element).on("scroll", function() {
-                       // console.log(this.scrollTop);
-                        scope.scrollPos.offset = this.scrollTop;
-                        console.log(scope.scrollPos.offset);
-
-                        sctrl.setPosition(scope.scrollPos.offset);
-                        scope.$apply();
-
-                    });
-
-                }
-            }
-
-        });
-
-    ScrollController.$inject = ['$rootScope', '$window', '$element'];
-    function ScrollController($rootScope, $window, $element) {
-        var scroll = this;
-        scroll.setPosition = setPosition;
-        scroll.getPosition = getPosition;
-        //scroll.offset = 0;
-
-        console.log($element);
-        $element.scrollTop = scroll.getPosition();
-        function getPosition() {
-            return $rootScope.offset;
-        }
-
-        function setPosition(offset) {
-            $rootScope.offset = offset;
-        }
-
-    }
-
-
-})();(function() {
-    angular.module('listwidget.list')
         .controller('ListController', ListController);
 
     ListController.$inject = ['$state',
         'dataservice',
         'itemshareservice',
+        'iScrollService',
         '$window',
         '$rootScope'];
 
     function ListController($state,
                             dataservice,
                             itemshareservice,
+                            iScrollService,
                             $window,
                             $rootScope) {
         var vm = this;
@@ -170,8 +128,13 @@
         vm.select = select;
         vm.goToSite = goToSite;
         vm.scrollTo = scrollTo;
-        vm.animeClass = 'slideInLeft';
+        vm.animeClass = 'fadeInLeft';
         vm.element = '';
+        vm.iScrollState = iScrollService.state;
+
+
+
+        vm.iScrollState.mouseWheel = true;
 
         function scrollTo(element) {
             jQuery( 'html, body').animate({

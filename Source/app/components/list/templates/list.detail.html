@@ -1,5 +1,5 @@
 <div class="detail-container">
-    <div class="return"><span class="return-arrow"></span><a ui-sref="list" ng-keypress="goBack('list')" tabindex="0"> Back to List</a></div>
+    <div class="return"><a ui-sref="list" ng-keypress="goBack('list')" tabindex="0"><span class="return-arrow"></span> Back to List</a></div>
     <div class="heading">
         <span class="fullname heading" ng-bind="vm.getFullName(vm.item)"></span>
         <span class="crd-number"> <span> (#</span><span ng-bind="vm.item.fields.ac_source_id"></span><span>)</span></span>

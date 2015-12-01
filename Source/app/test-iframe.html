@@ -1,27 +1,12 @@
 <html>
+<head>
+    <style>
+
+    </style>
 </head>
 <body>
-<style>
-
-    .wide {
-        margin:0 auto;
-        height:400px;
-    }
-</style>
-<div class="wide">
-<div id="bc-root"></div>
-<script>
-    /*** DON'T EDIT BELOW THIS LINE ***/
-    (function() {
-        var d = document,
-                sc = document.getElementsByTagName('script')[0],
-                s = d.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.id = 'bcwidgetId';
-        s.src = ' <a href="http://cdn.qa.finra.org/brokercheck-widget/assets/js/min/addbcwidget.min.js?firmname=JP">http://cdn.dev.finra.org/brokercheck-widget/assets/js/min/addbcwidget.min.js</a> Morgan&crds=79';
-        sc.parentNode.insertBefore(s, sc);
-    } )();
-</script>
+<div class="narrow">
+    <iframe src="index.html?firmname=JP%20Morgan&crds=79" scrolling="no" frameborder="0"  height="100%" width="100%"></iframe>
+</div>
 </body>
 </html>
