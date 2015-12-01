@@ -88,20 +88,23 @@ ul {
 /*  Use this file to define widget specific styles. */
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 4px 4px 0;
+  min-width: 235px;
+  max-width: 480px;
+  min-height: 300px;
+  max-height: 480px;
+  overflow: hidden;
 }
 
 .widget-container {
   border: solid 1px #51a2da;
   background-color: #51a2da;
-  min-width: 250px;
-  max-width: 480px;
-  min-height: 300px;
-  max-height: 480px;
   width: 100%;
   height: 100%;
   position: relative;
   overflow: hidden;
+  min-height: 300px;
+  min-width: 245px;
 }
 .widget-container ul {
   list-style: none;
@@ -109,7 +112,7 @@ body {
   margin: 0em .7em 0 .3em;
 }
 .widget-container ul li {
-  padding: .6em 0 .6em .6em;
+  padding: .5em 0 .5em .5em;
   border-bottom: solid 1px #80c5fb;
   position: relative;
 }
@@ -146,7 +149,7 @@ footer .separator {
 
 .main-view {
   position: relative;
-  height: 68%;
+  height: 72%;
 }
 .main-view .main {
   width: 100%;
@@ -157,20 +160,30 @@ footer .separator {
 .data-container {
   position: relative;
   width: 100%;
-  height: 160px;
+  height: 100%;
 }
 
 .message {
-  font-size: 1.125em;
+  margin: 1.5em auto 0;
+  font-size: 1em;
   background-color: #51a2da;
   color: white;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 300;
-  font-size: 1.125em;
   height: 100%;
   width: 80%;
   text-align: center;
-  margin: 2em auto 0 auto;
+}
+@media (min-width: 20em) {
+  .message {
+    margin-top: 1em;
+    font-size: 1.125em;
+  }
+}
+@media (min-width: 30em) {
+  .message {
+    margin: 2em auto 0 auto;
+  }
 }
 .message .firmname {
   color: white;
@@ -190,8 +203,6 @@ footer .separator {
 }
 
 .logo {
-  width: 236px;
-  height: 63px;
   text-align: center;
   margin: 0 auto;
   display: block;
@@ -202,7 +213,13 @@ footer .separator {
   border: none;
 }
 .logo img {
+  width: 150px;
   border: none;
+}
+@media (min-width: 20em) {
+  .logo img {
+    width: 236px;
+  }
 }
 
 .more {
@@ -233,7 +250,7 @@ footer .separator {
   width: 100%;
   margin: 0 auto;
   position: relative;
-  padding: .3em 0 .5em;
+  padding: .1em 0 .5em;
 }
 .field-search .clear {
   display: inline-block;
@@ -254,7 +271,7 @@ footer .separator {
   position: absolute;
   /* left: -45px; */
   right: 5%;
-  top: .2em;
+  top: 0em;
   border: none;
 }
 .search-icon:hover {
@@ -291,7 +308,6 @@ footer .separator {
   margin: 0;
   padding: 0;
   font-size: .875em;
-  font-weight: 300;
   color: #fff;
 }
 .bc-item:hover {
@@ -301,8 +317,7 @@ footer .separator {
   color: #fff;
   text-decoration: none;
   padding: .3em 0 .3em .5em;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-weight: 300;
+  font-family: Arial, sans-serif;
   font-size: .9em;
   display: inline-block;
   width: 100%;
@@ -328,9 +343,8 @@ footer .separator {
 
 .scrollable {
   overflow-x: hidden;
-  overflow-y: scroll;
-  height: 160px;
-  max-height: 160px;
+  overflow-y: auto;
+  max-height: 165px;
   margin-right: .5em;
   margin-top: .5em;
 }
@@ -350,7 +364,7 @@ footer .separator {
 
 .detail-container {
   width: 94%;
-  margin: 0 .2em 0 1em;
+  margin: 0 .5em 0 .5em;
   color: #fff;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 300;
@@ -377,11 +391,10 @@ footer .separator {
 }
 .detail-container .more-link {
   float: none;
-  position: absolute;
+  display: inline-block;
+  white-space: nowrap;
   bottom: 0;
-  left: 25%;
   /* top: 1em; */
-  width: 50%;
   height: 20px;
   border-radius: 2px;
   margin: 0 auto;
@@ -448,29 +461,28 @@ input[type="text"] {
   font-weight: bold;
 }
 
-/* Let's get this party started */
-::-webkit-scrollbar {
-  width: 8px;
-}
+  /* Let's get this party started
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  /* Track
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 
-/* Track */
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  width: 12px;
-  background: rgba(255, 255, 255, 0.8);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
-
-::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(192, 192, 192, 0.4);
-}
-
+  }
+*/
+  /* Handle
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    width:12px;
+    background: rgba(255,255,255,0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+  }
+  ::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(192,192,192,0.4);
+  }
+*/
 .notation {
   font-weight: 300;
   font-size: .8em;
@@ -486,142 +498,27 @@ li .heading:hover {
   font-size: .875em;
 }
 
-.ps-container.ps-active-x > .ps-scrollbar-x-rail, .ps-container.ps-active-y > .ps-scrollbar-y-rail {
-  display: block;
+.ul-parent {
+  position: relative;
 }
-.ps-container.ps-in-scrolling {
-  pointer-events: none;
-}
-.ps-container.ps-in-scrolling > .ps-scrollbar-x-rail {
-  background-color: #eeeeee;
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
-.ps-container.ps-in-scrolling > .ps-scrollbar-x-rail > .ps-scrollbar-x {
-  background-color: #999999;
-}
-.ps-container.ps-in-scrolling > .ps-scrollbar-y-rail {
-  background-color: #eeeeee;
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
-.ps-container.ps-in-scrolling > .ps-scrollbar-y-rail > .ps-scrollbar-y {
-  background-color: #999999;
-}
-.ps-container > .ps-scrollbar-x-rail {
+
+.ng-leave-active {
   display: none;
-  position: absolute;
-  /* please don't change 'position' */
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  -webkit-transition: background-color 0.2s linear, opacity 0.2s linear;
-  -moz-transition: background-color 0.2s linear, opacity 0.2s linear;
-  -o-transition: background-color 0.2s linear, opacity 0.2s linear;
-  transition: background-color 0.2s linear, opacity 0.2s linear;
-  bottom: 3px;
-  /* there must be 'bottom' for ps-scrollbar-x-rail */
-  height: 8px;
 }
-.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
-  position: absolute;
-  /* please don't change 'position' */
-  background-color: #aaaaaa;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-transition: background-color 0.2s linear;
-  -moz-transition: background-color 0.2s linear;
-  -o-transition: background-color 0.2s linear;
-  transition: background-color 0.2s linear;
-  bottom: 0;
-  /* there must be 'bottom' for ps-scrollbar-x */
-  height: 8px;
+
+.iscroll-wrapper {
+  position: relative;
+  height: 160px;
+  width: 100%;
+  overflow: auto;
 }
-.ps-container > .ps-scrollbar-y-rail {
-  display: none;
-  position: absolute;
-  /* please don't change 'position' */
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  opacity: 0;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  filter: alpha(opacity=0);
-  -webkit-transition: background-color 0.2s linear, opacity 0.2s linear;
-  -moz-transition: background-color 0.2s linear, opacity 0.2s linear;
-  -o-transition: background-color 0.2s linear, opacity 0.2s linear;
-  transition: background-color 0.2s linear, opacity 0.2s linear;
-  right: 3px;
-  /* there must be 'right' for ps-scrollbar-y-rail */
-  width: 10px;
-}
-.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
-  position: absolute;
-  /* please don't change 'position' */
-  background-color: #aaaaaa;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  -ms-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-transition: background-color 0.2s linear;
-  -moz-transition: background-color 0.2s linear;
-  -o-transition: background-color 0.2s linear;
-  transition: background-color 0.2s linear;
-  right: 0;
-  /* there must be 'right' for ps-scrollbar-y */
-  width: 10px;
-}
-.ps-container:hover.ps-in-scrolling {
-  pointer-events: none;
-}
-.ps-container:hover.ps-in-scrolling > .ps-scrollbar-x-rail {
-  background-color: #eeeeee;
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
-.ps-container:hover.ps-in-scrolling > .ps-scrollbar-x-rail > .ps-scrollbar-x {
-  background-color: #999999;
-}
-.ps-container:hover.ps-in-scrolling > .ps-scrollbar-y-rail {
-  background-color: #eeeeee;
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
-.ps-container:hover.ps-in-scrolling > .ps-scrollbar-y-rail > .ps-scrollbar-y {
-  background-color: #999999;
-}
-.ps-container:hover > .ps-scrollbar-x-rail,
-.ps-container:hover > .ps-scrollbar-y-rail {
-  opacity: 0.6;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
-  filter: alpha(opacity=60);
-}
-.ps-container:hover > .ps-scrollbar-x-rail:hover {
-  background-color: #eeeeee;
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
-.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
-  background-color: #999999;
-}
-.ps-container:hover > .ps-scrollbar-y-rail:hover {
-  background-color: #eeeeee;
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
-.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
-  background-color: #999999;
+
+.iscroll-scroller {
+  position: relative;
+  width: 100%;
+  /*	-webkit-touch-callout:none;*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  float: left;
+  padding: 0;
+  height: 160px;
 }

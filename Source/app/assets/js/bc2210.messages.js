@@ -21,7 +21,7 @@
 
         function activate() {
             if (name) {
-                vm.firmname = decodeURI(name);
+                vm.firmname = decodeURIComponent(name);
                 var vowels = ['a','e','i','o','u','h'];
                 //name is valid
                 var firstLetter = (name.substring(0, 1)).toLowerCase();
