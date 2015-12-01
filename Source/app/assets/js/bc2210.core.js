@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.core',['ui.router', 'ngSanitize', 'angular-iscroll']);
+    angular.module('listwidget.core',['ui.router', 'ngSanitize', 'angular-iscroll','ngTouch']);
 })();(function() {
     angular.module('listwidget.core')
         .constant('restConfig', { endpoint: 'http://doppler.finra.org/doppler-lookup/api/v1/lookup' })
@@ -74,10 +74,11 @@
         var options = {
             iScroll: {
                 mousewheel: true,
-                scrollbar: true,
+                scrollbars: 'custom',
                 scrollY: true,
                 scrollX: false,
-                tap: true
+                tap: true,
+                fadeScrollbars : false
             }
         }
 
