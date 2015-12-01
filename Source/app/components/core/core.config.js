@@ -5,10 +5,12 @@
         .config(configure)
         .run(runApp);
 
-    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', '$uiViewScrollProvider'];
+    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider','iScrollServiceProvider'];
     runApp.$inject = ['$state'];
 
-    function configure($urlRouterProvider, $stateProvider, $httpProvider, $uiViewScrollProvider) {
+    function configure($urlRouterProvider, $stateProvider, $httpProvider, iScrollServiceProvider) {
+
+
 
         $urlRouterProvider.otherwise('/');
 
@@ -53,7 +55,21 @@
             templateUrl: 'components/messages/templates/error.messages.html',
             controller: 'MessagesController',
             controllerAs: 'vm'
+        };
+
+
+        var options = {
+            iScroll: {
+                mousewheel: true,
+                scrollbars: 'custom',
+                scrollY: true,
+                scrollX: false,
+                tap: true,
+                fadeScrollbars : false
+            }
         }
+
+        iScrollServiceProvider.configureDefaults(options);
 
         $stateProvider
             .state(main)

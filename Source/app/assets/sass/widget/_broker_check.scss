@@ -1,31 +1,36 @@
 /*  Use this file to define widget specific styles. */
 body {
   margin:0;
-  padding:0;
-}
-
-.widget-container {
-  border: solid 1px $default-bg-color;
-  background-color: $default-bg-color;
-  min-width: 250px;
+  padding:0 4px 4px 0;
+  min-width: 235px;
   max-width: 480px;
   min-height: 300px;
   max-height: 480px;
+  overflow:hidden;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.widget-container {
+  border: solid 1px $default-bg-color;
+  background-color: $default-bg-color;
   width: 100%;
   height:100%;
   position:relative;
   overflow:hidden;
+  min-height: 300px;
+  min-width: 245px;
   ul {
     list-style: none;
     padding: 0;
     margin: 0em .7em 0 .3em;
 
     li {
-      padding: .6em 0 .6em .6em;
+      padding: .5em 0 .5em .5em;
       border-bottom: solid 1px $separator-line-color;
       position:relative;
-
-
     }
   }
 }
@@ -63,7 +68,7 @@ footer {
 }
 .main-view {
   position:relative;
-  height: 68%;
+  height: 72%;
 
   .main {
     width:100%;
@@ -75,20 +80,31 @@ footer {
 .data-container {
   position: relative;
   width: 100%;
-  height:160px;
+  height:100%;
 
 }
 .message {
-  font-size: em(18);
+
+  margin: 1.5em auto 0;
+  font-size: 1em;
   background-color: $default-bg-color;
   color: $default-text-color;
   font-family: $sans-serif-stack;
   font-weight:300;
-  font-size: 1.125em;
   height: 100%;
   width: 80%;
   text-align:center;
-  margin: 2em auto 0 auto;
+
+  @include breakpoint($phone) {
+    margin-top: 1em;
+    font-size: 1.125em;
+  }
+
+  @include breakpoint($max) {
+    margin: 2em auto 0 auto;
+  }
+
+
 
 
   .firmname {
@@ -114,8 +130,7 @@ footer {
 
 
 .logo {
-  width: 236px;
-  height: 63px;
+
   text-align:center;
   margin:0 auto;
   display:block;
@@ -127,7 +142,13 @@ footer {
     border:none;
   }
   img {
+    width: 150px;
     border:none;
+
+    @include breakpoint($phone) {
+      width:236px;
+    }
+
   }
 }
 
@@ -158,7 +179,7 @@ footer {
   width: 100%;
   margin: 0 auto;
   position:relative;
-  padding: .3em 0 .5em;
+  padding: .1em 0 .5em;
 
   .clear {
     display: inline-block;
@@ -180,7 +201,7 @@ footer {
   position: absolute;
   /* left: -45px; */
   right: 5%;
-  top:.2em;
+  top:0em;
   border: none;
   &:hover {
     cursor:pointer;
@@ -208,9 +229,7 @@ footer {
   margin:0;
   padding:0;
   font-size: .875em;
-  font-weight:300;
   color: #fff;
-
 
   &:hover {
     cursor:pointer;
@@ -220,13 +239,13 @@ footer {
     color: #fff;
     text-decoration: none;
     padding: .3em 0 .3em .5em;
-
-    font-family: $sans-serif-stack;
-    font-weight: 300;
+    font-family: $arial;
     font-size:.9em;
     display: inline-block;
     width: 100%;
     border-bottom: solid 1px #fff;
+
+
   }
   &.expanded {
     .result {
@@ -257,9 +276,9 @@ footer {
 
 .scrollable {
   overflow-x: hidden;
-  overflow-y: scroll;
-  height: 160px;
-  max-height: 160px;
+  overflow-y: auto;
+ // height: 160px;
+  max-height: 165px;
   margin-right: .5em;
   margin-top:.5em;
 
@@ -279,19 +298,24 @@ footer {
 }
 
 .detail-container {
-  width: 94%;
-  margin: 0 .2em 0 1em;
+  width: 90%;
+  margin: .5em auto 0 auto;
   color: #fff;
-  font-family: $sans-serif-stack;
-  font-weight: 300;
-  overflow:hidden;
-  padding: .5em 0 0 0;
+  overflow: hidden;
   font-size: .9em;
   height: 100%;
+  font-family: $arial;
+  font-weight: 500;
+
+  @include breakpoint($phone) {
+    font-weight:300;
+    font-family: $sans-serif-stack;
+  }
+
 
   .detail-item {
     margin:.5em 0;
-    font-size:.93em;
+
     a {
       color: $white;
       font-weight: 600;
@@ -306,20 +330,25 @@ footer {
   .heading {
     font-weight:500;
   }
+  .centered {
+    text-align:center;
+  }
   .more-link {
 
     float: none;
-    position: absolute;
+    display:inline-block;
+    white-space: nowrap;
+    //position: absolute;
     bottom:0;
-    left:25%;
+    //left:25%;
     /* top: 1em; */
-    width: 50%;
-    height: 20px;
+
+    height: 28px;
     border-radius: 2px;
     margin: 0 auto;
     text-align: center;
     background: #ff553a;
-    padding: .3em .3em;
+    padding: 0.3em 2em .3em .9em;
     cursor: pointer;
 
 
@@ -385,17 +414,17 @@ input[type="text"] {
   font-weight: bold;
 }
 
-  /* Let's get this party started */
+  /* Let's get this party started
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
   }
-  /* Track */
+  /* Track
   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 
   }
-
-  /* Handle */
+*/
+  /* Handle
   ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -406,7 +435,7 @@ input[type="text"] {
   ::-webkit-scrollbar-thumb:window-inactive {
     background: rgba(192,192,192,0.4);
   }
-
+*/
 
   .notation {
     font-weight:300;
@@ -422,4 +451,55 @@ li {
 .locations {
   font-size: .875em;
 
+}
+.ul-parent {
+  position:relative;
+}
+
+.ng-leave-active {
+  display:none;
+}
+.iscroll-wrapper {
+  position:relative;
+  height:160px;
+  width: 93%;
+  margin: 0 auto;
+  overflow:auto;
+}
+
+.iscroll-scroller {
+  position:relative;
+  width:98%;
+  /*	-webkit-touch-callout:none;*/
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  float:left;
+  padding:0;
+  height:160px;
+
+}
+/*
+.iScrollVerticalScrollbar {
+  z-index: 9999;
+  position:absolute;
+  width: 10px;
+  top: 2px;
+  right: 2px;
+  background-color:$white;
+}
+.iScrollIndicator {
+  width:12px;
+  height:18px;
+
+  background-color: $white;
+  border-radius: 2px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #efefef;
+
+
+}
+*/
+
+input::-ms-clear {
+  display: none;
 }

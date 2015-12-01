@@ -5,12 +5,14 @@
     ListController.$inject = ['$state',
         'dataservice',
         'itemshareservice',
+        'iScrollService',
         '$window',
         '$rootScope'];
 
     function ListController($state,
                             dataservice,
                             itemshareservice,
+                            iScrollService,
                             $window,
                             $rootScope) {
         var vm = this;
@@ -20,8 +22,13 @@
         vm.select = select;
         vm.goToSite = goToSite;
         vm.scrollTo = scrollTo;
-        vm.animeClass = 'slideInLeft';
+        vm.animeClass = 'fadeInLeft';
         vm.element = '';
+        vm.iScrollState = iScrollService.state;
+
+
+
+        vm.iScrollState.mouseWheel = true;
 
         function scrollTo(element) {
             jQuery( 'html, body').animate({
