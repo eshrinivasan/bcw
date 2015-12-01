@@ -100,13 +100,15 @@ module.exports = function (grunt) {
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
+                            'app/bower_components/angular-touch/angular-touch.min.js',
                             'app/bower_components/angular-sanitize/angular-sanitize.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js',
                             'app/bower_components/iscroll/build/iscroll.js',
-                            'app/bower_components/angular-iscroll/dist/lib/angular-iscroll.min.js'
+                            'app/bower_components/angular-iscroll/dist/lib/angular-iscroll.min.js',
+                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js',
+
                         ],
 
                         dest: 'app/assets/js/min/angular-plugins.min.js'
@@ -149,13 +151,14 @@ module.exports = function (grunt) {
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
+                            'app/bower_components/angular-touch/angular-touch.min.js',
                             'app/bower_components/angular-sanitize/angular-sanitize.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js',
                             'app/bower_components/iscroll/build/iscroll.js',
-                            'app/bower_components/angular-iscroll/dist/lib/angular-iscroll.min.js'
+                            'app/bower_components/angular-iscroll/dist/lib/angular-iscroll.min.js',
+                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js',
                         ],
                         dest: 'app/assets/js/min/angular-plugins.min.js'
                     },

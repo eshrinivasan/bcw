@@ -61,10 +61,11 @@
         var options = {
             iScroll: {
                 mousewheel: true,
-                scrollbar: true,
+                scrollbars: 'custom',
                 scrollY: true,
                 scrollX: false,
-                tap: true
+                tap: true,
+                fadeScrollbars : false
             }
         }
 
