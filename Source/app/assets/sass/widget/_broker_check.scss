@@ -464,7 +464,10 @@ li {
   height:160px;
   width: 93%;
   margin: 0 auto;
-  overflow:auto;
+  overflow-x: hidden; // Control how to clip the container's content.
+  overflow-y: scroll;
+  -ms-overflow-style: -ms-autohiding-scrollbar; // configure overflow scrolling behavior for IE 10
+  -webkit-overflow-scrolling: touch; // The magic happens here
 }
 
 .iscroll-scroller {

@@ -78,7 +78,22 @@
                 scrollY: true,
                 scrollX: false,
                 tap: true,
-                fadeScrollbars : false
+                fadeScrollbars : false,
+                keyBindings : true,
+                momentum: true,
+                snap: true,
+                zoom:true,
+                bindToWrapper: true,
+                onBeforeScrollStart: function (e) {
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                },
+                onScrollStart: null,
+                onBeforeScrollMove: null,
+                onScrollMove: null,
+                onBeforeScrollEnd: null,
+                onScrollEnd: null
             }
         }
 
