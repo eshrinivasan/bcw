@@ -78,7 +78,12 @@
                 scrollY: true,
                 scrollX: false,
                 tap: true,
-                fadeScrollbars : false
+                fadeScrollbars : false,
+                keyBindings : true,
+                momentum: false,
+                snap: true,
+                zoom:true,
+                bindToWrapper: true
             }
         }
 

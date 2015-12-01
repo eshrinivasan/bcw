@@ -457,22 +457,27 @@ li .heading:hover {
   padding: 0;
   height: 160px; }
 
+/*
 .iScrollVerticalScrollbar {
   z-index: 9999;
-  position: absolute;
+  position:absolute;
   width: 10px;
   top: 2px;
   right: 2px;
-  background-color: white; }
-
+  background-color:$white;
+}
 .iScrollIndicator {
-  width: 12px;
-  height: 18px;
-  background-color: white;
+  width:12px;
+  height:18px;
+
+  background-color: $white;
   border-radius: 2px;
   border-width: 1px;
   border-style: solid;
-  border-color: #efefef; }
+  border-color: #efefef;
 
-::-ms-clear {
+
+}
+*/
+input::-ms-clear {
   display: none; }
