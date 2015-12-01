@@ -5,7 +5,7 @@
         .config(configure)
         .run(runApp);
 
-    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', '$uiViewScrollProvider'];
+    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider'];
     runApp.$inject = ['$state'];
 
     function configure($urlRouterProvider, $stateProvider, $httpProvider, $uiViewScrollProvider) {

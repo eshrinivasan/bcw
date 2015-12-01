@@ -1,5 +1,5 @@
-<div class="scrollable" preserve-scroll>
-    <ul infinite-scroll="$parent.vm.loadMore()" infinite-scroll-parent="true">
+<div class="scrollable">
+    <ul infinite-scroll="$parent.vm.loadMore()" infinite-scroll-parent="scrollable" infinite-list-distance="1">
     <li tabindex="0" class="bc-item clearfix result" id="bc-item-{{$index}}" ng-class="{'expanded': isActive(item) }"
        ng-repeat="item in $parent.vm.results track by $index" ng-click="vm.select(item, $event, $index)">
         <div class="heading">

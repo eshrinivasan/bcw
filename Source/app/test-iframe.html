@@ -1,12 +1,17 @@
 <html>
-<head>
-
 </head>
 <body>
+<style>
 
+    .wide {
+        margin:0 auto;
+        height:400px;
+    }
+</style>
+<div class="wide">
 <div id="bc-root"></div>
 <script>
-    /* * * DON'T EDIT BELOW THIS LINE * * */
+    /*** DON'T EDIT BELOW THIS LINE ***/
     (function() {
         var d = document,
                 sc = document.getElementsByTagName('script')[0],
@@ -14,17 +19,9 @@
         s.type = 'text/javascript';
         s.async = true;
         s.id = 'bcwidgetId';
-        s.src = 'assets/js/min/addbcwidget.min.js?firmname=JP Morgan&crds=79,112,10104';
+        s.src = ' <a href="http://cdn.qa.finra.org/brokercheck-widget/assets/js/min/addbcwidget.min.js?firmname=JP">http://cdn.dev.finra.org/brokercheck-widget/assets/js/min/addbcwidget.min.js</a> Morgan&crds=79';
         sc.parentNode.insertBefore(s, sc);
     } )();
 </script>
-
-
-<!--<iframe src="http://cdn.finra.org/professional-designations-widget/index.html" height="600"></iframe>-->
-<!--
-<div style="width:100%;">
-<iframe src="index.html?firmname=JP Morgan&crds=79"  height="400px" width="280px" scrolling="0" frameborder="0"></iframe>
-</div>
--->
 </body>
 </html>
