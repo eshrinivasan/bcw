@@ -67,10 +67,20 @@
                 tap: true,
                 fadeScrollbars : false,
                 keyBindings : true,
-                momentum: false,
+                momentum: true,
                 snap: true,
                 zoom:true,
-                bindToWrapper: true
+                bindToWrapper: true,
+                onBeforeScrollStart: function (e) {
+                    if (e.preventDefault) {
+                        e.preventDefault();
+                    }
+                },
+                onScrollStart: null,
+                onBeforeScrollMove: null,
+                onScrollMove: null,
+                onBeforeScrollEnd: null,
+                onScrollEnd: null
             }
         }
 

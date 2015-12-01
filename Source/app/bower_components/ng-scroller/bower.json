@@ -1,8 +1,0 @@
-{
-  "name": "ng-scroller",
-  "dependencies": {
-    "angular": "*",
-    "bootstrap": "*",
-    "closure-library": "git://github.com/google/closure-library.git"
-  }
-}
