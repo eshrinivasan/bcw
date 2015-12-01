@@ -2,8 +2,10 @@
 
 //Default settings
 var bcwidget = window.bcwidget || {};
-bcwidget.width = bcwidget.width || "310px";
-bcwidget.height = bcwidget.height || "300px";
+bcwidget.minwidth = "250px";
+bcwidget.minheight = "300px";
+bcwidget.maxwidth = "480px";
+bcwidget.maxheight = "480px";
 bcwidget.theme="basic";
 
 //Create iframe and append to div bc-root
@@ -11,15 +13,20 @@ var i = document.createElement("iframe");
 var bcroot = document.getElementById("bc-root")
 i.scrolling = "no";
 i.frameBorder = "0";
-i.width = bcroot.style.width = bcwidget.width;
-i.height = bcroot.style.height = bcwidget.height;
+bcroot.style.minWidth  = bcwidget.minwidth;
+bcroot.style.minHeight  = bcwidget.minheight;
+bcroot.style.height = bcwidget.minheight;	
+bcroot.style.maxWidth  = bcwidget.maxwidth;
+bcroot.style.maxHeight  = bcwidget.maxheight;
+i.width="100%";
+i.height="100%";
 bcroot.appendChild(i);
 
 var thisBCScript = document.CurrentScript || document.getElementById("bcwidgetId");
 var bcQueryString = thisBCScript.src.replace(/^[^\?]+\??/,'');
 
 function setIframeSrc() {
-    i.src = "//cdn.qa.finra.org/brokercheck2210-widget/index.html?"+bcQueryString;
+    i.src = "//cdn.qa.finra.org/brokercheck2210-widget/index.html?"+bcQueryString;//cdn.qa.finra.org
 }
 
 setTimeout(setIframeSrc, 2);
