@@ -67,7 +67,7 @@
                 tap: true,
                 fadeScrollbars : false,
                 keyBindings : true,
-                momentum: false,
+                momentum: true,
                 snap: true,
                 zoom:true,
                 bindToWrapper: true,

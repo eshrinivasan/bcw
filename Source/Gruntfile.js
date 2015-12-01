@@ -62,6 +62,8 @@ module.exports = function (grunt) {
                     {expand: false, flatten: true, src: ['app/shared/footer/footer.html'], dest: 'build/shared/footer/footer.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/shared/header/header.html'], dest: 'build/shared/header/header.html', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['app/assets/images/*'], dest: 'build/assets/images/', filter: 'isFile'},
+                    {expand: false, flatten: true, src: ['app/ie9/js/xdomain.min.js'], dest: 'build/ie9/js/xdomain.min.js', filter: 'isFile'},
+                    {expand: false, flatten: true, src: ['app/ie9/proxy.html'], dest: 'build/ie9/proxy.html', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['app/assets/js/min/*'], dest: 'build/assets/js/min/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['app/assets/js/external/*'], dest: 'build/assets/js/external/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['app/assets/css/min/*'], dest: 'build/assets/css/min/', filter: 'isFile'},
