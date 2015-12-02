@@ -108,7 +108,8 @@ module.exports = function (grunt) {
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/angular-rt-popup/dist/angular-rt-popup.min.js',
+                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-0.14.3.js',
+                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.14.3.js',
                             'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
                             'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
 
@@ -159,7 +160,8 @@ module.exports = function (grunt) {
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/angular-rt-popup/dist/angular-rt-popup.min.js',
+                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-0.14.3.js',
+                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.14.3.js',
                             'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
                             'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
 
