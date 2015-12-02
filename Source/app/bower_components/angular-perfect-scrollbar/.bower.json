@@ -32,5 +32,6 @@
   },
   "_source": "https://github.com/itsdrewmiller/angular-perfect-scrollbar.git",
   "_target": "~0.0.4",
-  "_originalSource": "angular-perfect-scrollbar"
+  "_originalSource": "angular-perfect-scrollbar",
+  "_direct": true
 }

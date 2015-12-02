@@ -5,24 +5,29 @@
     ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
 
     function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
-        var vm = this;
-        vm.item = itemshareservice.getItem();
-        vm.bcIndUrl = externalUrls.bcIndUrl;
-        vm.iaIndUrl = externalUrls.iaIndUrl;
-        vm.brokerToolTip = tooltips.broker;
-        vm.iaToolTip = tooltips.investmentAdvisor;
-        vm.disclosureToolTip = tooltips.disclosure;
-        vm.animeClass = 'slideInRight';
+        var detailCtl = this;
+        detailCtl.item = itemshareservice.getItem();
+        detailCtl.bcIndUrl = externalUrls.bcIndUrl;
+        detailCtl.iaIndUrl = externalUrls.iaIndUrl;
+        detailCtl.brokerToolTip = tooltips.broker;
+        detailCtl.iaToolTip = tooltips.investmentAdvisor;
+        detailCtl.disclosureToolTip = tooltips.disclosure;
+        detailCtl.animeClass = 'slideInRight';
 
-        vm.goBack = goBack;
-        vm.isBroker = isBroker;
-        vm.isInvestmentAdvisor = isInvestmentAdvisor;
-        vm.isBoth = isBoth;
-        vm.isNeither = isNeither;
-        vm.hasDisclosures = hasDisclosures;
-        vm.getFullName = getFullName;
-        vm.getLocations = getLocations;
-        vm.openFullReport = openFullReport;
+        detailCtl.goBack = goBack;
+        detailCtl.isBroker = isBroker;
+        detailCtl.isInvestmentAdvisor = isInvestmentAdvisor;
+        detailCtl.isBoth = isBoth;
+        detailCtl.isNeither = isNeither;
+        detailCtl.hasDisclosures = hasDisclosures;
+        detailCtl.getFullName = getFullName;
+        detailCtl.getLocations = getLocations;
+        detailCtl.openFullReport = openFullReport;
+        detailCtl.placement = placement;
+
+        function placement(anchor) {
+            return anchor.left < $window.width / 2 ? "right" : "left";
+        };
 
           function goBack(state) {
               $state.go(state);

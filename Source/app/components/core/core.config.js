@@ -5,10 +5,10 @@
         .config(configure)
         .run(runApp);
 
-    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider','iScrollServiceProvider'];
+    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider'];
     runApp.$inject = ['$state'];
 
-    function configure($urlRouterProvider, $stateProvider, $httpProvider, iScrollServiceProvider) {
+    function configure($urlRouterProvider, $stateProvider, $httpProvider) {
 
 
 
@@ -20,7 +20,7 @@
             abstract: true,
             templateUrl: 'components/list/templates/search.main.html',
             controller: 'SearchController',
-            controllerAs: 'vm'
+            controllerAs: 'searchCtl'
         };
         var list = {
             name: 'list',
@@ -28,7 +28,7 @@
             parent: 'main',
             templateUrl: 'components/list/templates/list.main.html',
             controller: 'ListController',
-            controllerAs: 'vm'
+            controllerAs: 'listCtl'
 
         };
         var info = {
@@ -37,7 +37,7 @@
             url: '',
             templateUrl: 'components/messages/templates/info.messages.html',
             controller: 'MessagesController',
-            controllerAs: 'vm'
+            controllerAs: 'messageCtl'
 
         }
         var detail = {
@@ -46,7 +46,7 @@
             url: '/detail',
             templateUrl: 'components/list/templates/list.detail.html',
             controller: 'ListDetailController',
-            controllerAs: 'vm'
+            controllerAs: 'detailCtl'
         }
         var error = {
             name: 'error',
@@ -54,37 +54,11 @@
             url: '/error',
             templateUrl: 'components/messages/templates/error.messages.html',
             controller: 'MessagesController',
-            controllerAs: 'vm'
+            controllerAs: 'messageCtl'
         };
 
 
-        var options = {
-            iScroll: {
-                mousewheel: true,
-                scrollbars: 'custom',
-                scrollY: true,
-                scrollX: false,
-                tap: true,
-                fadeScrollbars : false,
-                keyBindings : true,
-                momentum: true,
-                snap: true,
-                zoom:true,
-                bindToWrapper: true,
-                onBeforeScrollStart: function (e) {
-                    if (e.preventDefault) {
-                        e.preventDefault();
-                    }
-                },
-                onScrollStart: null,
-                onBeforeScrollMove: null,
-                onScrollMove: null,
-                onBeforeScrollEnd: null,
-                onScrollEnd: null
-            }
-        }
 
-        iScrollServiceProvider.configureDefaults(options);
 
         $stateProvider
             .state(main)

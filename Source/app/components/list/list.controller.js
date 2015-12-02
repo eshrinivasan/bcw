@@ -5,30 +5,24 @@
     ListController.$inject = ['$state',
         'dataservice',
         'itemshareservice',
-        'iScrollService',
         '$window',
         '$rootScope'];
 
     function ListController($state,
                             dataservice,
                             itemshareservice,
-                            iScrollService,
                             $window,
                             $rootScope) {
-        var vm = this;
+        var listCtl = this;
 
-        vm.getFullName = getFullName;
-        vm.getLocations = getLocations;
-        vm.select = select;
-        vm.goToSite = goToSite;
-        vm.scrollTo = scrollTo;
-        vm.animeClass = 'fadeInLeft';
-        vm.element = '';
-        vm.iScrollState = iScrollService.state;
+        listCtl.getFullName = getFullName;
+        listCtl.getLocations = getLocations;
+        listCtl.select = select;
+        listCtl.goToSite = goToSite;
+        listCtl.scrollTo = scrollTo;
+        listCtl.animeClass = 'fadeInLeft';
+        listCtl.element = '';
 
-
-
-        vm.iScrollState.mouseWheel = true;
 
         function scrollTo(element) {
             jQuery( 'html, body').animate({
@@ -39,7 +33,7 @@
         $rootScope.$on('$stateChangeSuccess', function (event) {
            // console.log($rootScope.offset);
            // $window.pageYOffset =  $rootScope.offset;
-            vm.scrollTo(vm.element);
+            listCtl.scrollTo(listCtl.element);
 
         });
         function goToSite(url) {
@@ -47,7 +41,7 @@
         }
         function select(item, event, index) {
             itemshareservice.setItem(item);
-            vm.element = event.currentTarget.id;
+            listCtl.element = event.currentTarget.id;
             $state.go('detail');
         };
 
