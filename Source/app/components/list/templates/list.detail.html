@@ -1,26 +1,26 @@
 <div class="detail-container">
     <div class="return"><a ui-sref="list" ng-keypress="goBack('list')" tabindex="0"><span class="return-arrow"></span> Back to List</a></div>
     <div class="heading">
-        <span class="fullname heading" ng-bind="vm.getFullName(vm.item)"></span>
-        <span class="crd-number"> <span> (#</span><span ng-bind="vm.item.fields.ac_source_id"></span><span>)</span></span>
+        <span class="fullname heading" ng-bind="detailCtl.getFullName(detailCtl.item)"></span>
+        <span class="crd-number"> <span> (#</span><span ng-bind="detailCtl.item.fields.ac_source_id"></span><span>)</span></span>
     </div>
     <div class="locations">
-        <span ng-bind="vm.getLocations(vm.item)"></span>
+        <span ng-bind="detailCtl.getLocations(detailCtl.item)"></span>
     </div>
     <div class="details">
         <div class="bc-type detail-item">
-            <span class="fullname" ng-bind="vm.getFullName(vm.item)"></span><span> is </span>
+            <span class="fullname" ng-bind="detailCtl.getFullName(detailCtl.item)"></span><span> is </span>
 
-            <span ng-show="vm.isBroker(vm.item)"> a <a href="#" title="{{vm.brokerToolTip}}">registered broker</a>.</span>
-            <span ng-show="vm.isInvestmentAdvisor(vm.item)"> an <a href="#" title="{{vm.iaToolTip}}">investment advisor.</a></span>
-            <span ng-show="vm.isBoth(vm.item)"> both a <a href="#" title="{{vm.brokerToolTip}}">registered broker</a> and an <a href="#" title="{{vm.iaToolTip}}">investment advisor</a>.</span>
-            <span ng-show="vm.isNeither(vm.item)"> neither a <a href="#" title="{{vm.brokerToolTip}}">registered broker</a> nor an <a href="#" title="{{vm.iaToolTip}}">investment advisor</a>.</span>
+            <span ng-show="detailCtl.isBroker(detailCtl.item)"> a <span popup-placement-fn="placement" class="bolder" popup-show="{{detailCtl.brokerToolTip}}">registered broker</span>.</span>
+            <span ng-show="detailCtl.isInvestmentAdvisor(detailCtl.item)"> an <span tooltip-placement="bottom" tooltip-popup-close-delay='500' class="bolder" uib-tooltip="{{detailCtl.iaToolTip}}">investment adviser</span></span>
+            <span ng-show="detailCtl.isBoth(detailCtl.item)"> both a <span tooltip-placement="bottom" tooltip-popup-close-delay='500' class="bolder" uib-tooltip="{{detailCtl.brokerToolTip}}">registered broker</span> and an <span tooltip-placement="bottom" class="bolder" tooltip-popup-close-delay='500' uib-tooltip="{{detailCtl.iaToolTip}}">investment adviser</span>.</span>
+            <span ng-show="detailCtl.isNeither(detailCtl.item)"> neither a <span tooltip-placement="bottom" tooltip-popup-close-delay='500' class="bolder" uib-tooltip="{{detailCtl.brokerToolTip}}">registered broker</span> nor an <span tooltip-placement="bottom" class="bolder" tooltip-popup-close-delay='500' uib-tooltip="{{detailCtl.iaToolTip}}">investment adviser</span>.</span>
 
-            <span class="detail-item">There are <span ng-hide="vm.hasDisclosures(vm.item)"><b>no</b></span> <a href="#" title="{{vm.disclosureToolTip}}">disclosures</a> for this individual.</span>
+            <span class="detail-item">There are <span ng-hide="detailCtl.hasDisclosures(detailCtl.item)"><b>no</b></span> <span tooltip-placement="bottom" class="bolder" tooltip-popup-close-delay='500' uib-tooltip="{{detailCtl.disclosureToolTip}}">disclosures</span> for this individual.</span>
         </div>
     </div>
     <div class="centered">
-    <div class="more-link" ng-click="vm.openFullReport(vm.item)" tabindex="0">
+    <div class="more-link" ng-click="detailCtl.openFullReport(detailCtl.item)" tabindex="0">
         <span class="external-link"></span>
         <span class="link">Get Full Report</span>
     </div>

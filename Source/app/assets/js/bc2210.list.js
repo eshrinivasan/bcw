@@ -1,18 +1,18 @@
 (function() {
-    angular.module('listwidget.list', ['infinite-scroll', 'ngAnimate', 'ui.router']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'rt.popup', 'perfect_scrollbar']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice', 'iScrollService'];
+    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice'];
 
-    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice, iScrollService) {
-        var vm = this;
-        vm.query = '';
-        vm.noresults = false;
-        vm.search = search;
-        vm.animeClass = 'slideInRight';
-        vm.loadMore = loadMore;
+    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice) {
+        var searchCtl = this;
+        searchCtl.query = '';
+        searchCtl.noresults = false;
+        searchCtl.search = search;
+        searchCtl.animeClass = 'slideInRight';
+        searchCtl.loadMore = loadMore;
 
 
         var items = [];
@@ -26,10 +26,10 @@
         };
 
 
-        $scope.$watch("vm.query", function(newValue, oldValue){
+        $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
             if (newValue != oldValue) {
-                vm.results = [];
+                searchCtl.results = [];
                 search(false, 0);
 
             }
@@ -42,7 +42,7 @@
         }
         function search(append, startWith) {
 
-            if (angular.isUndefined(vm.query) || vm.query.length === 0) {
+            if (angular.isUndefined(searchCtl.query) || searchCtl.query.length === 0) {
                 $state.go('info');
             }
             else {
@@ -54,15 +54,15 @@
                 else {
                     params.start = 0;
                 }
-                params.query = dataservice.concatWords(vm.query);
+                params.query = dataservice.concatWords(searchCtl.query);
                 params.filter =  '(ac_ia_active_fl:Y+OR+ac_bc_active_fl:Y)' + urlfactory.createQueryStringEle(crdnumbers);
 
                 dataservice.searchBy(params, true)
                     .then(function (data) {
-                        vm.noresults = false;
+                        searchCtl.noresults = false;
                         var total = data.results.BC_INDIVIDUALS_2210.totalResults;
                         if (total === 0) {
-                            vm.noresults = true;
+                            searchCtl.noresults = true;
                         }
                         else {
                             items = data.results.BC_INDIVIDUALS_2210.results;
@@ -71,7 +71,7 @@
                                 if (startWith < total) {
 
                                     for (i = 0; i < items.length; i++) {
-                                        vm.results.push(items[i]);
+                                        searchCtl.results.push(items[i]);
                                     }
                                 }
                                 else {
@@ -79,11 +79,12 @@
                                 }
                             }
                             else {
-                                vm.results = [];
-                                vm.results = items;
+                                searchCtl.results = [];
+                                searchCtl.results = items;
                                 $state.go('list');
 
                             }
+
                         }
 
                     }), function (error) {
@@ -93,14 +94,12 @@
             }
         }
         function loadMore() {
-            console.log('does this get called?');
-            if (!angular.isUndefined(vm.results)) {
-                var startPosition = vm.results.length;
+            if (!angular.isUndefined(searchCtl.results)) {
+                var startPosition = searchCtl.results.length;
             }
             else {
                 var startPosition = 0;
             }
-
             search(true, startPosition);
         }
     }
@@ -111,30 +110,24 @@
     ListController.$inject = ['$state',
         'dataservice',
         'itemshareservice',
-        'iScrollService',
         '$window',
         '$rootScope'];
 
     function ListController($state,
                             dataservice,
                             itemshareservice,
-                            iScrollService,
                             $window,
                             $rootScope) {
-        var vm = this;
+        var listCtl = this;
 
-        vm.getFullName = getFullName;
-        vm.getLocations = getLocations;
-        vm.select = select;
-        vm.goToSite = goToSite;
-        vm.scrollTo = scrollTo;
-        vm.animeClass = 'fadeInLeft';
-        vm.element = '';
-        vm.iScrollState = iScrollService.state;
+        listCtl.getFullName = getFullName;
+        listCtl.getLocations = getLocations;
+        listCtl.select = select;
+        listCtl.goToSite = goToSite;
+        listCtl.scrollTo = scrollTo;
+        listCtl.animeClass = 'fadeInLeft';
+        listCtl.element = '';
 
-
-
-        vm.iScrollState.mouseWheel = true;
 
         function scrollTo(element) {
             jQuery( 'html, body').animate({
@@ -145,7 +138,7 @@
         $rootScope.$on('$stateChangeSuccess', function (event) {
            // console.log($rootScope.offset);
            // $window.pageYOffset =  $rootScope.offset;
-            vm.scrollTo(vm.element);
+            listCtl.scrollTo(listCtl.element);
 
         });
         function goToSite(url) {
@@ -153,7 +146,7 @@
         }
         function select(item, event, index) {
             itemshareservice.setItem(item);
-            vm.element = event.currentTarget.id;
+            listCtl.element = event.currentTarget.id;
             $state.go('detail');
         };
 
@@ -172,24 +165,29 @@
     ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
 
     function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
-        var vm = this;
-        vm.item = itemshareservice.getItem();
-        vm.bcIndUrl = externalUrls.bcIndUrl;
-        vm.iaIndUrl = externalUrls.iaIndUrl;
-        vm.brokerToolTip = tooltips.broker;
-        vm.iaToolTip = tooltips.investmentAdvisor;
-        vm.disclosureToolTip = tooltips.disclosure;
-        vm.animeClass = 'slideInRight';
+        var detailCtl = this;
+        detailCtl.item = itemshareservice.getItem();
+        detailCtl.bcIndUrl = externalUrls.bcIndUrl;
+        detailCtl.iaIndUrl = externalUrls.iaIndUrl;
+        detailCtl.brokerToolTip = tooltips.broker;
+        detailCtl.iaToolTip = tooltips.investmentAdvisor;
+        detailCtl.disclosureToolTip = tooltips.disclosure;
+        detailCtl.animeClass = 'slideInRight';
 
-        vm.goBack = goBack;
-        vm.isBroker = isBroker;
-        vm.isInvestmentAdvisor = isInvestmentAdvisor;
-        vm.isBoth = isBoth;
-        vm.isNeither = isNeither;
-        vm.hasDisclosures = hasDisclosures;
-        vm.getFullName = getFullName;
-        vm.getLocations = getLocations;
-        vm.openFullReport = openFullReport;
+        detailCtl.goBack = goBack;
+        detailCtl.isBroker = isBroker;
+        detailCtl.isInvestmentAdvisor = isInvestmentAdvisor;
+        detailCtl.isBoth = isBoth;
+        detailCtl.isNeither = isNeither;
+        detailCtl.hasDisclosures = hasDisclosures;
+        detailCtl.getFullName = getFullName;
+        detailCtl.getLocations = getLocations;
+        detailCtl.openFullReport = openFullReport;
+        detailCtl.placement = placement;
+
+        function placement(anchor) {
+            return anchor.left < $window.width / 2 ? "right" : "left";
+        };
 
           function goBack(state) {
               $state.go(state);
