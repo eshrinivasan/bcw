@@ -86,9 +86,9 @@
 				<div class="span4">
 					<div class="rightColBG" id="col6cont" >   					
 						 
-					
+						<div class="bcwidgetCover">	
 						<div class="add-finra-bc-widget"></div>	
-					
+						</div>
 					</div>	
 				</div>
 			</div>		
@@ -103,11 +103,16 @@
 			<script>
 				(function( j171 ) {
 						j171(".add-finra-bc-widget").BCWidget({                             
+                                'shortenCaption':true,
+                                'showLogo':false,
+                                'tos':true,
                                 'displayCount':false,
-                                'redirectOutOfDomain':true,
-                                '$mWrap': '<div id="finra-bc-widget" class="finra-bc-widget widget-ad"><div class="finra-bc-widget-common"><div class="autocomplete-container"><input id="finra_pc_search_box" type="text" maxlength="150" placeholder="Search by Name, Firm, or CRD#" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" /><div class="ui-autocomplete-input-clear"></div></div></div></div>'
+                                'redirectOutOfDomain':true
+
 						});
 				})( jQuery );	
+
+				// '$mWrap': '<div id="finra-bc-widget" class="finra-bc-widget widget-ad"><div class="finra-bc-widget-common"><div class="autocomplete-container"><input id="finra_pc_search_box" type="text" maxlength="150" placeholder="Search by Name, Firm, or CRD#" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" /><div class="ui-autocomplete-input-clear"></div></div></div></div>'
 			</script>
 		</body>
 	</html>
