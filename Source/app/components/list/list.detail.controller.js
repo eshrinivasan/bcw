@@ -12,7 +12,7 @@
         detailCtl.brokerToolTip = tooltips.broker;
         detailCtl.iaToolTip = tooltips.investmentAdvisor;
         detailCtl.disclosureToolTip = tooltips.disclosure;
-        detailCtl.animeClass = 'slideInRight';
+        $scope.animeClass = 'fadeInRight';
 
         detailCtl.goBack = goBack;
         detailCtl.isBroker = isBroker;
@@ -24,6 +24,7 @@
         detailCtl.getLocations = getLocations;
         detailCtl.openFullReport = openFullReport;
         detailCtl.placement = placement;
+        $scope.isList = dataservice.isList();
 
         function placement(anchor) {
             return anchor.left < $window.width / 2 ? "right" : "left";

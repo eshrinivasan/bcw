@@ -9,10 +9,9 @@
         searchCtl.query = '';
         searchCtl.noresults = false;
         searchCtl.search = search;
-        searchCtl.animeClass = 'slideInRight';
         searchCtl.loadMore = loadMore;
-
-
+        $scope.isList = dataservice.isList();
+        $scope.animeClass = 'fadeInRight';
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
         var params = {
@@ -33,11 +32,6 @@
             }
         });
 
-
-        function isList() {
-            var state = dataservice.getCurrentState();
-            return state === 'list';
-        }
         function search(append, startWith) {
 
             if (angular.isUndefined(searchCtl.query) || searchCtl.query.length === 0) {

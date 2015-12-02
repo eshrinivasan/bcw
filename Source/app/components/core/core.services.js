@@ -53,7 +53,8 @@
             getLocations: getLocations,
             getFullName: getFullName,
             concatWords: concatWords,
-            getCurrentState : getCurrentState
+            getCurrentState : getCurrentState,
+            isList : isList
         };
 
         return service;
@@ -121,6 +122,10 @@
 
         function getCurrentState() {
             return $state.current.name();
+        }
+        function isList() {
+            var _isList = $state.current.name === 'list' ? true : false;
+            return _isList;
         }
 
     }
