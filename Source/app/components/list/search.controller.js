@@ -2,9 +2,9 @@
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice'];
+    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice', '$analytics'];
 
-    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice) {
+    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $analytics) {
         var searchCtl = this;
         searchCtl.query = '';
         searchCtl.noresults;
@@ -101,6 +101,10 @@
             else {
                 var startPosition = 0;
             }
+
+            $analytics.eventTrack('Click', {
+                  category: 'BCListItem', label: "LoadMore"
+            });
             search(true, startPosition);
         }
     }

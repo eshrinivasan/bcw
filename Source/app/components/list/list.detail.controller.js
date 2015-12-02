@@ -2,9 +2,9 @@
     angular.module('listwidget.list')
         .controller('ListDetailController', ListDetailController);
 
-    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
+    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window', '$analytics'];
 
-    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
+    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window, $analytics) {
         var detailCtl = this;
         detailCtl.item = itemshareservice.getItem();
         detailCtl.bcIndUrl = externalUrls.bcIndUrl;
@@ -37,24 +37,24 @@
           };
 
         function isBroker(item) {
-
+          
             return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl !== "Y");
         };
         function isInvestmentAdvisor(item) {
-
+           
             return (item.fields.ac_ia_active_fl === "Y" && item.fields.ac_bc_active_fl !== "Y");
         };
         function isBoth(item) {
-
+               
             return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl === "Y");
 
         };
         function isNeither(item) {
-
+            
             return (item.fields.ac_bc_active_fl !== "Y" && item.fields.ac_ia_active_fl !== "Y");
         };
         function hasDisclosures(item) {
-
+            
             return (item.fields.ac_bc_dsclr_fl === "Y" || item.fields.ac_ia_dsclr_fl === "Y");
         }
         function getFullName(item) {
@@ -76,6 +76,10 @@
                 url = 'http://brokercheck.finra.org'
             }
             $window.open(url);
+
+            $analytics.eventTrack('Click', {
+                  category: 'GetDetails', label: url
+            });
         }
 
     }
