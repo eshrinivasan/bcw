@@ -22,10 +22,12 @@ body {
   overflow:hidden;
   min-height: 300px;
   min-width: 245px;
+  max-width: 480px;
+  max-height: 480px;
   ul {
     list-style: none;
     padding: 0;
-    margin: 0em .7em 0 .3em;
+    margin: 0 1em 0 0em;
 
     li {
       padding: .5em 0 .5em .5em;
@@ -275,15 +277,23 @@ footer {
 
 
 .scrollable {
-  overflow-x: hidden;
-  overflow-y: auto;
- // height: 160px;
-  max-height: 165px;
-  margin-right: .5em;
-  margin-top:.5em;
-
+  max-height: 160px;
+  width: 97%;
+  margin: 0 auto;
+  overflow-y: hidden;
+  position: relative;
 }
 
+.always-visible.ps-container > .ps-scrollbar-y-rail {
+  opacity: .7;
+  width:10px;
+  border-radius:1px;
+}
+.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y {
+  width:10px;
+  opacity:1;
+  border-radius:2px;
+}
 .ps-container.ps-active-x > .ps-scrollbar-x-rail {
   display: none !important;
 }
@@ -298,7 +308,7 @@ footer {
 }
 
 .detail-container {
-  width: 90%;
+  width: 95%;
   margin: .5em auto 0 auto;
   color: #fff;
   overflow: hidden;
@@ -314,7 +324,7 @@ footer {
 
 
   .detail-item {
-    margin:.5em 0;
+    margin: .2em 0 .1em;
 
     a {
       color: $white;
@@ -327,12 +337,19 @@ footer {
       }
     }
   }
+  .bolder {
+    font-weight: 500;
+  }
   .heading {
     font-weight:500;
+  }
+  .details {
+    margin-bottom: .5em;
   }
   .centered {
     text-align:center;
   }
+
   .more-link {
 
     float: none;
@@ -378,7 +395,13 @@ footer {
     }
   }
 }
-
+button.load-more {
+  margin-top: .4em;
+  margin-bottom: .4em;
+  position: absolute;
+  right: 1.4em;
+  display:inline-block;
+}
 div.animated {
   height:100%;
 }
@@ -388,7 +411,7 @@ input[type="text"] {
   border: none;
   height: 30px;
   position: relative;
-  width: 92%;
+  width: 97%;
   margin: 0 auto;
   padding: 0 0 0 4%;
   top: .5em;
@@ -414,30 +437,7 @@ input[type="text"] {
   font-weight: bold;
 }
 
-  /* Let's get this party started
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
-  /* Track
-  ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-
-  }
-*/
-  /* Handle
-  ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    width:12px;
-    background: rgba(255,255,255,0.8);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
-  }
-  ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(192,192,192,0.4);
-  }
-*/
-
-  .notation {
+.notation {
     font-weight:300;
     font-size:.8em;
     font-style:italic;
@@ -459,49 +459,7 @@ li {
 .ng-leave-active {
   display:none;
 }
-.iscroll-wrapper {
-  position:relative;
-  height:160px;
-  width: 93%;
-  margin: 0 auto;
-  overflow-x: hidden; // Control how to clip the container's content.
-  overflow-y: scroll;
-  -ms-overflow-style: -ms-autohiding-scrollbar; // configure overflow scrolling behavior for IE 10
-  -webkit-overflow-scrolling: touch; // The magic happens here
-}
 
-.iscroll-scroller {
-  position:relative;
-  width:98%;
-  /*	-webkit-touch-callout:none;*/
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
-  float:left;
-  padding:0;
-  height:160px;
-
-}
-/*
-.iScrollVerticalScrollbar {
-  z-index: 9999;
-  position:absolute;
-  width: 10px;
-  top: 2px;
-  right: 2px;
-  background-color:$white;
-}
-.iScrollIndicator {
-  width:12px;
-  height:18px;
-
-  background-color: $white;
-  border-radius: 2px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #efefef;
-
-
-}
-*/
 
 input::-ms-clear {
   display: none;

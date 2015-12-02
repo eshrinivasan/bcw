@@ -108,9 +108,10 @@ module.exports = function (grunt) {
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/iscroll/build/iscroll.js',
-                            'app/bower_components/angular-iscroll/dist/lib/angular-iscroll.min.js',
-                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js',
+                            'app/bower_components/angular-rt-popup/dist/angular-rt-popup.min.js',
+                            'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
+                            'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
+
 
                         ],
 
@@ -131,7 +132,6 @@ module.exports = function (grunt) {
                     {
                         src: ['app/components/list/list.module.js',
                             'app/components/list/search.controller.js',
-                            'app/components/list/autoscroll.directive.js',
                             'app/components/list/list.controller.js',
                             'app/components/list/list.detail.controller.js'],
                         dest: 'app/assets/js/bc2210.list.js'
@@ -159,9 +159,10 @@ module.exports = function (grunt) {
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/iscroll/build/iscroll.js',
-                            'app/bower_components/angular-iscroll/dist/lib/angular-iscroll.min.js',
-                            'app/bower_components/angular-infinite-scroll/ng-infinite-scroll.js',
+                            'app/bower_components/angular-rt-popup/dist/angular-rt-popup.min.js',
+                            'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
+                            'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
+
                         ],
                         dest: 'app/assets/js/min/angular-plugins.min.js'
                     },
@@ -199,12 +200,20 @@ module.exports = function (grunt) {
             dev: {
                 files: [{
                     'app/assets/css/min/compiled-styles.min.css': [
+                        'app/assets/css/min/normalize.min.css',
+                        'app/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css',
+                        'app/assets/css/min/animate.min.css',
+                        'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css'
                         ]
                 }]
             },
             dist: {
                 files: [{
                     'app/assets/css/min/compiled-styles.min.css': [
+                        'app/assets/css/min/normalize.min.css',
+                        'app/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css',
+                        'app/assets/css/min/animate.min.css',
+                        'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css'
                                                             ]
                 }]
             }
