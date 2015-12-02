@@ -25,8 +25,9 @@
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
         $scope.isList = dataservice.isList();
+        $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
-
+        $scope.state = $state.current.name;
         function scrollTo(element) {
             jQuery( 'html, body').animate({
                 scrollTop: jQuery(element).offset()

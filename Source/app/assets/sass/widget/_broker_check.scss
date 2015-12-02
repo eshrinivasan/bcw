@@ -16,9 +16,10 @@ body {
 .widget-container {
   border: solid 1px $default-bg-color;
   background-color: $default-bg-color;
+  font-family: $sans-serif-stack;
+  position:relative;
   width: 100%;
   height:100%;
-  position:relative;
   overflow:hidden;
   min-height: 300px;
   min-width: 245px;
@@ -45,32 +46,30 @@ footer {
   text-align: center;
   background-color: $footer-bg-color;
   position: absolute;
-  bottom: 0;
+  bottom: .5em;
   right: 0;
-  left: 0;
-  padding: 0px 5px 3px;
+  padding: 0 1em 2em;
   height:20px;
   color:$white;
+  font-size:.9em;
+  font-weight: 400;
 
 
   a {
-    font-family: $sans-serif-stack;
+    font-family: $opensans-serif-stack;
     font-weight: 300;
-    font-size: em(11);
-    color: $footer-text-color;
+    color: $white;
     text-decoration:none;
   }
   .separator {
     position:relative;
-
     font-family: $sans-serif-stack;
-    font-size:em(11);
+    font-size:em(12);
     font-weight:300;
   }
 }
 .main-view {
-  position:relative;
-  height: 72%;
+  height: 70%;
 
   .main {
     width:100%;
@@ -80,7 +79,7 @@ footer {
 
 }
 .data-container {
-  position: relative;
+
   width: 100%;
   height:100%;
 
@@ -91,19 +90,20 @@ footer {
   font-size: 1em;
   background-color: $default-bg-color;
   color: $default-text-color;
-  font-family: $sans-serif-stack;
+  font-family: $opensans-serif-stack;
   font-weight:300;
   height: 100%;
   width: 80%;
   text-align:center;
 
   @include breakpoint($phone) {
-    margin-top: 1em;
-    font-size: 1.125em;
+    margin-top: 2em;
+    font-size: 1.3em;
   }
 
   @include breakpoint($max) {
     margin: 2em auto 0 auto;
+    font-size: 1.3em;
   }
 
 
@@ -277,7 +277,7 @@ footer {
 
 
 .scrollable {
-  max-height: 160px;
+  max-height: 150px;
   width: 97%;
   margin: 0 auto;
   overflow-y: hidden;
@@ -306,81 +306,69 @@ footer {
     color: $white;
   }
 }
+.fullname, .crd-number {
+  font-size:1.2em;
 
+}
+
+.locations {
+  font-size: .9em;
+  font-weight: 300;
+  font-family: $opensans-serif-stack;
+}
 .detail-container {
   width: 95%;
   margin: .5em auto 0 auto;
   color: #fff;
   overflow: hidden;
-  font-size: .9em;
-  height: 100%;
-  font-family: $arial;
-  font-weight: 500;
+  height: 12em;
 
+  .fullname, .crd-number {
+    font-size: 1.1em;
+  }
   @include breakpoint($phone) {
     font-weight:300;
-    font-family: $sans-serif-stack;
+    font-family: $opensans-serif-stack;
   }
 
 
   .detail-item {
-    margin: .2em 0 .1em;
+    font-family: $opensans-serif-stack;
+    margin: .6em 0 .1em;
+    font-weight:200;
+    font-size:.95em;
 
+    @include breakpoint($phone) {
+      font-size:.95em;
+    }
+    .fullname, .crd-number {
+      font-size: 1em;
+    }
     a {
       color: $white;
-      font-weight: 600;
+      font-weight:bold;
       text-decoration: none;
 
       &:hover {
         color: $hover-color;
-        font-weight:600;
+
       }
     }
   }
   .bolder {
-    font-weight: 500;
+    font-weight: 600;
   }
   .heading {
-    font-weight:500;
+    font-weight:400;
+
+
   }
   .details {
     margin-bottom: .5em;
   }
-  .centered {
-    text-align:center;
-  }
-
-  .more-link {
-
-    float: none;
-    display:inline-block;
-    white-space: nowrap;
-    //position: absolute;
-    bottom:0;
-    //left:25%;
-    /* top: 1em; */
-
-    height: 28px;
-    border-radius: 2px;
-    margin: 0 auto;
-    text-align: center;
-    background: #ff553a;
-    padding: 0.3em 2em .3em .9em;
-    cursor: pointer;
 
 
-    .link {
-      display:inline;
-      height:100%;
-      width:100%;
-      color:$white;
-      text-decoration:none;
-      position: relative;
-      top: -5px;
 
-
-    }
-  }
   .return {
     border-bottom: solid 1px $separator-line-color;
     margin-bottom:.5em;
@@ -393,6 +381,40 @@ footer {
     a:hover {
       color:$hover-color;
     }
+  }
+}
+.more-link {
+
+  float: none;
+  display:inline-block;
+  white-space: nowrap;
+  //position: absolute;
+  bottom:0;
+  //left:25%;
+  /* top: 1em; */
+
+  height: 28px;
+  border-radius: 2px;
+  text-align: center;
+  background: #ff553a;
+  padding: .3em .5em .3em .1em;
+
+  cursor: pointer;
+
+  @include breakpoint($phone) {
+    padding: 0.3em 2em .3em .9em;
+  }
+
+  .link {
+    display:inline;
+    height:100%;
+    width:100%;
+    color:$white;
+    text-decoration:none;
+    position: relative;
+    top: -5px;
+
+
   }
 }
 button.load-more {
@@ -448,19 +470,19 @@ li {
     font-weight:500;
   }
 }
-.locations {
-  font-size: .875em;
 
+.centered {
+   margin-left:.5em;
+  margin-top: -.5em;
+  @include breakpoint($phone) {
+    margin-top:-2em;
+  }
 }
-.ul-parent {
-  position:relative;
-}
-
 .ng-leave-active {
   display:none;
 }
 
 
-input::-ms-clear {
+::-ms-clear {
   display: none;
 }

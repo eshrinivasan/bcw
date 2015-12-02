@@ -13,7 +13,8 @@
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
         $scope.isList = dataservice.isList();
-        $scope.animeClass = 'fadeInRight';
+        $scope.isDetail = dataservice.getCurrentState() === 'detail';
+
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
         var params = {
@@ -124,8 +125,9 @@
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
         $scope.isList = dataservice.isList();
+        $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
-
+        $scope.state = $state.current.name;
         function scrollTo(element) {
             jQuery( 'html, body').animate({
                 scrollTop: jQuery(element).offset()
@@ -169,7 +171,7 @@
         detailCtl.brokerToolTip = tooltips.broker;
         detailCtl.iaToolTip = tooltips.investmentAdvisor;
         detailCtl.disclosureToolTip = tooltips.disclosure;
-        $scope.animeClass = 'fadeInRight';
+        $scope.state = $state.current.name;
 
         detailCtl.goBack = goBack;
         detailCtl.isBroker = isBroker;
@@ -182,6 +184,7 @@
         detailCtl.openFullReport = openFullReport;
         detailCtl.placement = placement;
         $scope.isList = dataservice.isList();
+        $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
         function placement(anchor) {
             return anchor.left < $window.width / 2 ? "right" : "left";

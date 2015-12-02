@@ -8,6 +8,6 @@
         </div>
     </li>
 </ul>
-    <button class="btn load-more" ng-click="searchCtl.loadMore()" value="Load More">Load More</button>
+    <button class="btn load-more" ng-click="searchCtl.loadMore()" ngDisabled="searchCtl.noresults" value="Load More">Load More</button>
     <div class="no-results-found" ng-show="searchCtl.noresults">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
 </perfect-scrollbar>

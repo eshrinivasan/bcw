@@ -11,7 +11,8 @@
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
         $scope.isList = dataservice.isList();
-        $scope.animeClass = 'fadeInRight';
+        $scope.isDetail = dataservice.getCurrentState() === 'detail';
+
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
         var params = {

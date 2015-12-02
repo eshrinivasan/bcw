@@ -121,7 +121,7 @@
         }
 
         function getCurrentState() {
-            return $state.current.name();
+            return $state.current.name;
         }
         function isList() {
             var _isList = $state.current.name === 'list' ? true : false;

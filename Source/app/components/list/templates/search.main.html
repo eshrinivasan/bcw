@@ -4,6 +4,6 @@
         <a href="#" class="search-icon" ng-click="searchCtl.search(false, 0)"></a>
     </div>
     <div class="data-container">
-        <div ui-view class="animated" ng-model="isList" ng-class="{'fadeInRight' : !isList,  'fadeInLeft' : isList }"></div>
+        <div ui-view class="animated" ng-class="{'fadeInRight' : !isList,  'fadeInLeft' : isList, 'detail' : isDetail }"></div>
     </div>
 </div>
