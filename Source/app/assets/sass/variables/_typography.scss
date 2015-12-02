@@ -8,9 +8,10 @@
 
 $em-base: 16; // Default
 
-$sans-serif-stack					:   'Open Sans', Arial, Helvetica, sans-serif;
+$sans-serif-stack					:   Arial, Helvetica, sans-serif;
+$opensans-serif-stack               :   'Open Sans',Arial, sans-serif;
 $serif-stack                        :   Georgia, "Times New Roman", Times, serif;
-$header-font-stack                  :   robotoregular, Arial, sans-serif;
+$header-font-stack                  :   Arial, sans-serif;
 $arial                              :   Arial, sans-serif;
 
 @function em($pixels, $context: $em-base ) {

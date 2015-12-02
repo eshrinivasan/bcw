@@ -8,14 +8,14 @@
 
     function MessagesController(urlfactory, $sanitize) {
         var messageCtl = this;
-        messageCtl.firmname = ' ';
+        messageCtl.firmname;
 
         var name = $sanitize(urlfactory.getQueryStringVar('firmname'));
         var getPrep = getPrep;
         var activate = activate;
         messageCtl.prep = 'an';
         messageCtl.animeClass = 'fadeInRight';
-
+        messageCtl.hasFirmName = messageCtl.firmname;
 
         activate();
 
