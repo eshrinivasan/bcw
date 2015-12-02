@@ -11,12 +11,13 @@
         <div class="bc-type detail-item">
             <span class="fullname" ng-bind="detailCtl.getFullName(detailCtl.item)"></span><span> is </span>
 
-            <span ng-show="detailCtl.isBroker(detailCtl.item)"> a <span popup-placement-fn="placement" class="bolder" popup-show="{{detailCtl.brokerToolTip}}">registered broker</span>.</span>
-            <span ng-show="detailCtl.isInvestmentAdvisor(detailCtl.item)"> an <span tooltip-placement="bottom" tooltip-popup-close-delay='500' class="bolder" uib-tooltip="{{detailCtl.iaToolTip}}">investment adviser</span></span>
-            <span ng-show="detailCtl.isBoth(detailCtl.item)"> both a <span tooltip-placement="bottom" tooltip-popup-close-delay='500' class="bolder" uib-tooltip="{{detailCtl.brokerToolTip}}">registered broker</span> and an <span tooltip-placement="bottom" class="bolder" tooltip-popup-close-delay='500' uib-tooltip="{{detailCtl.iaToolTip}}">investment adviser</span>.</span>
-            <span ng-show="detailCtl.isNeither(detailCtl.item)"> neither a <span tooltip-placement="bottom" tooltip-popup-close-delay='500' class="bolder" uib-tooltip="{{detailCtl.brokerToolTip}}">registered broker</span> nor an <span tooltip-placement="bottom" class="bolder" tooltip-popup-close-delay='500' uib-tooltip="{{detailCtl.iaToolTip}}">investment adviser</span>.</span>
+            <span ng-show="detailCtl.isBroker(detailCtl.item)"> a <a href= title="{{detailCtl.brokerToolTip}}">registered broker</a>.</span>
+            <span ng-show="detailCtl.isInvestmentAdvisor(detailCtl.item)"> an <a href="" title="{{detailCtl.iaToolTip}}">investment advisor.</a></span>
+            <span ng-show="detailCtl.isBoth(detailCtl.item)"> both a <a href="" title="{{detailCtl.brokerToolTip}}">registered broker</a> and an <a href="" title="{{detailCtl.iaToolTip}}">investment advisor</a>.</span>
+            <span ng-show="detailCtl.isNeither(detailCtl.item)"> neither a <a href="" title="{{detailCtl.brokerToolTip}}">registered broker</a> nor an <a href="" title="{{detailCtl.iaToolTip}}">investment advisor</a>.</span>
 
-            <span class="detail-item">There are <span ng-hide="detailCtl.hasDisclosures(detailCtl.item)"><b>no</b></span> <span tooltip-placement="bottom" class="bolder" tooltip-popup-close-delay='500' uib-tooltip="{{detailCtl.disclosureToolTip}}">disclosures</span> for this individual.</span>
+            <span class="detail-item">There are <span ng-hide="detailCtl.hasDisclosures(detailCtl.item)"><b>no</b></span> <a href="" title="{{detailCtl.disclosureToolTip}}">disclosures</a> for this individual.</span>
+
         </div>
     </div>
 

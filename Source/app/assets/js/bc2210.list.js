@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'rt.popup', 'perfect_scrollbar']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ui.bootstrap', 'perfect_scrollbar']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
