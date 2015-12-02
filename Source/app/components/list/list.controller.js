@@ -2,13 +2,15 @@
     angular.module('listwidget.list')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$state',
+    ListController.$inject = ['$scope',
+        '$state',
         'dataservice',
         'itemshareservice',
         '$window',
         '$rootScope'];
 
-    function ListController($state,
+    function ListController($scope,
+                            $state,
                             dataservice,
                             itemshareservice,
                             $window,
@@ -22,6 +24,7 @@
         listCtl.scrollTo = scrollTo;
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
+        $scope.isList = dataservice.isList();
 
 
         function scrollTo(element) {

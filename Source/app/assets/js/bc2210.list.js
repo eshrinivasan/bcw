@@ -11,10 +11,9 @@
         searchCtl.query = '';
         searchCtl.noresults = false;
         searchCtl.search = search;
-        searchCtl.animeClass = 'slideInRight';
         searchCtl.loadMore = loadMore;
-
-
+        $scope.isList = dataservice.isList();
+        $scope.animeClass = 'fadeInRight';
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
         var params = {
@@ -35,11 +34,6 @@
             }
         });
 
-
-        function isList() {
-            var state = dataservice.getCurrentState();
-            return state === 'list';
-        }
         function search(append, startWith) {
 
             if (angular.isUndefined(searchCtl.query) || searchCtl.query.length === 0) {
@@ -107,13 +101,15 @@
     angular.module('listwidget.list')
         .controller('ListController', ListController);
 
-    ListController.$inject = ['$state',
+    ListController.$inject = ['$scope',
+        '$state',
         'dataservice',
         'itemshareservice',
         '$window',
         '$rootScope'];
 
-    function ListController($state,
+    function ListController($scope,
+                            $state,
                             dataservice,
                             itemshareservice,
                             $window,
@@ -127,6 +123,7 @@
         listCtl.scrollTo = scrollTo;
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
+        $scope.isList = dataservice.isList();
 
 
         function scrollTo(element) {
@@ -172,7 +169,7 @@
         detailCtl.brokerToolTip = tooltips.broker;
         detailCtl.iaToolTip = tooltips.investmentAdvisor;
         detailCtl.disclosureToolTip = tooltips.disclosure;
-        detailCtl.animeClass = 'slideInRight';
+        $scope.animeClass = 'fadeInRight';
 
         detailCtl.goBack = goBack;
         detailCtl.isBroker = isBroker;
@@ -184,6 +181,7 @@
         detailCtl.getLocations = getLocations;
         detailCtl.openFullReport = openFullReport;
         detailCtl.placement = placement;
+        $scope.isList = dataservice.isList();
 
         function placement(anchor) {
             return anchor.left < $window.width / 2 ? "right" : "left";
