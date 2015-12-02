@@ -9,7 +9,8 @@
     function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice) {
         var searchCtl = this;
         searchCtl.query = '';
-        searchCtl.noresults = false;
+        searchCtl.noresults;
+        searchCtl.total;
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
         $scope.isList = dataservice.isList();
@@ -24,7 +25,10 @@
             hl: false,
             wt: 'json'
         };
+        function hasResults() {
+            var hasMore = true;
 
+        }
 
         $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
@@ -34,6 +38,7 @@
 
             }
         });
+
 
         function search(append, startWith) {
 
@@ -58,6 +63,7 @@
                         var total = data.results.BC_INDIVIDUALS_2210.totalResults;
                         if (total === 0) {
                             searchCtl.noresults = true;
+
                         }
                         else {
                             items = data.results.BC_INDIVIDUALS_2210.results;
@@ -70,6 +76,8 @@
                                     }
                                 }
                                 else {
+                                   searchCtl.total = searchCtl.results.length;
+                                   searchCtl.noresults = true;
                                    return false;
                                 }
                             }
@@ -156,6 +164,8 @@
         function getLocations(item) {
             return dataservice.getLocations(item);
         }
+
+
     }
 })();(function() {
     angular.module('listwidget.list')

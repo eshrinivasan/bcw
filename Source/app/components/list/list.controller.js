@@ -56,5 +56,7 @@
         function getLocations(item) {
             return dataservice.getLocations(item);
         }
+
+
     }
 })()
