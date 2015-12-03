@@ -27,10 +27,18 @@
         listCtl.element = '';
         $scope.isList = dataservice.isList();
         $scope.isDetail = dataservice.getCurrentState() === 'detail';
-
         $scope.state = $state.current.name;
 
         $scope.slideLeft = dataservice.slideLeft();
+
+        $scope.jqueryScrollbarOptions = {
+            "onScroll": function (y, x) {
+                if (y.scroll == y.maxScroll) {
+
+                }
+            }
+        };
+
 
         $rootScope.$on('$stateChangeSuccess', function (event) {
            // console.log($rootScope.offset);

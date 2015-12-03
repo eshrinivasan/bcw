@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.core',['ui.router', 'ngSanitize','ngTouch', 'ngAnimate','ngQuantum', 'ct.ui.router.extras']);
+    angular.module('listwidget.core',['ui.router', 'ngSanitize','ngTouch', 'ngAnimate', 'ct.ui.router.extras']);
 })();(function() {
     angular.module('listwidget.core')
         .constant('restConfig', { endpoint: 'http://doppler.finra.org/doppler-lookup/api/v1/lookup' })
