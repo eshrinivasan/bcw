@@ -22,7 +22,7 @@
         detailCtl.hasDisclosures = hasDisclosures;
         detailCtl.getFullName = getFullName;
         detailCtl.getLocations = getLocations;
-        detailCtl.openFullReport = openFullReport;
+        $scope.openFullReport = openFullReport;
         detailCtl.placement = placement;
         $scope.isList = dataservice.isList();
         $scope.isDetail = dataservice.getCurrentState() === 'detail';
@@ -75,6 +75,7 @@
             else {
                 url = 'http://brokercheck.finra.org'
             }
+            console.log(url);
             $window.open(url);
         }
 

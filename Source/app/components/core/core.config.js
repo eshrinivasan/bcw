@@ -55,6 +55,30 @@
             templateUrl: 'components/messages/templates/error.messages.html',
             controller: 'MessagesController',
             controllerAs: 'messageCtl'
+        }
+        var disclosure = {
+            name: 'disclosure',
+            parent: 'main',
+            url: '/disclosure',
+            templateUrl: 'components/messages/templates/disclosures.messages.html',
+            controller: 'MessagesController',
+            controllerAs: 'messageCtl'
+        }
+        var broker = {
+            name: 'broker',
+            parent: 'main',
+            url: '/broker',
+            templateUrl: 'components/messages/templates/broker.messages.html',
+            controller: 'MessagesController',
+            controllerAs: 'messageCtl'
+        }
+        var ia = {
+            name: 'ia',
+            parent: 'main',
+            url: '/ia',
+            templateUrl: 'components/messages/templates/investment-adviser.messages.html',
+            controller: 'MessagesController',
+            controllerAs: 'messageCtl'
         };
 
 
@@ -65,7 +89,10 @@
             .state(list)
             .state(info)
             .state(detail)
-            .state(error);
+            .state(error)
+            .state(disclosure)
+            .state(broker)
+            .state(ia);
 
 
         $httpProvider.interceptors.push(function () {

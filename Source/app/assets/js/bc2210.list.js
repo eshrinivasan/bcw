@@ -1,16 +1,16 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ui.bootstrap', 'perfect_scrollbar']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice'];
+    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout'];
 
-    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice) {
+    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout) {
         var searchCtl = this;
         searchCtl.query = '';
-        searchCtl.noresults;
-        searchCtl.total;
+        searchCtl.hasMore = hasMore;
+        searchCtl.isEmpty = isEmpty;
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
         $scope.isList = dataservice.isList();
@@ -25,10 +25,6 @@
             hl: false,
             wt: 'json'
         };
-        function hasResults() {
-            var hasMore = true;
-
-        }
 
         $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
@@ -42,6 +38,7 @@
 
         function search(append, startWith) {
 
+            $state.go('list');
             if (angular.isUndefined(searchCtl.query) || searchCtl.query.length === 0) {
                 $state.go('info');
             }
@@ -60,10 +57,13 @@
                 dataservice.searchBy(params, true)
                     .then(function (data) {
                         searchCtl.noresults = false;
+                        searchCtl.moreresults = true;
                         var total = data.results.BC_INDIVIDUALS_2210.totalResults;
+                        searchCtl.total = total;
+
                         if (total === 0) {
                             searchCtl.noresults = true;
-
+                            searchCtl.moreresults = false;
                         }
                         else {
                             items = data.results.BC_INDIVIDUALS_2210.results;
@@ -76,7 +76,7 @@
                                     }
                                 }
                                 else {
-                                   searchCtl.total = searchCtl.results.length;
+                                   searchCtl.moreresults = false;
                                    searchCtl.noresults = true;
                                    return false;
                                 }
@@ -84,9 +84,11 @@
                             else {
                                 searchCtl.results = [];
                                 searchCtl.results = items;
-                                $state.go('list');
+
+
 
                             }
+
 
                         }
 
@@ -104,6 +106,24 @@
                 var startPosition = 0;
             }
             search(true, startPosition);
+        }
+
+        function hasMore() {
+
+            if (searchCtl.total === searchCtl.results.length) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function isEmpty() {
+            if (searchCtl.results.length === 0 && !hasMore()) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 })();(function() {
@@ -129,23 +149,18 @@
         listCtl.getLocations = getLocations;
         listCtl.select = select;
         listCtl.goToSite = goToSite;
-        listCtl.scrollTo = scrollTo;
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
         $scope.isList = dataservice.isList();
         $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
         $scope.state = $state.current.name;
-        function scrollTo(element) {
-            jQuery( 'html, body').animate({
-                scrollTop: jQuery(element).offset()
-            }, 2000);
-        }
+
 
         $rootScope.$on('$stateChangeSuccess', function (event) {
            // console.log($rootScope.offset);
            // $window.pageYOffset =  $rootScope.offset;
-            listCtl.scrollTo(listCtl.element);
+            //listCtl.scrollTo(listCtl.element);
 
         });
         function goToSite(url) {
@@ -191,7 +206,7 @@
         detailCtl.hasDisclosures = hasDisclosures;
         detailCtl.getFullName = getFullName;
         detailCtl.getLocations = getLocations;
-        detailCtl.openFullReport = openFullReport;
+        $scope.openFullReport = openFullReport;
         detailCtl.placement = placement;
         $scope.isList = dataservice.isList();
         $scope.isDetail = dataservice.getCurrentState() === 'detail';
@@ -244,6 +259,7 @@
             else {
                 url = 'http://brokercheck.finra.org'
             }
+            console.log(url);
             $window.open(url);
         }
 
