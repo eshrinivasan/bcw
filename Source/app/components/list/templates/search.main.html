@@ -1,7 +1,7 @@
 <div class="main">
     <div class="field-search clearfix" ng-hide="searchCtl.hideSearch">
-        <input type="text" ng-model="searchCtl.query"  placeholder="Search by Name or CRD#"  />
-        <a href="#" class="search-icon" ng-click="searchCtl.search(false, 0)"></a>
+        <input type="text" ng-model="searchCtl.query" tabindex="0" placeholder="Search by Name or CRD#"  />
+        <a href="#" class="search-icon" ng-click="searchCtl.search(false, 0)" tabindex="0"></a>
     </div>
     <div class="data-container">
         <div ui-view class="animated" ng-class="{'slideInRight' : !isList,  'slideInLeft' : isList, 'detail' : isDetail }"></div>

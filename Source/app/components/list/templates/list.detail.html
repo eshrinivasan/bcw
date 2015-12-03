@@ -1,3 +1,4 @@
+<div>
 <div class="detail-container">
     <div class="return"><a ui-sref="list" ng-keypress="goBack('list')" tabindex="0"><span class="return-arrow"></span> Back to List</a></div>
     <div class="heading">
@@ -32,9 +33,10 @@
 
 </div>
 <div class="centered">
-    <span class="more-link" ng-click="listCtl.select(item, $event, $index)"
-          ng-keypress="listCtl.select(item, $event, $index)" tabindex="0">
+    <div class="more-link" tabindex="0" ng-href="#here" ng-click="openFullReport(detailCtl.item)"
+         ng-keypress="openFullReport(detailCtl.item)">
         <span class="external-link"></span>
         <span class="link">Get Full Report</span>
-    </span>
+    </div>
+    </div>
 </div>
