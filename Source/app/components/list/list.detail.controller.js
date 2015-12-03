@@ -2,9 +2,9 @@
     angular.module('listwidget.list')
         .controller('ListDetailController', ListDetailController);
 
-    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
+    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window', '$analytics'];
 
-    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
+    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window, $analytics) {
         var detailCtl = this;
         detailCtl.item = itemshareservice.getItem();
         detailCtl.bcIndUrl = externalUrls.bcIndUrl;
@@ -76,8 +76,10 @@
             else {
                 url = 'http://brokercheck.finra.org'
             }
-            console.log(url);
             $window.open(url);
+            $analytics.eventTrack('Click', {
+                category: 'GetDetails', label: url
+            });
         }
 
     }

@@ -7,14 +7,16 @@
         'dataservice',
         'itemshareservice',
         '$window',
-        '$rootScope'];
+        '$rootScope',
+        '$analytics'];
 
     function ListController($scope,
                             $state,
                             dataservice,
                             itemshareservice,
                             $window,
-                            $rootScope) {
+                            $rootScope,
+                            $analytics)  {
         var listCtl = this;
 
         listCtl.getFullName = getFullName;
@@ -43,6 +45,9 @@
             itemshareservice.setItem(item);
             listCtl.element = event.currentTarget.id;
             $state.go('detail');
+            $analytics.eventTrack('Click', {
+                category: 'BCListItem', label:getFullName(item)
+            });
         };
 
         function getFullName(item) {

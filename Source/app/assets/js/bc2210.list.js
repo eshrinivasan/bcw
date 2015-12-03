@@ -1,12 +1,12 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngQuantum', 'ngSanitize']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngQuantum', 'ngSanitize', 'angulartics', 'angulartics.google.analytics']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope','$rootScope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout'];
+    SearchController.$inject = ['$scope','$rootScope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout', '$analytics'];
 
-    function SearchController($scope, $rootScope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout) {
+    function SearchController($scope, $rootScope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout, $analytics) {
         var searchCtl = this;
         searchCtl.query = '';
         searchCtl.hasMore = hasMore;
@@ -28,8 +28,7 @@
         };
 
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-            console.log(to);
-            console.log(from);
+
             var toState = to.name;
             var fromState = from.name;
 
@@ -120,6 +119,9 @@
             else {
                 var startPosition = 0;
             }
+            $analytics.eventTrack('Click', {
+                category: 'BCListItem', label: "LoadMore"
+            });
             search(true, startPosition);
         }
 
@@ -150,14 +152,16 @@
         'dataservice',
         'itemshareservice',
         '$window',
-        '$rootScope'];
+        '$rootScope',
+        '$analytics'];
 
     function ListController($scope,
                             $state,
                             dataservice,
                             itemshareservice,
                             $window,
-                            $rootScope) {
+                            $rootScope,
+                            $analytics)  {
         var listCtl = this;
 
         listCtl.getFullName = getFullName;
@@ -186,6 +190,9 @@
             itemshareservice.setItem(item);
             listCtl.element = event.currentTarget.id;
             $state.go('detail');
+            $analytics.eventTrack('Click', {
+                category: 'BCListItem', label:getFullName(item)
+            });
         };
 
         function getFullName(item) {
@@ -202,9 +209,9 @@
     angular.module('listwidget.list')
         .controller('ListDetailController', ListDetailController);
 
-    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
+    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window', '$analytics'];
 
-    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
+    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window, $analytics) {
         var detailCtl = this;
         detailCtl.item = itemshareservice.getItem();
         detailCtl.bcIndUrl = externalUrls.bcIndUrl;
@@ -276,8 +283,10 @@
             else {
                 url = 'http://brokercheck.finra.org'
             }
-            console.log(url);
             $window.open(url);
+            $analytics.eventTrack('Click', {
+                category: 'GetDetails', label: url
+            });
         }
 
     }
