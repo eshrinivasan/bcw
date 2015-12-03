@@ -459,6 +459,15 @@ li .heading:hover {
 .ng-leave-active {
   display: none; }
 
+.load-more {
+  color: white;
+  font-weight: 600;
+  font-family: "Open Sans", Arial, sans-serif;
+  font-size: 1.2em;
+  pointer: default; }
+  .load-more:hover {
+    text-decoration: underline; }
+
 ::-ms-clear {
   display: none; }
 

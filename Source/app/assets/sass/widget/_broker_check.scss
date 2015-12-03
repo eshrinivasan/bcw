@@ -482,6 +482,17 @@ li {
   display:none;
 }
 
+.load-more {
+  color: white;
+  font-weight: 600;
+  font-family: $opensans-serif-stack;
+  font-size: 1.2em;
+  pointer:default;
+
+  &:hover {
+    text-decoration:underline;
+  }
+}
 
 ::-ms-clear {
   display: none;

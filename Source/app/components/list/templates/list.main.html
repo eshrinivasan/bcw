@@ -1,4 +1,4 @@
-<div data-jquery-scrollbar="jqueryScrollbarOptions" class="scrollbar-outer scrollable">
+<div data-jquery-scrollbar="jqueryScrollbarOptions" class="scrollbar-dynamic scrollable">
     <div>
 <ul>
     <li tabindex="0" class="bc-item clearfix result" id="bc-item-{{$index}}"
@@ -9,7 +9,7 @@
         </div>
     </li>
 </ul>
-    <button class="btn btn-default load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
+    <button class="btn btn-link load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
             ng-disabled="!searchCtl.hasMore()" ng-show="!searchCtl.isEmpty()" tabindex="0">Load More</button>
     <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
 </div>

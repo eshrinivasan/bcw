@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics', 'jQueryScrollbar']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
