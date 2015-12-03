@@ -906,7 +906,7 @@
 }
 #finra-bc-widget .bcCallToAction a,
 #finra-bc-widget .bcCallToAction button {
-  background: url(../imgs/CalltoActionBtn.png) repeat;
+  background: url(../imgs/calltoactionbtn.png) repeat;
   border: 1px solid #d9a916;
   display: inline-block;
   color: #575755!important;
