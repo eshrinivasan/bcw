@@ -5,7 +5,7 @@
 			<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 		    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-			<link type="text/css" rel="stylesheet" href="./css/style.min.css">
+			<link type="text/css" rel="stylesheet" href="./css/style.css">
 	
 			  <script type="text/javascript">
 			    /*if (!document.all) {
@@ -57,9 +57,7 @@
 			.span4{
 				float:left;	
 				width:270px;			
-			}
-		
-
+			}			
 			</style>
 			<script type="text/javascript">
 
@@ -86,33 +84,29 @@
 				<div class="span4">
 					<div class="rightColBG" id="col6cont" >   					
 						 
-						<div class="bcwidgetCover">	
+					<div class="bcwidgetCover">	
 						<div class="add-finra-bc-widget"></div>	
-						</div>
+					</div>
 					</div>	
 				</div>
 			</div>		
 			<link type="text/css" rel="stylesheet" href="./css/internal_style.css">
-		
 			<script src="./js/jquery.finra.static.min.js"  type="text/javascript"></script>	
 		    <script type="text/javascript">
 		    	var j171 = jQuery.noConflict();
 		    </script> 			
 			<script src="./js/jquery.finra.bcwidget.js"  type="text/javascript"></script>
-		
+			<script src="./js/jquery.finra.bcwidget.renderer.js"  type="text/javascript"></script>
 			<script>
 				(function( j171 ) {
-						j171(".add-finra-bc-widget").BCWidget({                             
-                                'shortenCaption':true,
+						j171(".add-finra-bc-widget").BCWidget({
+								'shortenCaption':true,
                                 'showLogo':false,
                                 'tos':true,
                                 'displayCount':false,
                                 'redirectOutOfDomain':true
-
 						});
 				})( jQuery );	
-
-				// '$mWrap': '<div id="finra-bc-widget" class="finra-bc-widget widget-ad"><div class="finra-bc-widget-common"><div class="autocomplete-container"><input id="finra_pc_search_box" type="text" maxlength="150" placeholder="Search by Name, Firm, or CRD#" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" /><div class="ui-autocomplete-input-clear"></div></div></div></div>'
 			</script>
 		</body>
 	</html>
