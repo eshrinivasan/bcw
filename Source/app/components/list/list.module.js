@@ -1,3 +1,3 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ui.bootstrap', 'perfect_scrollbar']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router']);
 })()

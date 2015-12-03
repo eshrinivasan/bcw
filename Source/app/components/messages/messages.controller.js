@@ -2,9 +2,9 @@
     angular.module('listwidget.messages')
         .controller('MessagesController', MessagesController);
 
-    MessagesController.$inject = ['urlfactory', '$sanitize'];
+    MessagesController.$inject = ['urlfactory', '$sanitize', 'tooltips'];
 
-    function MessagesController(urlfactory, $sanitize) {
+    function MessagesController(urlfactory, $sanitize, tooltips) {
         var messageCtl = this;
         messageCtl.firmname;
 
@@ -14,6 +14,10 @@
         messageCtl.prep = 'an';
         messageCtl.animeClass = 'fadeInRight';
         messageCtl.hasFirmName = messageCtl.firmname;
+        messageCtl.broker = tooltips.broker;
+        messageCtl.ia = tooltips.investmentAdviser;
+        messageCtl.disclosure = tooltips.disclosure;
+
 
         activate();
 

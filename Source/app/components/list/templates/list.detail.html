@@ -10,21 +10,31 @@
     <div class="details">
         <div class="bc-type detail-item">
             <span class="fullname" ng-bind="detailCtl.getFullName(detailCtl.item)"></span><span> is </span>
+           <!-- <span ng-show="detailCtl.isBroker(detailCtl.item)"> a <span data-qo-theme="default" data-nq-tooltip="" data-qo-placement="bottom" class="bolder" data-qs-title="{{detailCtl.brokerToolTip}}">registered broker</span>.</span>
+            <span ng-show="detailCtl.isInvestmentAdvisor(detailCtl.item)"> an <span data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" class="bolder"  data-qs-title="{{detailCtl.iaToolTip}}">investment adviser.</span></span>
+            <span ng-show="detailCtl.isBoth(detailCtl.item)"> both a <span data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" class="bolder" data-qs-title="{{detailCtl.brokerToolTip}}">registered broker</span> and an
+                <span data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" class="bolder"  data-qs-title="{{detailCtl.iaToolTip}}">investment adviser</span>.</span>
+            <span ng-show="detailCtl.isNeither(detailCtl.item)"> neither a <span data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" class="bolder" data-qs-title="{{detailCtl.brokerToolTip}}">registered broker</span> nor an <span data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" class="bolder"  data-qs-title="{{detailCtl.iaToolTip}}">investment adviser</span>.</span>
 
-            <span ng-show="detailCtl.isBroker(detailCtl.item)"> a <a href= title="{{detailCtl.brokerToolTip}}">registered broker</a>.</span>
-            <span ng-show="detailCtl.isInvestmentAdvisor(detailCtl.item)"> an <a href="" title="{{detailCtl.iaToolTip}}">investment advisor.</a></span>
-            <span ng-show="detailCtl.isBoth(detailCtl.item)"> both a <a href="" title="{{detailCtl.brokerToolTip}}">registered broker</a> and an <a href="" title="{{detailCtl.iaToolTip}}">investment advisor</a>.</span>
-            <span ng-show="detailCtl.isNeither(detailCtl.item)"> neither a <a href="" title="{{detailCtl.brokerToolTip}}">registered broker</a> nor an <a href="" title="{{detailCtl.iaToolTip}}">investment advisor</a>.</span>
+            <span class="detail-item">There are <span ng-hide="detailCtl.hasDisclosures(detailCtl.item)"><b>no</b></span> <span data-qo-theme="default" data-nq-tooltip="" data-qo-placement="top-left" class="bolder"  data-qs-title="{{detailCtl.disclosureToolTip}}">disclosures</span> for this individual.</span>-->
+            <span ng-show="detailCtl.isBroker(detailCtl.item)"> a <a ui-sref="broker" class="bolder">registered broker</a>.</span>
+            <span ng-show="detailCtl.isInvestmentAdvisor(detailCtl.item)"> an <a ui-sref="ia" class="bolder">investment adviser.</a></span>
+            <span ng-show="detailCtl.isBoth(detailCtl.item)"> both a <a ui-sref="broker" class="bolder">registered broker</a> and an
+                <a ui-sref="ia" class="bolder">investment adviser</a>.</span>
+            <span ng-show="detailCtl.isNeither(detailCtl.item)"> neither a
+                <a ui-sref="broker" class="bolder">registered broker</a> nor an
+                <a ui-sref="ia" class="bolder">investment adviser</a>.</span>
 
-            <span class="detail-item">There are <span ng-hide="detailCtl.hasDisclosures(detailCtl.item)"><b>no</b></span> <a href="" title="{{detailCtl.disclosureToolTip}}">disclosures</a> for this individual.</span>
-
+            <span class="detail-item">There are <span ng-hide="detailCtl.hasDisclosures(detailCtl.item)"><b>no</b></span>
+                <a ui-sref="disclosure" class="bolder">disclosures</a> for this individual.</span>
         </div>
     </div>
 
 </div>
 <div class="centered">
-    <div class="more-link" ng-click="detailCtl.openFullReport(detailCtl.item)" tabindex="0">
+    <span class="more-link" ng-click="listCtl.select(item, $event, $index)"
+          ng-keypress="listCtl.select(item, $event, $index)" tabindex="0">
         <span class="external-link"></span>
         <span class="link">Get Full Report</span>
-    </div>
+    </span>
 </div>

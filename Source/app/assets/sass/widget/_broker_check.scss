@@ -28,7 +28,7 @@ body {
   ul {
     list-style: none;
     padding: 0;
-    margin: 0 1em 0 0em;
+    margin: 0 1.3em 0 0em;
 
     li {
       padding: .5em 0 .5em .5em;
@@ -64,7 +64,7 @@ footer {
   .separator {
     position:relative;
     font-family: $sans-serif-stack;
-    font-size:em(12);
+    font-size:1em;
     font-weight:300;
   }
 }
@@ -275,9 +275,9 @@ footer {
 }
 
 
-
 .scrollable {
-  max-height: 150px;
+  min-height: 155px;
+  max-height: 155px;
   width: 97%;
   margin: 0 auto;
   overflow-y: hidden;
@@ -440,7 +440,7 @@ input[type="text"] {
   color: #777;
   border-radius: 2px;
   -webkit-border-radius: 2px;
-  font-size: .82em;
+  font-size: 1em;
   vertical-align: top;
 
 
