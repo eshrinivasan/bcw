@@ -1,5 +1,4 @@
-<!--<perfect-scrollbar class="scrollable always-visible" wheel-propagation="true" wheel-speed="5" min-scrollbar-length="30" max-scrollbar-length="50">-->
-<div data-nq-scroll="" data-qo-visible="true" data-qo-max-height="165px" data-qo-bar-size="normal">
+<div data-nq-scroll="" data-bar-model data-qo-bar-size="slim" data-qo-visible="true" data-qa-keyboard="true" class="scrollable">
 <ul>
     <li tabindex="0" class="bc-item clearfix result" id="bc-item-{{$index}}"
        ng-repeat="item in searchCtl.results track by $index" ng-click="listCtl.select(item, $event, $index)" ng-keypress="listCtl.select(item, $event, $index)">
@@ -12,5 +11,5 @@
     <button class="btn btn-default load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
             ng-disabled="!searchCtl.hasMore()" ng-show="!searchCtl.isEmpty()" tabindex="0">Load More</button>
     <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
-    </div>
-<!--</perfect-scrollbar>-->
+</div>
+

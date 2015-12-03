@@ -1,12 +1,12 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngQuantum', 'ngSanitize']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout'];
+    SearchController.$inject = ['$scope','$rootScope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout'];
 
-    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout) {
+    function SearchController($scope, $rootScope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout) {
         var searchCtl = this;
         searchCtl.query = '';
         searchCtl.hasMore = hasMore;
@@ -16,6 +16,7 @@
         $scope.isList = dataservice.isList();
         $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
+        $scope.slideLeft = dataservice.slideLeft();
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
         var params = {
@@ -26,6 +27,20 @@
             wt: 'json'
         };
 
+        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+            console.log(to);
+            console.log(from);
+            var toState = to.name;
+            var fromState = from.name;
+
+            if (to.state === 'detail' && (fromState === 'disclosure' || fromState === 'ia' || fromState ==='broker')) {
+                $scope.slideLeft = true;
+            }
+            else {
+                $scope.slideLeft = false;
+            }
+
+        });
         $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
             if (newValue != oldValue) {
@@ -156,6 +171,7 @@
 
         $scope.state = $state.current.name;
 
+        $scope.slideLeft = dataservice.slideLeft();
 
         $rootScope.$on('$stateChangeSuccess', function (event) {
            // console.log($rootScope.offset);
@@ -211,6 +227,7 @@
         $scope.isList = dataservice.isList();
         $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
+        $scope.slideLeft = dataservice.slideLeft();
         function placement(anchor) {
             return anchor.left < $window.width / 2 ? "right" : "left";
         };
