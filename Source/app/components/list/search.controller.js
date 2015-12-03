@@ -68,14 +68,24 @@
 
                 dataservice.searchBy(params, true)
                     .then(function (data) {
+
                         searchCtl.noresults = false;
                         searchCtl.moreresults = true;
                         var total = data.results.BC_INDIVIDUALS_2210.totalResults;
+                        var errorCode = data.errorCode;
+                        var errorMessage = data.errorMessage;
                         searchCtl.total = total;
 
                         if (total === 0) {
-                            searchCtl.noresults = true;
-                            searchCtl.moreresults = false;
+                           if (errorCode === -1) {
+                               console.error('Error: ' + errorMessage);
+                               $state.go('error');
+                               return false;
+                           }
+                            else {
+                               searchCtl.noresults = true;
+                               searchCtl.moreresults = false;
+                           }
                         }
                         else {
                             items = data.results.BC_INDIVIDUALS_2210.results;
@@ -96,10 +106,7 @@
                             else {
                                 searchCtl.results = [];
                                 searchCtl.results = items;
-
-
-
-                            }
+                          }
 
 
                         }

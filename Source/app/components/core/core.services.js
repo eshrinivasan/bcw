@@ -72,12 +72,16 @@
 
             $http.jsonp(url, config).success(
                 function (data, status, headers, config) {
+
                     deferred.resolve(data);
+
                 })
                 .error(function (data, status, headers, config) {
+
                     $state.go('error');
                     $log.error("Couldn't retrieve data, check service end point.");
                 });
+
             return deferred.promise;
         }
 
