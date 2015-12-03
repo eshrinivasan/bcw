@@ -28,6 +28,7 @@
 
         $scope.state = $state.current.name;
 
+        $scope.slideLeft = dataservice.slideLeft();
 
         $rootScope.$on('$stateChangeSuccess', function (event) {
            // console.log($rootScope.offset);

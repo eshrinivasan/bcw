@@ -27,6 +27,7 @@
         $scope.isList = dataservice.isList();
         $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
+        $scope.slideLeft = dataservice.slideLeft();
         function placement(anchor) {
             return anchor.left < $window.width / 2 ? "right" : "left";
         };

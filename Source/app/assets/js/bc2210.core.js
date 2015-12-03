@@ -263,7 +263,8 @@
             getFullName: getFullName,
             concatWords: concatWords,
             getCurrentState : getCurrentState,
-            isList : isList
+            isList : isList,
+            slideLeft : slideLeft
         };
 
         return service;
@@ -335,6 +336,11 @@
         function isList() {
             var _isList = $state.current.name === 'list' ? true : false;
             return _isList;
+        }
+        function slideLeft() {
+            var stateName = $state.current.name;
+            console.log($state);
+            return true;
         }
 
     }
