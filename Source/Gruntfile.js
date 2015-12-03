@@ -112,9 +112,7 @@ module.exports = function (grunt) {
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/quantumui/dist/js/quantumui.min.js',
-                            'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
-                            'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
+                            'app/bower_components/quantumui/dist/js/quantumui.min.js'
 
 
                         ],
@@ -164,9 +162,8 @@ module.exports = function (grunt) {
                             'app/bower_components/angulartics/dist/angulartics.min.js',
                             'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
                             'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/quantumui/dist/js/quantumui.min.js',
-                            'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
-                            'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
+                            'app/bower_components/quantumui/dist/js/quantumui.min.js'
+
 
                         ],
                         dest: 'app/assets/js/min/angular-plugins.min.js'
