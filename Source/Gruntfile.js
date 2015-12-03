@@ -46,12 +46,14 @@ module.exports = function (grunt) {
             dev: {
                 files: [
                     {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js'], dest: 'app/assets/js/min/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js.map'], dest: 'app/assets/js/min/', filter: 'isFile'},
                 ]
             },
 
             dist: {
                 files: [
                     {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js'], dest: 'build/assets/js/min/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js.map'], dest: 'build/assets/js/min/', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/index.html'], dest: 'build/index.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/test-iframe.html'], dest: 'build/test-iframe.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/components/list/templates/list.detail.html'], dest: 'build/components/list/templates/list.detail.html', filter: 'isFile'},
@@ -102,17 +104,18 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
+                            'app/assets/libs/jquery.scrollbar/jquery.scrollbar.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
                             'app/bower_components/ui-router-extras/release/ct-ui-router-extras.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
+                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
                             'app/bower_components/angular-touch/angular-touch.min.js',
                             'app/bower_components/angular-sanitize/angular-sanitize.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
-                            'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
-                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/quantumui/dist/js/quantumui.min.js'
+                            'app/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
+
 
 
                         ],
@@ -152,17 +155,18 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
+                            'app/assets/libs/jquery.scrollbar/jquery.scrollbar.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
                             'app/bower_components/ui-router-extras/release/ct-ui-router-extras.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
+                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
                             'app/bower_components/angular-touch/angular-touch.min.js',
                             'app/bower_components/angular-sanitize/angular-sanitize.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
-                            'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
-                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/bower_components/quantumui/dist/js/quantumui.min.js'
+                            'app/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
+
 
 
                         ],
@@ -204,7 +208,7 @@ module.exports = function (grunt) {
                     'app/assets/css/min/compiled-styles.min.css': [
                         'app/assets/libs/animate/animate.min.css',
                         'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css',
-                        'app/bower_components/quantumui/dist/css/quantumui.min.css'
+                        'app/assets/libs/jquery.scrollbar/jquery.scrollbar.css'
                         ]
                 }]
             },
@@ -213,7 +217,7 @@ module.exports = function (grunt) {
                     'app/assets/css/min/compiled-styles.min.css': [
                         'app/assets/libs/animate/animate.min.css',
                         'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css',
-                        'app/bower_components/quantumui/dist/css/quantumui.min.css'
+                        'app/assets/libs/jquery.scrollbar/jquery.scrollbar.css'
                                                             ]
                 }]
             }
