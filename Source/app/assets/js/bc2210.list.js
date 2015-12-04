@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics', 'ngScrollbars']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
@@ -13,10 +13,9 @@
         searchCtl.isEmpty = isEmpty;
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
+        $scope.animationClass = 'fadeInLeft';
 
-        $scope.slideLeft = dataservice.slideLeft();
+
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
         var params = {
@@ -29,15 +28,21 @@
 
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 
+
             var toState = to.name;
             var fromState = from.name;
 
-            if (to.state === 'detail' && (fromState === 'disclosure' || fromState === 'ia' || fromState ==='broker')) {
-                $scope.slideLeft = true;
+            if ((fromState === 'list' && toState === 'detail') || (toState === 'disclosure' || toState === 'ia' || toState ==='broker')) {
+                $scope.animationClass = 'fadeInRight';
+            }
+            else if ((fromState === 'detail' && toState === 'list') || (fromState === 'detail' &&
+                (toState === 'detail' && (fromState === 'disclosure' || fromState === 'ia' || fromState ==='broker')))) {
+                $scope.animationClass = 'fadeInLeft';
             }
             else {
-                $scope.slideLeft = false;
+                $scope.animationClass = 'fadeInLeft';
             }
+
 
         });
         $scope.$watch("searchCtl.query", function(newValue, oldValue){
@@ -71,8 +76,7 @@
                 dataservice.searchBy(params, true)
                     .then(function (data) {
 
-                        searchCtl.noresults = false;
-                        searchCtl.moreresults = true;
+                        searchCtl.noresults = true;
                         var total = data.results.BC_INDIVIDUALS_2210.totalResults;
                         var errorCode = data.errorCode;
                         var errorMessage = data.errorMessage;
@@ -86,10 +90,10 @@
                            }
                             else {
                                searchCtl.noresults = true;
-                               searchCtl.moreresults = false;
                            }
                         }
                         else {
+                            searchCtl.noresults = false;
                             items = data.results.BC_INDIVIDUALS_2210.results;
                             if (startWith > 0) {
 
@@ -100,12 +104,12 @@
                                     }
                                 }
                                 else {
-                                   searchCtl.moreresults = false;
                                    searchCtl.noresults = true;
                                    return false;
                                 }
                             }
                             else {
+                                searchCtl.noresults = false;
                                 searchCtl.results = [];
                                 searchCtl.results = items;
                           }
@@ -134,7 +138,7 @@
 
         function hasMore() {
 
-            if (searchCtl.total === searchCtl.results.length) {
+            if (searchCtl.total === searchCtl.results.length || searchCtl.total === 0) {
                 return false;
             }
             else {
@@ -177,27 +181,31 @@
         listCtl.goToSite = goToSite;
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
-        $scope.state = $state.current.name;
 
-        $scope.slideLeft = dataservice.slideLeft();
 
-        $scope.jqueryScrollbarOptions = {
-            "onScroll": function (y, x) {
-                if (y.scroll == y.maxScroll) {
 
-                }
-            }
+        $scope.scrollConfig = {
+            autoHideScrollbar: false,
+            theme: 'light',
+            advanced:{
+                updateOnContentResize: true
+            },
+
+            scrollbarPosition: 'inside',
+            scrollInertia: 100,
+            alwaysShowScrollbar: 2,
+            mousewheel : {
+                enable : true
+            },
+            keyboard : {
+                enable : true
+            },
+            contentTouchScroll : 25,
+            documentTouchScroll : true
+
         };
 
 
-        $rootScope.$on('$stateChangeSuccess', function (event) {
-           // console.log($rootScope.offset);
-           // $window.pageYOffset =  $rootScope.offset;
-            //listCtl.scrollTo(listCtl.element);
-
-        });
         function goToSite(url) {
             $window.open(url);
         }
@@ -234,7 +242,6 @@
         detailCtl.brokerToolTip = tooltips.broker;
         detailCtl.iaToolTip = tooltips.investmentAdvisor;
         detailCtl.disclosureToolTip = tooltips.disclosure;
-        $scope.state = $state.current.name;
 
         detailCtl.goBack = goBack;
         detailCtl.isBroker = isBroker;
@@ -245,14 +252,7 @@
         detailCtl.getFullName = getFullName;
         detailCtl.getLocations = getLocations;
         $scope.openFullReport = openFullReport;
-        detailCtl.placement = placement;
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
-        $scope.slideLeft = dataservice.slideLeft();
-        function placement(anchor) {
-            return anchor.left < $window.width / 2 ? "right" : "left";
-        };
 
           function goBack(state) {
               $state.go(state);

@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.core',['ui.router', 'ngSanitize','ngTouch', 'ngAnimate', 'ct.ui.router.extras']);
+    angular.module('listwidget.core',['ui.router', 'ngSanitize','ngTouch', 'ngAnimate', 'ct.ui.router.extras', 'ngScrollbars']);
 })();(function() {
     angular.module('listwidget.core')
         .constant('restConfig', { endpoint: 'http://doppler.finra.org/doppler-lookup/api/v1/lookup' })
@@ -18,10 +18,10 @@
         .config(configure)
         .run(runApp);
 
-    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider'];
+    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ScrollBarsProvider'];
     runApp.$inject = ['$state'];
 
-    function configure($urlRouterProvider, $stateProvider, $httpProvider) {
+    function configure($urlRouterProvider, $stateProvider, $httpProvider,ScrollBarsProvider) {
 
 
 
@@ -132,6 +132,19 @@
                 }
             };
         })
+        ScrollBarsProvider.defaults = {
+            scrollButtons: {
+                scrollAmount: 'auto', // scroll amount when button pressed
+                enable: false // enable scrolling buttons by default
+            },
+            scrollInertia: 400, // adjust however you want
+            axis: 'y',
+            theme: 'light',
+            autoHideScrollbar: false,
+            advanced : {
+                updateOnContentResize: true
+            }
+        };
 
     }
 
@@ -261,10 +274,7 @@
             capitalize: capitalize,
             getLocations: getLocations,
             getFullName: getFullName,
-            concatWords: concatWords,
-            getCurrentState : getCurrentState,
-            isList : isList,
-            slideLeft : slideLeft
+            concatWords: concatWords
         };
 
         return service;
@@ -334,18 +344,9 @@
             return data;
         }
 
-        function getCurrentState() {
-            return $state.current.name;
-        }
-        function isList() {
-            var _isList = $state.current.name === 'list' ? true : false;
-            return _isList;
-        }
-        function slideLeft() {
-            var stateName = $state.current.name;
-            console.log($state);
-            return true;
-        }
+
+
+
 
     }
 })()

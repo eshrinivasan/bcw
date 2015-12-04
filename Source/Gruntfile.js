@@ -104,7 +104,6 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
-                            'app/assets/libs/jquery.scrollbar/jquery.scrollbar.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
@@ -155,7 +154,6 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
-                            'app/assets/libs/jquery.scrollbar/jquery.scrollbar.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
