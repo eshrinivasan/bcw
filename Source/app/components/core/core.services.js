@@ -52,9 +52,7 @@
             capitalize: capitalize,
             getLocations: getLocations,
             getFullName: getFullName,
-            concatWords: concatWords,
-            getCurrentState : getCurrentState,
-            isList : isList
+            concatWords: concatWords
         };
 
         return service;
@@ -71,12 +69,16 @@
 
             $http.jsonp(url, config).success(
                 function (data, status, headers, config) {
+
                     deferred.resolve(data);
+
                 })
                 .error(function (data, status, headers, config) {
+
                     $state.go('error');
                     $log.error("Couldn't retrieve data, check service end point.");
                 });
+
             return deferred.promise;
         }
 
@@ -120,13 +122,9 @@
             return data;
         }
 
-        function getCurrentState() {
-            return $state.current.name;
-        }
-        function isList() {
-            var _isList = $state.current.name === 'list' ? true : false;
-            return _isList;
-        }
+
+
+
 
     }
 })()

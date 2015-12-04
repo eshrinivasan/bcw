@@ -38,20 +38,22 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            dev: ["app/assets/js/min/*", "app/assets/js/min/*"],
-            dist: ["app/assets/js/min/*", "app/assets/js/min/*", "build/**/*"]
+            dev: ["app/assets/js/**/*", "app/assets/css/**/*"],
+            dist: ["build/**/*"]
         },
 
         copy: {
             dev: {
                 files: [
                     {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js'], dest: 'app/assets/js/min/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js.map'], dest: 'app/assets/js/min/', filter: 'isFile'},
                 ]
             },
 
             dist: {
                 files: [
                     {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js'], dest: 'build/assets/js/min/', filter: 'isFile'},
+                    {expand: true, flatten: true, src: ['app/bower_components/jquery/dist/jquery.min.js.map'], dest: 'build/assets/js/min/', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/index.html'], dest: 'build/index.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/test-iframe.html'], dest: 'build/test-iframe.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/components/list/templates/list.detail.html'], dest: 'build/components/list/templates/list.detail.html', filter: 'isFile'},
@@ -59,6 +61,10 @@ module.exports = function (grunt) {
                     {expand: false, flatten: true, src: ['app/components/list/templates/search.main.html'], dest: 'build/components/list/templates/search.main.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/components/messages/templates/error.messages.html'], dest: 'build/components/messages/templates/error.messages.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/components/messages/templates/info.messages.html'], dest: 'build/components/messages/templates/info.messages.html', filter: 'isFile'},
+                    {expand: false, flatten: true, src: ['app/components/messages/templates/disclosures.messages.html'], dest: 'build/components/messages/templates/disclosures.messages.html', filter: 'isFile'},
+                    {expand: false, flatten: true, src: ['app/components/messages/templates/broker.messages.html'], dest: 'build/components/messages/templates/broker.messages.html', filter: 'isFile'},
+                    {expand: false, flatten: true, src: ['app/components/messages/templates/investment-adviser.messages.html'], dest: 'build/components/messages/templates/investment-adviser.messages.html', filter: 'isFile'},
+
                     {expand: false, flatten: true, src: ['app/shared/footer/footer.html'], dest: 'build/shared/footer/footer.html', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/shared/header/header.html'], dest: 'build/shared/header/header.html', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['app/assets/images/*'], dest: 'build/assets/images/', filter: 'isFile'},
@@ -66,9 +72,8 @@ module.exports = function (grunt) {
                     {expand: false, flatten: true, src: ['app/ie9/js/xdomain.min.js'], dest: 'build/ie9/js/xdomain.min.js', filter: 'isFile'},
                     {expand: false, flatten: true, src: ['app/ie9/proxy.html'], dest: 'build/ie9/proxy.html', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['app/assets/js/min/*'], dest: 'build/assets/js/min/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['app/assets/js/external/*'], dest: 'build/assets/js/external/', filter: 'isFile'},
                     {expand: true, flatten: true, src: ['app/assets/css/min/*'], dest: 'build/assets/css/min/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['app/assets/css/external/*'], dest: 'build/assets/css/external/', filter: 'isFile'},
+
                 ]
             }
         },
@@ -99,19 +104,20 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
+                            'app/bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
+                            'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
+                            'app/bower_components/ng-scrollbars/dist/scrollbars.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
+                            'app/bower_components/ui-router-extras/release/ct-ui-router-extras.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
+                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
                             'app/bower_components/angular-touch/angular-touch.min.js',
                             'app/bower_components/angular-sanitize/angular-sanitize.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
-                            'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
-                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-0.14.3.js',
-                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.14.3.js',
-                            'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
-                            'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
+                            'app/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
+
 
 
                         ],
@@ -151,19 +157,21 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
+                            'app/bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
+                            'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
+                            'app/bower_components/ng-scrollbars/dist/scrollbars.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
+                            'app/bower_components/ui-router-extras/release/ct-ui-router-extras.min.js',
                             'app/bower_components/angular-animate/angular-animate.min.js',
+                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
                             'app/bower_components/angular-touch/angular-touch.min.js',
                             'app/bower_components/angular-sanitize/angular-sanitize.min.js',
                             'app/bower_components/angulartics/dist/angulartics.min.js',
-                            'app/bower_components/angulartics-google-analytics/lib/angulartics-google-analytics.js',
-                            'app/bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js',
-                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-0.14.3.js',
-                            'app/assets/libs/ui-bootstrap-custom-build/ui-bootstrap-custom-tpls-0.14.3.js',
-                            'app/bower_components/perfect-scrollbar/js/min/perfect-scrollbar.jquery.min.js',
-                            'app/bower_components/angular-perfect-scrollbar/src/angular-perfect-scrollbar.js'
+                            'app/bower_components/angulartics-google-analytics/dist/angulartics-google-analytics.min.js',
+
+
 
                         ],
                         dest: 'app/assets/js/min/angular-plugins.min.js'
@@ -202,20 +210,18 @@ module.exports = function (grunt) {
             dev: {
                 files: [{
                     'app/assets/css/min/compiled-styles.min.css': [
-                        'app/assets/css/min/normalize.min.css',
-                        'app/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css',
-                        'app/assets/css/min/animate.min.css',
-                        'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css'
+                        'app/assets/libs/animate/animate.min.css',
+                        'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css',
+                        'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
                         ]
                 }]
             },
             dist: {
                 files: [{
                     'app/assets/css/min/compiled-styles.min.css': [
-                        'app/assets/css/min/normalize.min.css',
-                        'app/bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css',
-                        'app/assets/css/min/animate.min.css',
-                        'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css'
+                        'app/assets/libs/animate/animate.min.css',
+                        'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css',
+                        'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css'
                                                             ]
                 }]
             }

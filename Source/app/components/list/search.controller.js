@@ -2,17 +2,19 @@
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice', '$analytics'];
 
-    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $analytics) {
+    SearchController.$inject = ['$scope','$rootScope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout', '$analytics'];
+
+    function SearchController($scope, $rootScope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout, $analytics) {
+
         var searchCtl = this;
         searchCtl.query = '';
-        searchCtl.noresults;
-        searchCtl.total;
+        searchCtl.hasMore = hasMore;
+        searchCtl.isEmpty = isEmpty;
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
+        $scope.animationClass = 'fadeInLeft';
+
 
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
@@ -23,11 +25,26 @@
             hl: false,
             wt: 'json'
         };
-        function hasResults() {
-            var hasMore = true;
 
-        }
+        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 
+
+            var toState = to.name;
+            var fromState = from.name;
+
+            if ((fromState === 'list' && toState === 'detail') || (toState === 'disclosure' || toState === 'ia' || toState ==='broker')) {
+                $scope.animationClass = 'fadeInRight';
+            }
+            else if ((fromState === 'detail' && toState === 'list') || (fromState === 'detail' &&
+                (toState === 'detail' && (fromState === 'disclosure' || fromState === 'ia' || fromState ==='broker')))) {
+                $scope.animationClass = 'fadeInLeft';
+            }
+            else {
+                $scope.animationClass = 'fadeInLeft';
+            }
+
+
+        });
         $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
             if (newValue != oldValue) {
@@ -40,6 +57,7 @@
 
         function search(append, startWith) {
 
+            $state.go('list');
             if (angular.isUndefined(searchCtl.query) || searchCtl.query.length === 0) {
                 $state.go('info');
             }
@@ -57,13 +75,25 @@
 
                 dataservice.searchBy(params, true)
                     .then(function (data) {
-                        searchCtl.noresults = false;
-                        var total = data.results.BC_INDIVIDUALS_2210.totalResults;
-                        if (total === 0) {
-                            searchCtl.noresults = true;
 
+                        searchCtl.noresults = true;
+                        var total = data.results.BC_INDIVIDUALS_2210.totalResults;
+                        var errorCode = data.errorCode;
+                        var errorMessage = data.errorMessage;
+                        searchCtl.total = total;
+
+                        if (total === 0) {
+                           if (errorCode === -1) {
+                               console.error('Error: ' + errorMessage);
+                               $state.go('error');
+                               return false;
+                           }
+                            else {
+                               searchCtl.noresults = true;
+                           }
                         }
                         else {
+                            searchCtl.noresults = false;
                             items = data.results.BC_INDIVIDUALS_2210.results;
                             if (startWith > 0) {
 
@@ -74,17 +104,16 @@
                                     }
                                 }
                                 else {
-                                   searchCtl.total = searchCtl.results.length;
                                    searchCtl.noresults = true;
                                    return false;
                                 }
                             }
                             else {
+                                searchCtl.noresults = false;
                                 searchCtl.results = [];
                                 searchCtl.results = items;
-                                $state.go('list');
+                          }
 
-                            }
 
                         }
 
@@ -103,9 +132,27 @@
             }
 
             $analytics.eventTrack('Click', {
-                  category: 'BCListItem', label: "LoadMore"
+                category: 'BCListItem', label: "LoadMore"
             });
             search(true, startPosition);
+        }
+
+        function hasMore() {
+
+            if (searchCtl.total === searchCtl.results.length || searchCtl.total === 0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function isEmpty() {
+            if (searchCtl.results.length === 0 && !hasMore()) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 })()

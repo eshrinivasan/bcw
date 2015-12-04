@@ -1,20 +1,20 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ui.bootstrap', 'perfect_scrollbar']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics', 'ngScrollbars']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$scope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice'];
+    SearchController.$inject = ['$scope','$rootScope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout', '$analytics'];
 
-    function SearchController($scope, $state, $sanitize, dataservice, urlfactory, itemshareservice) {
+    function SearchController($scope, $rootScope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout, $analytics) {
         var searchCtl = this;
         searchCtl.query = '';
-        searchCtl.noresults;
-        searchCtl.total;
+        searchCtl.hasMore = hasMore;
+        searchCtl.isEmpty = isEmpty;
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
+        $scope.animationClass = 'fadeInLeft';
+
 
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
@@ -25,11 +25,26 @@
             hl: false,
             wt: 'json'
         };
-        function hasResults() {
-            var hasMore = true;
 
-        }
+        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 
+
+            var toState = to.name;
+            var fromState = from.name;
+
+            if ((fromState === 'list' && toState === 'detail') || (toState === 'disclosure' || toState === 'ia' || toState ==='broker')) {
+                $scope.animationClass = 'fadeInRight';
+            }
+            else if ((fromState === 'detail' && toState === 'list') || (fromState === 'detail' &&
+                (toState === 'detail' && (fromState === 'disclosure' || fromState === 'ia' || fromState ==='broker')))) {
+                $scope.animationClass = 'fadeInLeft';
+            }
+            else {
+                $scope.animationClass = 'fadeInLeft';
+            }
+
+
+        });
         $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
             if (newValue != oldValue) {
@@ -42,6 +57,7 @@
 
         function search(append, startWith) {
 
+            $state.go('list');
             if (angular.isUndefined(searchCtl.query) || searchCtl.query.length === 0) {
                 $state.go('info');
             }
@@ -59,13 +75,25 @@
 
                 dataservice.searchBy(params, true)
                     .then(function (data) {
-                        searchCtl.noresults = false;
-                        var total = data.results.BC_INDIVIDUALS_2210.totalResults;
-                        if (total === 0) {
-                            searchCtl.noresults = true;
 
+                        searchCtl.noresults = true;
+                        var total = data.results.BC_INDIVIDUALS_2210.totalResults;
+                        var errorCode = data.errorCode;
+                        var errorMessage = data.errorMessage;
+                        searchCtl.total = total;
+
+                        if (total === 0) {
+                           if (errorCode === -1) {
+                               console.error('Error: ' + errorMessage);
+                               $state.go('error');
+                               return false;
+                           }
+                            else {
+                               searchCtl.noresults = true;
+                           }
                         }
                         else {
+                            searchCtl.noresults = false;
                             items = data.results.BC_INDIVIDUALS_2210.results;
                             if (startWith > 0) {
 
@@ -76,17 +104,16 @@
                                     }
                                 }
                                 else {
-                                   searchCtl.total = searchCtl.results.length;
                                    searchCtl.noresults = true;
                                    return false;
                                 }
                             }
                             else {
+                                searchCtl.noresults = false;
                                 searchCtl.results = [];
                                 searchCtl.results = items;
-                                $state.go('list');
+                          }
 
-                            }
 
                         }
 
@@ -103,7 +130,28 @@
             else {
                 var startPosition = 0;
             }
+            $analytics.eventTrack('Click', {
+                category: 'BCListItem', label: "LoadMore"
+            });
             search(true, startPosition);
+        }
+
+        function hasMore() {
+
+            if (searchCtl.total === searchCtl.results.length || searchCtl.total === 0) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        function isEmpty() {
+            if (searchCtl.results.length === 0 && !hasMore()) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 })();(function() {
@@ -115,39 +163,49 @@
         'dataservice',
         'itemshareservice',
         '$window',
-        '$rootScope'];
+        '$rootScope',
+        '$analytics'];
 
     function ListController($scope,
                             $state,
                             dataservice,
                             itemshareservice,
                             $window,
-                            $rootScope) {
+                            $rootScope,
+                            $analytics)  {
         var listCtl = this;
 
         listCtl.getFullName = getFullName;
         listCtl.getLocations = getLocations;
         listCtl.select = select;
         listCtl.goToSite = goToSite;
-        listCtl.scrollTo = scrollTo;
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
-        $scope.state = $state.current.name;
-        function scrollTo(element) {
-            jQuery( 'html, body').animate({
-                scrollTop: jQuery(element).offset()
-            }, 2000);
-        }
 
-        $rootScope.$on('$stateChangeSuccess', function (event) {
-           // console.log($rootScope.offset);
-           // $window.pageYOffset =  $rootScope.offset;
-            listCtl.scrollTo(listCtl.element);
 
-        });
+        $scope.scrollConfig = {
+            autoHideScrollbar: false,
+            theme: 'light',
+            advanced:{
+                updateOnContentResize: true
+            },
+
+            scrollbarPosition: 'inside',
+            scrollInertia: 100,
+            alwaysShowScrollbar: 2,
+            mousewheel : {
+                enable : true
+            },
+            keyboard : {
+                enable : true
+            },
+            contentTouchScroll : 25,
+            documentTouchScroll : true
+
+        };
+
+
         function goToSite(url) {
             $window.open(url);
         }
@@ -155,6 +213,9 @@
             itemshareservice.setItem(item);
             listCtl.element = event.currentTarget.id;
             $state.go('detail');
+            $analytics.eventTrack('Click', {
+                category: 'BCListItem', label:getFullName(item)
+            });
         };
 
         function getFullName(item) {
@@ -171,9 +232,9 @@
     angular.module('listwidget.list')
         .controller('ListDetailController', ListDetailController);
 
-    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window'];
+    ListDetailController.$inject = ['$scope', '$stateParams', '$state', 'tooltips', 'externalUrls', 'dataservice', 'itemshareservice', '$window', '$analytics'];
 
-    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window) {
+    function ListDetailController($scope, $stateParams, $state, tooltips, externalUrls, dataservice, itemshareservice, $window, $analytics) {
         var detailCtl = this;
         detailCtl.item = itemshareservice.getItem();
         detailCtl.bcIndUrl = externalUrls.bcIndUrl;
@@ -181,7 +242,6 @@
         detailCtl.brokerToolTip = tooltips.broker;
         detailCtl.iaToolTip = tooltips.investmentAdvisor;
         detailCtl.disclosureToolTip = tooltips.disclosure;
-        $scope.state = $state.current.name;
 
         detailCtl.goBack = goBack;
         detailCtl.isBroker = isBroker;
@@ -191,14 +251,8 @@
         detailCtl.hasDisclosures = hasDisclosures;
         detailCtl.getFullName = getFullName;
         detailCtl.getLocations = getLocations;
-        detailCtl.openFullReport = openFullReport;
-        detailCtl.placement = placement;
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
+        $scope.openFullReport = openFullReport;
 
-        function placement(anchor) {
-            return anchor.left < $window.width / 2 ? "right" : "left";
-        };
 
           function goBack(state) {
               $state.go(state);
@@ -245,6 +299,9 @@
                 url = 'http://brokercheck.finra.org'
             }
             $window.open(url);
+            $analytics.eventTrack('Click', {
+                category: 'GetDetails', label: url
+            });
         }
 
     }

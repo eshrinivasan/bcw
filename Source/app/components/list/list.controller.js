@@ -18,30 +18,37 @@
                             $rootScope,
                             $analytics) {
         var listCtl = this;
-
         listCtl.getFullName = getFullName;
         listCtl.getLocations = getLocations;
         listCtl.select = select;
         listCtl.goToSite = goToSite;
-        listCtl.scrollTo = scrollTo;
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
-        $scope.state = $state.current.name;
-        function scrollTo(element) {
-            jQuery( 'html, body').animate({
-                scrollTop: jQuery(element).offset()
-            }, 2000);
-        }
 
-        $rootScope.$on('$stateChangeSuccess', function (event) {
-           // console.log($rootScope.offset);
-           // $window.pageYOffset =  $rootScope.offset;
-            listCtl.scrollTo(listCtl.element);
 
-        });
+        $scope.scrollConfig = {
+            autoHideScrollbar: false,
+            theme: 'light',
+            advanced:{
+                updateOnContentResize: true
+            },
+
+            scrollbarPosition: 'inside',
+            scrollInertia: 100,
+            alwaysShowScrollbar: 2,
+            mousewheel : {
+                enable : true
+            },
+            keyboard : {
+                enable : true
+            },
+            contentTouchScroll : 25,
+            documentTouchScroll : true
+
+        };
+
+
         function goToSite(url) {
             $window.open(url);
         }

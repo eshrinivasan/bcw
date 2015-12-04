@@ -1,15 +1,19 @@
-<perfect-scrollbar class="scrollable always-visible" wheel-propagation="true" wheel-speed="5" min-scrollbar-length="30" max-scrollbar-length="50">
-    <ul>
+<div ng-scrollbars ng-scrollbars-config="scrollConfig" class="scrollable">
+<div class="scroll-inner">
+<ul>
     <li tabindex="0" class="bc-item clearfix result" id="bc-item-{{$index}}"
-       ng-repeat="item in searchCtl.results track by $index" ng-click="listCtl.select(item, $event, $index)">
+       ng-repeat="item in searchCtl.results track by $index" ng-click="listCtl.select(item, $event, $index)" ng-keypress="listCtl.select(item, $event, $index)">
         <div class="heading">
             <span class="fullname" ng-bind="listCtl.getFullName(item)"></span><span class="more"></span>
             <div class="locations" ng-bind="listCtl.getLocations(item)"></div>
         </div>
     </li>
+
 </ul>
 
-    <div class="no-results-found" ng-show="searchCtl.noresults">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
-    <div ng-hide="searchCtl.noresults"><button class="btn load-more" ng-click="searchCtl.loadMore()"  value="Load More">Load More</button></div>
+    <button class="btn btn-link load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
+            ng-hide="!searchCtl.hasMore() || searchCtl.noresults" tabindex="0">Load More</button>
+    <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
 
-</perfect-scrollbar>
+</div>
+</div>

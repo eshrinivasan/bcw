@@ -21,14 +21,14 @@ body {
   width: 100%;
   height:100%;
   overflow:hidden;
-  min-height: 300px;
+  min-height: 320px;
   min-width: 245px;
   max-width: 480px;
   max-height: 480px;
   ul {
     list-style: none;
     padding: 0;
-    margin: 0 1em 0 0em;
+    margin: 0 0 0 .5em;
 
     li {
       padding: .5em 0 .5em .5em;
@@ -64,7 +64,7 @@ footer {
   .separator {
     position:relative;
     font-family: $sans-serif-stack;
-    font-size:em(12);
+    font-size:1em;
     font-weight:300;
   }
 }
@@ -87,7 +87,7 @@ footer {
 .message {
 
   margin: 1.5em auto 0;
-  font-size: 1em;
+  font-size: 1.3em;
   background-color: $default-bg-color;
   color: $default-text-color;
   font-family: $opensans-serif-stack;
@@ -275,28 +275,13 @@ footer {
 }
 
 
-
 .scrollable {
-  max-height: 150px;
-  width: 97%;
-  margin: 0 auto;
-  overflow-y: hidden;
+  min-height: 145px;
+  max-height: 160px;
+  margin: .5em auto 0 auto;
   position: relative;
 }
 
-.always-visible.ps-container > .ps-scrollbar-y-rail {
-  opacity: .7;
-  width:10px;
-  border-radius:1px;
-}
-.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y {
-  width:10px;
-  opacity:1;
-  border-radius:2px;
-}
-.ps-container.ps-active-x > .ps-scrollbar-x-rail {
-  display: none !important;
-}
 
 .form-group {
   text-align:right;
@@ -321,7 +306,7 @@ footer {
   margin: .5em auto 0 auto;
   color: #fff;
   overflow: hidden;
-  height: 12em;
+  height: 13.5em;
 
   .fullname, .crd-number {
     font-size: 1.1em;
@@ -418,11 +403,20 @@ footer {
   }
 }
 button.load-more {
-  margin-top: .4em;
-  margin-bottom: .4em;
-  position: absolute;
-  right: 1.4em;
-  display:inline-block;
+  float: right;
+  clear: left;
+  margin-top: .3em;
+  font-weight: 600;
+  padding-right: 0;
+
+  &:focus {
+    color: $white;
+    text-decoration:none;
+  }
+  &:hover {
+    text-decoration:underline;
+  }
+
 }
 div.animated {
   height:100%;
@@ -440,7 +434,7 @@ input[type="text"] {
   color: #777;
   border-radius: 2px;
   -webkit-border-radius: 2px;
-  font-size: .82em;
+  font-size: 1em;
   vertical-align: top;
 
 
@@ -482,6 +476,17 @@ li {
   display:none;
 }
 
+.load-more {
+  color: white;
+  font-weight: 600;
+  font-family: $opensans-serif-stack;
+  font-size: 1.2em;
+  pointer:default;
+
+  &:hover {
+    text-decoration:underline;
+  }
+}
 
 ::-ms-clear {
   display: none;

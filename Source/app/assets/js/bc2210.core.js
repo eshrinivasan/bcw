@@ -1,5 +1,5 @@
 (function() {
-    angular.module('listwidget.core',['ui.router', 'ngSanitize','ngTouch']);
+    angular.module('listwidget.core',['ui.router', 'ngSanitize','ngTouch', 'ngAnimate', 'ct.ui.router.extras', 'ngScrollbars']);
 })();(function() {
     angular.module('listwidget.core')
         .constant('restConfig', { endpoint: 'http://doppler.finra.org/doppler-lookup/api/v1/lookup' })
@@ -8,7 +8,7 @@
                   iaIndUrl : 'http://www.adviserinfo.sec.gov/IAPD/Support/IAPD_Summary_Link.aspx?Source=Widget&IndividualID='})
         .constant('tooltips',
                 { broker: "A broker, or registered representative, is a person who buys and sells securities—such as stocks, bonds or mutual funds—for a customer or for a securities firm.",
-                  investmentAdvisor: 'An investment adviser is an individual or company that is paid for providing advice about investments to their clients.',
+                  investmentAdviser: 'An investment adviser is an individual or company that is paid for providing advice about investments to their clients.',
                   disclosure: 'All individuals registered to sell securities or provide investment advice are required to disclose customer complaints and arbitrations, ' +
                               'regulatory actions, employment terminations, bankruptcy filings, and criminal or civil judicial proceedings.'})
 })();(function() {
@@ -18,10 +18,10 @@
         .config(configure)
         .run(runApp);
 
-    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider'];
+    configure.$inject = ['$urlRouterProvider', '$stateProvider', '$httpProvider', 'ScrollBarsProvider'];
     runApp.$inject = ['$state'];
 
-    function configure($urlRouterProvider, $stateProvider, $httpProvider) {
+    function configure($urlRouterProvider, $stateProvider, $httpProvider,ScrollBarsProvider) {
 
 
 
@@ -68,6 +68,30 @@
             templateUrl: 'components/messages/templates/error.messages.html',
             controller: 'MessagesController',
             controllerAs: 'messageCtl'
+        }
+        var disclosure = {
+            name: 'disclosure',
+            parent: 'main',
+            url: '/disclosure',
+            templateUrl: 'components/messages/templates/disclosures.messages.html',
+            controller: 'MessagesController',
+            controllerAs: 'messageCtl'
+        }
+        var broker = {
+            name: 'broker',
+            parent: 'main',
+            url: '/broker',
+            templateUrl: 'components/messages/templates/broker.messages.html',
+            controller: 'MessagesController',
+            controllerAs: 'messageCtl'
+        }
+        var ia = {
+            name: 'ia',
+            parent: 'main',
+            url: '/ia',
+            templateUrl: 'components/messages/templates/investment-adviser.messages.html',
+            controller: 'MessagesController',
+            controllerAs: 'messageCtl'
         };
 
 
@@ -78,7 +102,10 @@
             .state(list)
             .state(info)
             .state(detail)
-            .state(error);
+            .state(error)
+            .state(disclosure)
+            .state(broker)
+            .state(ia);
 
 
         $httpProvider.interceptors.push(function () {
@@ -105,6 +132,19 @@
                 }
             };
         })
+        ScrollBarsProvider.defaults = {
+            scrollButtons: {
+                scrollAmount: 'auto', // scroll amount when button pressed
+                enable: false // enable scrolling buttons by default
+            },
+            scrollInertia: 400, // adjust however you want
+            axis: 'y',
+            theme: 'light',
+            autoHideScrollbar: false,
+            advanced : {
+                updateOnContentResize: true
+            }
+        };
 
     }
 
@@ -234,9 +274,7 @@
             capitalize: capitalize,
             getLocations: getLocations,
             getFullName: getFullName,
-            concatWords: concatWords,
-            getCurrentState : getCurrentState,
-            isList : isList
+            concatWords: concatWords
         };
 
         return service;
@@ -253,12 +291,16 @@
 
             $http.jsonp(url, config).success(
                 function (data, status, headers, config) {
+
                     deferred.resolve(data);
+
                 })
                 .error(function (data, status, headers, config) {
+
                     $state.go('error');
                     $log.error("Couldn't retrieve data, check service end point.");
                 });
+
             return deferred.promise;
         }
 
@@ -302,13 +344,9 @@
             return data;
         }
 
-        function getCurrentState() {
-            return $state.current.name;
-        }
-        function isList() {
-            var _isList = $state.current.name === 'list' ? true : false;
-            return _isList;
-        }
+
+
+
 
     }
 })()

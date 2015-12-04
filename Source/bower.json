@@ -18,10 +18,15 @@
     "angulartics": "~0.20.1",
     "angulartics-google-analytics": "~0.1.1",
     "html5-boilerplate": "~5.2.0",
+    "ngTinyScrollbar": "ng-tiny-scrollbar#~0.9.1",
     "perfect-scrollbar": "~0.6.7",
+    "quantumui": "~1.0.0",
     "ui-bootstrap": "~0.14.3"
   },
   "devDependencies": {
     "ui-router-extras": "~0.1.0"
+  },
+  "resolutions": {
+    "angular": "~1.3"
   }
 }

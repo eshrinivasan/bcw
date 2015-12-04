@@ -1,3 +1,3 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ui.bootstrap', 'perfect_scrollbar','angulartics','angulartics.google.analytics']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics', 'ngScrollbars']);
 })()
