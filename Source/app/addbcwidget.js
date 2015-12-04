@@ -3,7 +3,7 @@
 //Default settings
 var bcwidget = window.bcwidget || {};
 bcwidget.minwidth = "250px";
-bcwidget.minheight = "310px";
+bcwidget.minheight = "320px";
 bcwidget.maxwidth = "480px";
 bcwidget.maxheight = "480px";
 bcwidget.theme="basic";
