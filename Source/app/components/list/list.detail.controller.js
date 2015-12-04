@@ -71,7 +71,7 @@
             $window.open(url);
 
             $analytics.eventTrack('Click', {
-                category: 'GetDetails', label: url
+                category: 'BCGetDetails', label: url
             });
         }
 

@@ -27,8 +27,6 @@
         };
 
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-
-
             var toState = to.name;
             var fromState = from.name;
 
@@ -42,15 +40,12 @@
             else {
                 $scope.animationClass = 'fadeInLeft';
             }
-
-
         });
-        $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
+        $scope.$watch("searchCtl.query", function(newValue, oldValue){
             if (newValue != oldValue) {
                 searchCtl.results = [];
                 search(false, 0);
-
             }
         });
 
@@ -118,8 +113,12 @@
                         }
 
                     }), function (error) {
-                    $state.go('error');
-                    console.error('error' + error)
+                        $state.go('error');
+                        console.error('error' + error);
+
+                        $analytics.eventTrack('Keypress', {
+                                category: 'BCError', label: 'SearchError'
+                        });
                 };
             }
         }
