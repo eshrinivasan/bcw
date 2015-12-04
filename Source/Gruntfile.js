@@ -104,6 +104,9 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
+                            'app/bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
+                            'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
+                            'app/bower_components/ng-scrollbars/dist/scrollbars.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
@@ -154,6 +157,9 @@ module.exports = function (grunt) {
                 files:  [
                     {
                         src: ['app/bower_components/angular/angular.min.js',
+                            'app/bower_components/jquery-mousewheel/jquery.mousewheel.min.js',
+                            'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
+                            'app/bower_components/ng-scrollbars/dist/scrollbars.min.js',
                             'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
                             'app/bower_components/angular-ui/build/angular-ui.min.js',
                             'app/bower_components/angular-ui/build/angular-ui-ieshiv.min.js',
@@ -206,7 +212,7 @@ module.exports = function (grunt) {
                     'app/assets/css/min/compiled-styles.min.css': [
                         'app/assets/libs/animate/animate.min.css',
                         'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css',
-                        'app/assets/libs/jquery.scrollbar/jquery.scrollbar.css'
+                        'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
                         ]
                 }]
             },
@@ -215,7 +221,7 @@ module.exports = function (grunt) {
                     'app/assets/css/min/compiled-styles.min.css': [
                         'app/assets/libs/animate/animate.min.css',
                         'app/assets/libs/bootstrap-3.3.6-dist/css/bootstrap.min.css',
-                        'app/assets/libs/jquery.scrollbar/jquery.scrollbar.css'
+                        'app/bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css'
                                                             ]
                 }]
             }
