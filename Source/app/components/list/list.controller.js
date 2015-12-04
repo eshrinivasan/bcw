@@ -25,27 +25,31 @@
         listCtl.goToSite = goToSite;
         listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
-        $scope.state = $state.current.name;
 
-        $scope.slideLeft = dataservice.slideLeft();
 
-        $scope.jqueryScrollbarOptions = {
-            "onScroll": function (y, x) {
-                if (y.scroll == y.maxScroll) {
 
-                }
-            }
+        $scope.scrollConfig = {
+            autoHideScrollbar: false,
+            theme: 'light',
+            advanced:{
+                updateOnContentResize: true
+            },
+
+            scrollbarPosition: 'inside',
+            scrollInertia: 100,
+            alwaysShowScrollbar: 2,
+            mousewheel : {
+                enable : true
+            },
+            keyboard : {
+                enable : true
+            },
+            contentTouchScroll : 25,
+            documentTouchScroll : true
+
         };
 
 
-        $rootScope.$on('$stateChangeSuccess', function (event) {
-           // console.log($rootScope.offset);
-           // $window.pageYOffset =  $rootScope.offset;
-            //listCtl.scrollTo(listCtl.element);
-
-        });
         function goToSite(url) {
             $window.open(url);
         }

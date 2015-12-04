@@ -12,7 +12,6 @@
         detailCtl.brokerToolTip = tooltips.broker;
         detailCtl.iaToolTip = tooltips.investmentAdvisor;
         detailCtl.disclosureToolTip = tooltips.disclosure;
-        $scope.state = $state.current.name;
 
         detailCtl.goBack = goBack;
         detailCtl.isBroker = isBroker;
@@ -23,14 +22,7 @@
         detailCtl.getFullName = getFullName;
         detailCtl.getLocations = getLocations;
         $scope.openFullReport = openFullReport;
-        detailCtl.placement = placement;
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
 
-        $scope.slideLeft = dataservice.slideLeft();
-        function placement(anchor) {
-            return anchor.left < $window.width / 2 ? "right" : "left";
-        };
 
           function goBack(state) {
               $state.go(state);

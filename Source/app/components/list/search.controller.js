@@ -11,10 +11,9 @@
         searchCtl.isEmpty = isEmpty;
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
-        $scope.isList = dataservice.isList();
-        $scope.isDetail = dataservice.getCurrentState() === 'detail';
+        $scope.animationClass = 'fadeInLeft';
 
-        $scope.slideLeft = dataservice.slideLeft();
+
         var items = [];
         var crdnumbers =  $sanitize(urlfactory.getQueryStringVar('crds')).split(',');
         var params = {
@@ -27,15 +26,21 @@
 
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 
+
             var toState = to.name;
             var fromState = from.name;
 
-            if (to.state === 'detail' && (fromState === 'disclosure' || fromState === 'ia' || fromState ==='broker')) {
-                $scope.slideLeft = true;
+            if ((fromState === 'list' && toState === 'detail') || (toState === 'disclosure' || toState === 'ia' || toState ==='broker')) {
+                $scope.animationClass = 'fadeInRight';
+            }
+            else if ((fromState === 'detail' && toState === 'list') || (fromState === 'detail' &&
+                (toState === 'detail' && (fromState === 'disclosure' || fromState === 'ia' || fromState ==='broker')))) {
+                $scope.animationClass = 'fadeInLeft';
             }
             else {
-                $scope.slideLeft = false;
+                $scope.animationClass = 'fadeInLeft';
             }
+
 
         });
         $scope.$watch("searchCtl.query", function(newValue, oldValue){
@@ -132,7 +137,7 @@
 
         function hasMore() {
 
-            if (searchCtl.total === searchCtl.results.length) {
+            if (searchCtl.total === searchCtl.results.length || searchCtl.total === 0) {
                 return false;
             }
             else {

@@ -1,5 +1,5 @@
-<div data-jquery-scrollbar="jqueryScrollbarOptions" class="scrollbar-dynamic scrollable">
-    <div>
+<div ng-scrollbars ng-scrollbars-config="scrollConfig" class="scrollable">
+<div class="scroll-inner">
 <ul>
     <li tabindex="0" class="bc-item clearfix result" id="bc-item-{{$index}}"
        ng-repeat="item in searchCtl.results track by $index" ng-click="listCtl.select(item, $event, $index)" ng-keypress="listCtl.select(item, $event, $index)">
@@ -8,10 +8,12 @@
             <div class="locations" ng-bind="listCtl.getLocations(item)"></div>
         </div>
     </li>
-</ul>
-    <button class="btn btn-link load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
-            ng-disabled="!searchCtl.hasMore()" ng-show="!searchCtl.isEmpty()" tabindex="0">Load More</button>
-    <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
-</div>
-</div>
 
+</ul>
+
+    <button class="btn btn-link load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
+            ng-hide="!searchCtl.hasMore()" tabindex="0">Load More</button>
+    <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
+
+</div>
+</div>
