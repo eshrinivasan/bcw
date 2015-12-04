@@ -30,24 +30,24 @@
           };
 
         function isBroker(item) {
-
+          
             return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl !== "Y");
         };
         function isInvestmentAdvisor(item) {
-
+           
             return (item.fields.ac_ia_active_fl === "Y" && item.fields.ac_bc_active_fl !== "Y");
         };
         function isBoth(item) {
-
+               
             return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl === "Y");
 
         };
         function isNeither(item) {
-
+            
             return (item.fields.ac_bc_active_fl !== "Y" && item.fields.ac_ia_active_fl !== "Y");
         };
         function hasDisclosures(item) {
-
+            
             return (item.fields.ac_bc_dsclr_fl === "Y" || item.fields.ac_ia_dsclr_fl === "Y");
         }
         function getFullName(item) {
@@ -69,6 +69,7 @@
                 url = 'http://brokercheck.finra.org'
             }
             $window.open(url);
+
             $analytics.eventTrack('Click', {
                 category: 'GetDetails', label: url
             });
