@@ -179,7 +179,6 @@
         listCtl.getLocations = getLocations;
         listCtl.select = select;
         listCtl.goToSite = goToSite;
-        listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
 
 
@@ -195,7 +194,8 @@
             scrollInertia: 100,
             alwaysShowScrollbar: 2,
             mousewheel : {
-                enable : true
+                enable : true,
+                scrollAmount : 30
             },
             keyboard : {
                 enable : true

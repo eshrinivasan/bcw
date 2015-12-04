@@ -214,7 +214,7 @@
                     return crdString + ')';
                 }
                 else {
-                    console.error("iFrame parameter must supply at least one CRD number. Returning for all CRDs.");
+                    console.info("iFrame parameter must supply at least one CRD number. Returning for all CRDs.");
                 }
                 return crdString;
             }
