@@ -14,6 +14,8 @@
         searchCtl.search = search;
         searchCtl.loadMore = loadMore;
         $scope.animationClass = 'fadeInLeft';
+        $scope.noresults = true;
+        searchCtl.hideLoadMore = false;
 
 
         var items = [];
@@ -49,6 +51,7 @@
 
             if (newValue != oldValue) {
                 searchCtl.results = [];
+                searchCtl.hideLoadMore = true;
                 search(false, 0);
 
             }
@@ -76,7 +79,7 @@
                 dataservice.searchBy(params, true)
                     .then(function (data) {
 
-                        searchCtl.noresults = true;
+                        $scope.noresults = true;
                         var total = data.results.BC_INDIVIDUALS_2210.totalResults;
                         var errorCode = data.errorCode;
                         var errorMessage = data.errorMessage;
@@ -89,11 +92,11 @@
                                return false;
                            }
                             else {
-                               searchCtl.noresults = true;
+                               $scope.noresults = true;
                            }
                         }
                         else {
-                            searchCtl.noresults = false;
+                            $scope.noresults = false;
                             items = data.results.BC_INDIVIDUALS_2210.results;
                             if (startWith > 0) {
 
@@ -102,16 +105,19 @@
                                     for (i = 0; i < items.length; i++) {
                                         searchCtl.results.push(items[i]);
                                     }
+                                    searchCtl.hideLoadMore = false;
                                 }
                                 else {
                                    searchCtl.noresults = true;
                                    return false;
+                                    searchCtl.hideLoadMore = true;
                                 }
                             }
                             else {
-                                searchCtl.noresults = false;
+                                $scope.noresults = false;
                                 searchCtl.results = [];
                                 searchCtl.results = items;
+                                searchCtl.hideLoadMore = false;
                           }
 
 
@@ -179,8 +185,8 @@
         listCtl.getLocations = getLocations;
         listCtl.select = select;
         listCtl.goToSite = goToSite;
-        listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
+
 
 
 
@@ -195,13 +201,28 @@
             scrollInertia: 100,
             alwaysShowScrollbar: 2,
             mousewheel : {
-                enable : true
+                enable : true,
+                scrollAmount : 30
             },
             keyboard : {
                 enable : true
             },
             contentTouchScroll : 25,
-            documentTouchScroll : true
+            documentTouchScroll : true,
+          /*  callbacks:{
+                onScrollStart: function(){
+                    searchCtl.showLoadMore = false;
+                },
+                onTotalScrollOffset: 100,
+                onTotalScrollBackOffset:100,
+                onTotalScroll: function(){
+                    searchCtl.showLoadMore = true;
+                },
+                onTotalScrollBack: function() {
+                    searchCtl.showLoadMore = false;
+                }
+            }*/
+
 
         };
 
