@@ -27,6 +27,7 @@
 
 
 
+
         $scope.scrollConfig = {
             autoHideScrollbar: false,
             theme: 'light',
@@ -45,7 +46,21 @@
                 enable : true
             },
             contentTouchScroll : 25,
-            documentTouchScroll : true
+            documentTouchScroll : true,
+          /*  callbacks:{
+                onScrollStart: function(){
+                    searchCtl.showLoadMore = false;
+                },
+                onTotalScrollOffset: 100,
+                onTotalScrollBackOffset:100,
+                onTotalScroll: function(){
+                    searchCtl.showLoadMore = true;
+                },
+                onTotalScrollBack: function() {
+                    searchCtl.showLoadMore = false;
+                }
+            }*/
+
 
         };
 

@@ -11,8 +11,8 @@
 
 </ul>
 
-    <button class="btn btn-link load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
-            ng-hide="!searchCtl.hasMore() || searchCtl.noresults" tabindex="0">Load More</button>
+    <div class="btn-container" ng-show="searchCtl.hasMore() && !searchCtl.hideLoadMore"><button class="btn btn-primary btn-sm load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
+             tabindex="0">Load More</button></div>
     <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
 
 </div>

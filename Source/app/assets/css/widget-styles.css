@@ -388,16 +388,17 @@ footer {
     top: -5px; }
 
 button.load-more {
-  float: right;
-  clear: left;
   margin-top: .3em;
-  font-weight: 600;
-  padding-right: 0; }
+  color: white;
+  border-radius: 0px;
+  border: none; }
   button.load-more:focus {
     color: white;
     text-decoration: none; }
-  button.load-more:hover {
-    text-decoration: underline; }
+
+.btn-container {
+  text-align: center;
+  padding-top: 0.5em; }
 
 div.animated {
   height: 100%; }
@@ -448,15 +449,6 @@ li .heading:hover {
 
 .ng-leave-active {
   display: none; }
-
-.load-more {
-  color: white;
-  font-weight: 600;
-  font-family: "Open Sans", Arial, sans-serif;
-  font-size: 1.2em;
-  pointer: default; }
-  .load-more:hover {
-    text-decoration: underline; }
 
 ::-ms-clear {
   display: none; }

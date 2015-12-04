@@ -403,20 +403,23 @@ footer {
   }
 }
 button.load-more {
-  float: right;
-  clear: left;
+
   margin-top: .3em;
-  font-weight: 600;
-  padding-right: 0;
+  color: $white;
+  border-radius: 0px;
+  border:none;
+
 
   &:focus {
     color: $white;
     text-decoration:none;
   }
-  &:hover {
-    text-decoration:underline;
-  }
 
+
+}
+.btn-container {
+  text-align:center;
+  padding-top:.5em
 }
 div.animated {
   height:100%;
@@ -476,17 +479,6 @@ li {
   display:none;
 }
 
-.load-more {
-  color: white;
-  font-weight: 600;
-  font-family: $opensans-serif-stack;
-  font-size: 1.2em;
-  pointer:default;
-
-  &:hover {
-    text-decoration:underline;
-  }
-}
 
 ::-ms-clear {
   display: none;
