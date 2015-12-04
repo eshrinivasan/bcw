@@ -22,8 +22,8 @@
         listCtl.getLocations = getLocations;
         listCtl.select = select;
         listCtl.goToSite = goToSite;
-        listCtl.animeClass = 'fadeInLeft';
         listCtl.element = '';
+
 
 
 
@@ -38,13 +38,28 @@
             scrollInertia: 100,
             alwaysShowScrollbar: 2,
             mousewheel : {
-                enable : true
+                enable : true,
+                scrollAmount : 30
             },
             keyboard : {
                 enable : true
             },
             contentTouchScroll : 25,
-            documentTouchScroll : true
+            documentTouchScroll : true,
+          /*  callbacks:{
+                onScrollStart: function(){
+                    searchCtl.showLoadMore = false;
+                },
+                onTotalScrollOffset: 100,
+                onTotalScrollBackOffset:100,
+                onTotalScroll: function(){
+                    searchCtl.showLoadMore = true;
+                },
+                onTotalScrollBack: function() {
+                    searchCtl.showLoadMore = false;
+                }
+            }*/
+
 
         };
 
