@@ -16,9 +16,8 @@
                             itemshareservice,
                             $window,
                             $rootScope,
-                            $analytics)  {
+                            $analytics) {
         var listCtl = this;
-
         listCtl.getFullName = getFullName;
         listCtl.getLocations = getLocations;
         listCtl.select = select;

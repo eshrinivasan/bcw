@@ -10,12 +10,12 @@ bcwidget.theme="basic";
 
 //Create iframe and append to div bc-root
 var i = document.createElement("iframe");
-var bcroot = document.getElementById("bc-root")
+var bcroot = document.getElementById("bc-root");
 i.scrolling = "no";
 i.frameBorder = "0";
 bcroot.style.minWidth  = bcwidget.minwidth;
 bcroot.style.minHeight  = bcwidget.minheight;
-bcroot.style.height = bcwidget.minheight;	
+bcroot.style.height = "100%";	
 bcroot.style.maxWidth  = bcwidget.maxwidth;
 bcroot.style.maxHeight  = bcwidget.maxheight;
 i.width="100%";
