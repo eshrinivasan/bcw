@@ -104,7 +104,7 @@ body {
   .widget-container ul {
     list-style: none;
     padding: 0;
-    margin: 0; }
+    margin: 0 0 0 .5em; }
     .widget-container ul li {
       padding: .5em 0 .5em .5em;
       border-bottom: solid 1px #80c5fb;

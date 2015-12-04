@@ -12,7 +12,7 @@
 </ul>
 
     <button class="btn btn-link load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
-            ng-hide="!searchCtl.hasMore()" tabindex="0">Load More</button>
+            ng-hide="!searchCtl.hasMore() || searchCtl.noresults" tabindex="0">Load More</button>
     <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
 
 </div>
