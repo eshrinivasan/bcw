@@ -46,24 +46,29 @@
             },
             contentTouchScroll : 25,
             documentTouchScroll : true,
-          /*  callbacks:{
-                onScrollStart: function(){
-                    searchCtl.showLoadMore = false;
-                },
-                onTotalScrollOffset: 100,
-                onTotalScrollBackOffset:100,
-                onTotalScroll: function(){
-                    searchCtl.showLoadMore = true;
-                },
-                onTotalScrollBack: function() {
-                    searchCtl.showLoadMore = false;
-                }
-            }*/
+            callbacks:{
+            onScroll: function(){
+                var scrollPosition = 0;
+                scrollPosition = this.mcs.top;
+                itemshareservice.setScrollPos(scrollPosition);
+            }
+        }
 
 
         };
 
+        $scope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
 
+            if (toState.name === 'list' && fromState.name === 'detail') {
+                var data = itemshareservice.getScrollPos();
+             //   var item = shareselecteditem.getItem();
+                $scope.scrollPosition = data;
+                console.log($scope.scrollPosition);
+             //   $scope.selected = item.value;
+
+            }
+
+        });
         function goToSite(url) {
             $window.open(url);
         }
