@@ -9,13 +9,17 @@
         var _Item = {};
         var _List = [];
         var _queryStr = '';
+        var _scrollPos = 0;
         var service = {
             getQueryStr : getQueryStr,
             setQueryStr : setQueryStr,
             getItem : getItem,
             setItem : setItem,
             getList : getList,
-            setList : setList
+            setList : setList,
+            getScrollPos : getScrollPos,
+            setScrollPos : setScrollPos
+
         }
         return service;
 
@@ -36,6 +40,12 @@
             }
             function setList(list) {
                 _List = list;
+            }
+            function getScrollPos() {
+                return _scrollPos;
+            }
+            function setScrollPos(data) {
+                _scrollPos = data;
             }
      }
 
