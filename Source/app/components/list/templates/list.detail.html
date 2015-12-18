@@ -1,0 +1,35 @@
+<div>
+<div class="detail-container">
+    <div class="return"><a ui-sref="list" ng-keypress="goBack('list')" tabindex="0"><span class="return-arrow"></span> Back to List</a></div>
+    <div class="heading">
+        <span class="fullname heading" ng-bind="detailCtl.getFullName(detailCtl.item)"></span>
+        <span class="crd-number"> <span> (#</span><span ng-bind="detailCtl.item.fields.ac_source_id"></span><span>)</span></span>
+    </div>
+    <div class="locations">
+        <span ng-bind="detailCtl.getLocations(detailCtl.item)"></span>
+    </div>
+    <div class="details">
+        <div class="bc-type detail-item">
+            <span class="fullname" ng-bind="detailCtl.getFullName(detailCtl.item)"></span><span> is </span>
+            <span ng-show="detailCtl.isBroker(detailCtl.item)"> a <a ui-sref="broker" class="bolder">registered broker</a>.</span>
+            <span ng-show="detailCtl.isInvestmentAdvisor(detailCtl.item)"> an <a ui-sref="ia" class="bolder">investment adviser.</a></span>
+            <span ng-show="detailCtl.isBoth(detailCtl.item)"> both a <a ui-sref="broker" class="bolder">registered broker</a> and an
+                <a ui-sref="ia" class="bolder">investment adviser</a>.</span>
+            <span ng-show="detailCtl.isNeither(detailCtl.item)"> neither a
+                <a ui-sref="broker" class="bolder">registered broker</a> nor an
+                <a ui-sref="ia" class="bolder">investment adviser</a>.</span>
+
+            <span class="detail-item">There are <span ng-hide="detailCtl.hasDisclosures(detailCtl.item)"><b>no</b></span>
+                <a ui-sref="disclosure" class="bolder">disclosures</a> for this individual.</span>
+        </div>
+    </div>
+
+</div>
+<div class="centered">
+    <div class="more-link" tabindex="0" ng-href="#here" ng-click="openFullReport(detailCtl.item)"
+         ng-keypress="openFullReport(detailCtl.item)">
+        <span class="external-link"></span>
+        <span class="link">Get Full Report</span>
+    </div>
+    </div>
+</div>

@@ -6,10 +6,10 @@ CopyToS3BuildBucket () {
 		bucketFolder=$1
 		echo "Copying to S3 build bucket with $HTTP_PROXY"
 		#if s3 bucket does not exist, copy the build to bucket.
-        aws s3 ls s3://${bucketFolder}/ |grep brokercheckwidget
+        aws s3 ls s3://${bucketFolder}/ |grep brokercheckwidget2210
         if [ "$?" = "1" ]; then
 				echo "Copying to S3 bucket folder with build $buildLabel"
-                aws s3 cp --sse  --recursive ./brokercheckwidget/ s3://${bucketFolder}/brokercheckwidget/
+                aws s3 cp --sse  --recursive ./brokercheckwidget2210/ s3://${bucketFolder}/brokercheckwidget2210/
                 if [ "$?" != "0" ]; then
                         echo "aws s3 command failed, exiting..."
                         exit 1
@@ -74,7 +74,7 @@ if [ -z "$AWS_DEFAULT_REGION" ]; then
 fi
 
 
-echo "Installing FNRW brokercheckwidget build $buildLabel."
+echo "Installing FNRW brokercheckwidget2210 build $buildLabel."
 		
 CopyToS3BuildBucket $bucketFolder
 	
@@ -84,11 +84,11 @@ unset HTTPS_PROXY
 cd app-stack
 python ./update.py  $ENV $buildLabel $region $componentName $runlevel
 if [ "$?" != "0" ]; then
-	echo "Failed to update brokercheckwidget build $buildLabel."
+	echo "Failed to update brokercheckwidget2210 build $buildLabel."
 	exit 1;
 fi
 		
-echo "Done updating FNRW brokercheckwidget with build $buildLabel. "
+echo "Done updating FNRW brokercheckwidget2210 with build $buildLabel. "
 
 
 

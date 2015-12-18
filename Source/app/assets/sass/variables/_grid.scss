@@ -1,0 +1,35 @@
+@import "singularitygs";
+
+$small-ad           : 125px;
+$minimum            : 250px;
+$phone              : 320px;  //  iPhone 3 portrait, Default
+$max                : 480px;
+$tab-portrait       : 767px;	            //  iPad portrait
+$tab-landscape      : 850px;	            //  iPad landscape
+$mdesk				: 959px;
+$desk               : 960px;			    //  Small desktop Nav Arts uses 960
+$ie-desk            : 960px; 				//  IE7 desktop
+$lg-desk            : 1200px;               //  Large desktop
+
+$breakpoint-to-ems  : true;
+
+$grids              : 1;
+$grids              : add-grid(12 at $phone); // Mobile
+$grids              : add-grid(6 at $tab-portrait); 	// Tablet (Portrait)
+$grids              : add-grid(6 at $tab-landscape); 	// Tablet (Landscape)
+$grids              : add-grid(12 at $desk); 			// Large Desktop
+$grids              : add-grid(12 at $ie-desk); 		// IE Desktop
+$grids              : add-grid(12 at $lg-desk); 		// Large Desktop
+
+$gutters            : .25;
+$gutters            : add-gutter(.25 at $tab-portrait);
+$gutters            : add-gutter(.25 at $tab-landscape);
+$gutters            : add-gutter(.20 at $desk);
+$gutters            : add-gutter(.20 at $lg-desk);
+
+$include-border-box : true;
+$fullwidth          : 100%;
+
+$lt-ie9             : '.lt-ie9' !default;
+$no-queries         : $ie-desk, 'no-query' $lt-ie9;
+$ie7-queries        : $ie-desk, 'no-query' '.lt-ie8';

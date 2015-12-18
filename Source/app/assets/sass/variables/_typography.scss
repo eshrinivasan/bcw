@@ -1,0 +1,19 @@
+/*
+ * Typography
+ * --------------------------------------------------
+ * Font, line-height, and color for body text, headings, and more.
+ * Mobile first
+ */
+
+
+$em-base: 16; // Default
+
+$sans-serif-stack					:   Arial, Helvetica, sans-serif;
+$opensans-serif-stack               :   'Open Sans',Arial, sans-serif;
+$serif-stack                        :   Georgia, "Times New Roman", Times, serif;
+$header-font-stack                  :   Arial, sans-serif;
+$arial                              :   Arial, sans-serif;
+
+@function em($pixels, $context: $em-base ) {
+  @return $pixels/$context * 1em;
+}

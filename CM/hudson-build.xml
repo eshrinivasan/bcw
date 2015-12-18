@@ -20,7 +20,9 @@
         <antcall target="cm-calculate-sloc"/>
         
         <stopwatch name="TimeToBuild" action="start"/>
-		
+			<exec dir="${cm.checkout.dir}/Source" executable="${cm.shell.cmd}"  failonerror="true"  taskname="broker check widget 2210 compile" >
+				<arg line="${cm.checkout.dir}/CM/brokercheckwidget2210.sh "/>
+			</exec>
         <stopwatch name="TimeToBuild" action="total"/>
         <antcall target="cm-publish-all"/>
 		
@@ -31,8 +33,8 @@
 		<echo>Add code to create distribution files</echo>
 		
 		<!-- Copy DRUPAL Source Code -->
-		<tar destfile="${dist.dir}/brokercheckwidget/brokercheckwidget.tar.gz" compression="gzip">
-			<tarfileset dir="${cm.checkout.dir}/Source/" filemode="755"/>
+		<tar destfile="${dist.dir}/brokercheckwidget2210/brokercheckwidget2210.tar.gz" compression="gzip">
+			<tarfileset dir="${cm.checkout.dir}/Source/build/" filemode="755"/>
 		</tar>
 	
 		<copy todir="${dist.dir}/bootstrap">
