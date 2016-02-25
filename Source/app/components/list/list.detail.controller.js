@@ -66,7 +66,7 @@
                 url = externalUrls.iaIndUrl + item.fields.ac_source_id;
             }
             else {
-                url = 'http://brokercheck.finra.org'
+                url = '//brokercheck.finra.org'
             }
             $window.open(url);
 
