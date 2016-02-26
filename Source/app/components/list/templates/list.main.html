@@ -1,4 +1,4 @@
-<div ng-scrollbars ng-scrollbars-config="scrollConfig" class="scrollable">
+<div ng-scrollbars ng-scrollbars-config="scrollConfig" class="scrollable" sticky-scroll sticky-scroll-position="{{scrollPosition}}">
 <div class="scroll-inner">
 <ul>
     <li tabindex="0" class="bc-item clearfix result" id="bc-item-{{$index}}"
@@ -12,7 +12,7 @@
 </ul>
 
     <div class="btn-container" ng-show="searchCtl.hasMore() && !searchCtl.hideLoadMore"><button class="btn btn-primary btn-sm load-more" ng-click="searchCtl.loadMore()" ng-keypress="searchCtl.loadMore()"
-             tabindex="0">Load More</button></div>
+             tabindex="0">Show More</button></div>
     <div class="no-results-found" ng-show="searchCtl.isEmpty()">There were no results for <b>"{{searchCtl.query}}"</b>. Please try again.</div>
 
 </div>

@@ -1,6 +1,6 @@
 (function() {
     angular.module('listwidget.core')
-        .constant('restConfig', { endpoint: 'http://doppler.finra.org/doppler-lookup/api/v1/lookup' })
+        .constant('restConfig', { endpoint: '//doppler.finra.org/doppler-lookup/api/v1/lookup' })
         .constant('externalUrls',
                 { bcIndUrl : 'http://brokercheck.finra.org/Individual/Summary/',
                   iaIndUrl : 'http://www.adviserinfo.sec.gov/IAPD/Support/IAPD_Summary_Link.aspx?Source=Widget&IndividualID='})
