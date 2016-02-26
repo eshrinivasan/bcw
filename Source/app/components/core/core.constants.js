@@ -2,8 +2,8 @@
     angular.module('listwidget.core')
         .constant('restConfig', { endpoint: '//doppler.finra.org/doppler-lookup/api/v1/lookup' })
         .constant('externalUrls',
-                { bcIndUrl : '//brokercheck.finra.org/Individual/Summary/',
-                  iaIndUrl : '//www.adviserinfo.sec.gov/IAPD/Support/IAPD_Summary_Link.aspx?Source=Widget&IndividualID='})
+                { bcIndUrl : 'http://brokercheck.finra.org/Individual/Summary/',
+                  iaIndUrl : 'http://www.adviserinfo.sec.gov/IAPD/Support/IAPD_Summary_Link.aspx?Source=Widget&IndividualID='})
         .constant('tooltips',
                 { broker: "A broker, or registered representative, is a person who buys and sells securities—such as stocks, bonds or mutual funds—for a customer or for a securities firm.",
                   investmentAdviser: 'An investment adviser is an individual or company that is paid for providing advice about investments to their clients.',
