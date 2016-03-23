@@ -1,12 +1,14 @@
 (function() {
-    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics', 'ngScrollbars']);
+    angular.module('listwidget.list', ['ngAnimate', 'ui.router', 'ngSanitize', 'angulartics', 'angulartics.google.analytics', 'ngScrollbars','pdwidget.stickyscroll']);
 })();(function() {
     angular.module('listwidget.list')
         .controller('SearchController', SearchController);
 
+
     SearchController.$inject = ['$scope','$rootScope', '$state','$sanitize', 'dataservice', 'urlfactory', 'itemshareservice','$timeout', '$analytics'];
 
     function SearchController($scope, $rootScope, $state, $sanitize, dataservice, urlfactory, itemshareservice, $timeout, $analytics) {
+
         var searchCtl = this;
         searchCtl.query = '';
         searchCtl.hasMore = hasMore;
@@ -29,8 +31,6 @@
         };
 
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-
-
             var toState = to.name;
             var fromState = from.name;
 
@@ -44,16 +44,13 @@
             else {
                 $scope.animationClass = 'fadeInLeft';
             }
-
-
         });
-        $scope.$watch("searchCtl.query", function(newValue, oldValue){
 
+        $scope.$watch("searchCtl.query", function(newValue, oldValue){
             if (newValue != oldValue) {
                 searchCtl.results = [];
                 searchCtl.hideLoadMore = true;
                 search(false, 0);
-
             }
         });
 
@@ -124,8 +121,12 @@
                         }
 
                     }), function (error) {
-                    $state.go('error');
-                    console.error('error' + error)
+                        $state.go('error');
+                        console.error('error' + error);
+
+                        $analytics.eventTrack('Keypress', {
+                                category: 'BCError', label: 'SearchError'
+                        });
                 };
             }
         }
@@ -136,6 +137,7 @@
             else {
                 var startPosition = 0;
             }
+
             $analytics.eventTrack('Click', {
                 category: 'BCListItem', label: "LoadMore"
             });
@@ -178,9 +180,8 @@
                             itemshareservice,
                             $window,
                             $rootScope,
-                            $analytics)  {
+                            $analytics) {
         var listCtl = this;
-
         listCtl.getFullName = getFullName;
         listCtl.getLocations = getLocations;
         listCtl.select = select;
@@ -209,24 +210,29 @@
             },
             contentTouchScroll : 25,
             documentTouchScroll : true,
-          /*  callbacks:{
-                onScrollStart: function(){
-                    searchCtl.showLoadMore = false;
-                },
-                onTotalScrollOffset: 100,
-                onTotalScrollBackOffset:100,
-                onTotalScroll: function(){
-                    searchCtl.showLoadMore = true;
-                },
-                onTotalScrollBack: function() {
-                    searchCtl.showLoadMore = false;
-                }
-            }*/
+            callbacks:{
+            onScroll: function(){
+                var scrollPosition = 0;
+                scrollPosition = this.mcs.top;
+                itemshareservice.setScrollPos(scrollPosition);
+            }
+        }
 
 
         };
 
+        $scope.$on("$stateChangeSuccess", function(event, toState, toParams, fromState, fromParams) {
 
+            if (toState.name === 'list' && fromState.name === 'detail') {
+                var data = itemshareservice.getScrollPos();
+             //   var item = shareselecteditem.getItem();
+                $scope.scrollPosition = data;
+                console.log($scope.scrollPosition);
+             //   $scope.selected = item.value;
+
+            }
+
+        });
         function goToSite(url) {
             $window.open(url);
         }
@@ -281,24 +287,24 @@
           };
 
         function isBroker(item) {
-
+          
             return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl !== "Y");
         };
         function isInvestmentAdvisor(item) {
-
+           
             return (item.fields.ac_ia_active_fl === "Y" && item.fields.ac_bc_active_fl !== "Y");
         };
         function isBoth(item) {
-
+               
             return (item.fields.ac_bc_active_fl === "Y" && item.fields.ac_ia_active_fl === "Y");
 
         };
         function isNeither(item) {
-
+            
             return (item.fields.ac_bc_active_fl !== "Y" && item.fields.ac_ia_active_fl !== "Y");
         };
         function hasDisclosures(item) {
-
+            
             return (item.fields.ac_bc_dsclr_fl === "Y" || item.fields.ac_ia_dsclr_fl === "Y");
         }
         function getFullName(item) {
@@ -320,8 +326,9 @@
                 url = 'http://brokercheck.finra.org'
             }
             $window.open(url);
+
             $analytics.eventTrack('Click', {
-                category: 'GetDetails', label: url
+                category: 'BCGetDetails', label: url
             });
         }
 

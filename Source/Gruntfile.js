@@ -149,6 +149,12 @@ module.exports = function (grunt) {
                             'app/components/messages/messages.controller.js'],
                         dest: 'app/assets/js/bc2210.messages.js'
 
+                    },
+                    {
+                        src: ['app/components/stickyscroll/stickyscroll.module.js',
+                            'app/components/stickyscroll/stickyscroll.directive.js'],
+                        dest: 'app/assets/js/bc2210.stickyscroll.js'
+
                     }
 
                 ]
@@ -200,6 +206,12 @@ module.exports = function (grunt) {
                         src: ['app/components/messages/messages.module.js',
                             'app/components/messages/messages.controller.js'],
                         dest: 'app/assets/js/bc2210.messages.js'
+
+                    },
+                    {
+                        src: ['app/components/stickyscroll/stickyscroll.module.js',
+                            'app/components/stickyscroll/stickyscroll.directive.js'],
+                        dest: 'app/assets/js/bc2210.stickyscroll.js'
 
                     }
                 ]
